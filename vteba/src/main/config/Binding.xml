@@ -1,0 +1,4 @@
+<binding name="Binding" package="com.vteba.service.xml.jibx">
+  <include path="service_xml_jibxBinding.xml"/>
+  <include path="service_xmlBinding.xml"/>
+</binding>

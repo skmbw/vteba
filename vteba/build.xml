@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="GBK"?>
+<project name="testjibx" default="BindGen">
+	<property name="ProjectPath" value="/home/yinlei/downloads/vteba" />
+	<!--<property name="jibx_lib" value="/home/yinlei/downloads/lib/jibx" />-->
+	<property name="jibx_lib" value="/home/yinlei/downloads/vteba/lib" />
+	<property name="src" value="${ProjectPath}/src/main/java" />
+	<property name="resources" value="${ProjectPath}/src/main/resources" />
+	<property name="lib" value="/home/yinlei/java/ant_dev_lib" />
+	<property name="classes" value="${ProjectPath}/target/classes" />
+
+	<target name="clean">
+		<delete includeEmptyDirs="true">
+			<fileset dir="${classes}" includes="**/*" defaultexcludes="no" />
+		</delete>
+	</target>
+
+	<target name="init">
+		<mkdir dir="${classes}" />
+	</target>
+
+	<target name="compile" depends="init,clean" description="编译源代码">
+		<javac destdir="${classes}" verbose="false" debug="on" target="1.7" deprecation="true" includeantruntime="true">
+			<src path="${src}" />
+			<classpath>
+				<path location="${jibx_lib}">
+					<fileset dir="${jibx_lib}" includes="**/*.jar">
+					</fileset>
+				</path>
+				<path location="${lib}">
+					<fileset dir="${lib}" includes="**/*.jar">
+					</fileset>
+				</path>
+			</classpath>
+		</javac>
+		<copy todir="${classes}">
+			<fileset dir="${src}" excludes="**/*.java" />
+			<fileset dir="${resources}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<taskdef name="bind" classname="org.jibx.binding.ant.CompileTask">
+		<classpath>
+			<path location="${jibx_lib}">
+				<fileset dir="${jibx_lib}" includes="**/*.jar">
+				</fileset>
+			</path>
+			<path location="${lib}">
+				<fileset dir="${lib}" includes="**/*.jar">
+				</fileset>
+			</path>
+		</classpath>
+	</taskdef>
+
+	<target name="jibx-binding" ><!--depends="compile"-->
+		<bind verbose="false" load="true" binding="${ProjectPath}/src/main/config/binding.xml">
+			<classpath>
+				<path location="${classes}">
+				</path>
+				<path location="${jibx_lib}">
+					<fileset dir="${jibx_lib}" includes="**/*.jar">
+					</fileset>
+				</path>
+				<path location="${lib}">
+					<fileset dir="${lib}" includes="**/*.jar">
+					</fileset>
+				</path>
+			</classpath>
+		</bind>
+	</target>
+
+	<target name="run" depends="jibx-binding" description="run">
+		<java classname="com.hch.testjibx.Test">
+			<classpath>
+				<path location="${classes}">
+				</path>
+				<path location="${jibx_lib}">
+					<fileset dir="${jibx_lib}" includes="**/*.jar">
+					</fileset>
+				</path>
+				<path location="${lib}">
+					<fileset dir="${lib}" includes="**/*.jar">
+					</fileset>
+				</path>
+			</classpath>
+		</java>
+	</target>
+<!--
+	<target name="BindingGenerator" description="Generator Binding File">
+		<echo>Generator Binding File</echo>
+		<java classname="org.jibx.binding.BindingGenerator">
+			<classpath>
+				<path location="${classes}">
+					<fileset dir="${classes}" includes="**/*" />
+				</path>
+				<path location="${jibx_lib}">
+					<fileset dir="${jibx_lib}" includes="**/*.jar">
+					</fileset>
+				</path>
+				<path location="${lib}">
+					<fileset dir="${lib}" includes="**/*.jar">
+					</fileset>
+				</path>
+			</classpath>
+
+		</java>
+	</target>-->
+	<target name="BindGen" description="Generator Binding File">
+			<echo>Generator Binding File Start</echo>
+			<java classname="org.jibx.binding.generator.BindGen">
+				<classpath>
+					<path location="${classes}">
+						<fileset dir="${classes}" includes="**/*" />
+					</path>
+					<path location="${jibx_lib}">
+						<fileset dir="${jibx_lib}" includes="**/*.jar">
+						</fileset>
+					</path>
+					<path location="${lib}">
+						<fileset dir="${lib}" includes="**/*.jar">
+						</fileset>
+					</path>
+				</classpath>
+				
+				<!--<arg value="-o"/>
+				<arg value="-p"/>
+				<arg value="${classes}"/>
+				<arg value="-b" />
+				<arg value="gaga.xml" />
+				<arg value="com.vteba.service.xml.jibx.Customer" />-->
+			</java>
+			<echo>Generator Binding File Start</echo>
+		</target>
+</project>

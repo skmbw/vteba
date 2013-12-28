@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-catalog="skmbw" match-name="collocation_tag"/>
+<!-- 	<table-filter match-catalog="skmbw" match-name="group_tag"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="group"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="album_type"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="album"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="images"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="daren"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="bag"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="accessories"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="men"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="child"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="home"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="beauty"/> -->
+<!-- 	<table-filter match-catalog="skmbw" match-name="tags"/> -->
+<!--   <table-filter match-catalog="skmbw" match-name="shoes"/> -->
+<!--   <table-filter match-catalog="skmbw" match-name="clothing"/> -->
+<!--   <table-filter match-catalog="skmbw" match-name="account"/> -->
+<!--   <table-filter match-catalog="skmbw" match-name="banner"/> -->
+<!--   <table-filter match-catalog="skmbw" match-name="item"/> -->
+<!--   <table-filter match-catalog="skmbw" match-name="order"/> -->
+<!--   <table-filter match-catalog="skmbw" match-name="consume_detail"/> -->
+<!--   <table-filter match-catalog="skmbw" match-name="category"/> -->
+</hibernate-reverse-engineering>

@@ -1,0 +1,29 @@
+<binding xmlns:ns1="http://vteba.com/service/xml/jibx">
+  <namespace uri="http://vteba.com/service/xml/jibx" default="elements"/>
+  <mapping abstract="true" type-name="ns1:customer" class="com.vteba.service.xml.jibx.Customer">
+    <structure map-as="ns1:person" field="person" usage="optional" name="person"/>
+    <value style="element" name="street" field="street" usage="optional"/>
+    <value style="element" name="city" field="city" usage="optional"/>
+    <value style="element" name="state" field="state" usage="optional"/>
+    <value style="attribute" name="zip" field="zip" usage="optional"/>
+    <value style="element" name="phone" field="phone" usage="optional"/>
+    <collection field="nameList" usage="optional" create-type="java.util.ArrayList">
+      <value name="name" type="java.lang.String"/>
+    </collection>
+    <collection field="personList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="ns1:person" name="person"/>
+    </collection>
+    <structure field="personMap" usage="optional" name="personMap" marshaller="org.jibx.extras.HashMapperStringToComplex" unmarshaller="org.jibx.extras.HashMapperStringToComplex"/>
+  </mapping>
+  <mapping class="com.vteba.service.xml.jibx.Customer" name="customer">
+    <structure map-as="ns1:customer"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:person" class="com.vteba.service.xml.jibx.Person">
+    <value style="attribute" name="customerNumber" field="customerNumber"/>
+    <value style="element" name="firstName" field="firstName" usage="optional"/>
+    <value style="element" name="lastName" field="lastName" usage="optional"/>
+  </mapping>
+  <mapping class="com.vteba.service.xml.jibx.Person" name="person">
+    <structure map-as="ns1:person"/>
+  </mapping>
+</binding>

@@ -1,0 +1,10 @@
+<binding xmlns:ns2="http://vteba.com/service/xml">
+  <namespace uri="http://vteba.com/service/xml" default="elements"/>
+  <mapping abstract="true" type-name="ns2:au" class="com.vteba.service.xml.Au">
+    <value style="element" name="name" field="name" usage="optional"/>
+    <value style="element" name="account" field="account" usage="optional"/>
+  </mapping>
+  <mapping class="com.vteba.service.xml.Au" name="au">
+    <structure map-as="ns2:au"/>
+  </mapping>
+</binding>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:spring="http://www.infinispan.org/schemas/spring" 
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd http://www.infinispan.org/schemas/spring http://www.infinispan.org/schemas/infinispan-spring-5.0.xsd 
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd"
+	default-autowire="byName">
+	
+	<!-- 用于测试目的 -->
+	<bean id="jmemCacheDaemon" class="com.vteba.cache.jmemcache.JMemcachedFactoryBean"/>
+	
+	<!-- xmemcached客户端创建者。XMemcachedClientBuilder有两个参数，第一个是server list第二个是各server的权重array -->
+	<bean id="xmemcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+		<constructor-arg>
+			<list>
+				<bean class="java.net.InetSocketAddress">
+					<constructor-arg>
+						<value>localhost</value>
+					</constructor-arg>
+					<constructor-arg>
+						<value>11211</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>1</value>
+			</list>
+		</constructor-arg>
+<!-- 		<property name="connectionPoolSize" value="2" /> -->
+		<property name="commandFactory">
+			<bean class="net.rubyeye.xmemcached.command.TextCommandFactory" />
+		</property>
+		<property name="sessionLocator">
+			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator" />
+		</property>
+		<property name="transcoder">
+<!-- 			<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" /> -->
+			<bean class="com.vteba.cache.memcached.transcoder.KryoTranscoder"/>
+		</property>
+		<property name="name" value="springMemcache"/>
+	</bean>
+    
+    <!-- 使用factory bean去创建xmemcached客户端 -->
+    <bean id="xmemcachedClient" factory-bean="xmemcachedClientBuilder" factory-method="build" destroy-method="shutdown"/>
+	
+	<!-- 基于xmemcached的封装，不让应用层接触xmemcached的API -->
+	<bean id="memcacheImpl" class="com.vteba.cache.memcached.internal.MemcacheImpl">
+		<property name="memcachedClient" ref="xmemcachedClient"/>
+	</bean>
+	
+	<!-- spring security 登录用户缓存 -->
+	<bean id="userCache" class="com.vteba.cache.spring.xmemcached.SpringSecurityUserCache">
+		<property name="memcache" ref="memcacheImpl"/>
+	</bean>
+	
+	<!-- spring security的user cache -->
+	<bean id="springMemcache" class="com.vteba.cache.spring.xmemcached.SpringMemcacheFactoryBean">
+		<property name="cacheName" value="springMemcache"/>
+		<property name="memcache" ref="memcacheImpl"/>
+	</bean>
+	
+	<!--xmemcached客户端缓存管理器 -->
+    <bean id="xmemcachedManager" class="com.vteba.cache.memcached.manager.XMemcachedManager">
+    	<property name="springMemcache" ref="springMemcache"/>
+    </bean>
+	
+	<!-- spring抽象cache的缓存管理器，基于xmemcached实现，bean的id默认是cacheManager -->
+	<bean id="springMemcacheManager" class="com.vteba.cache.spring.xmemcached.SpringMemcacheManager">
+		<property name="cacheManager" ref="xmemcachedManager"/>
+	</bean>
+	
+	<!-- 不许要工厂方法了，直接按照上面配置就好了。spring抽象cache缓存管理器工厂，产生SpringMemcacheManager，基于xmemcached实现 -->
+<!-- 	<bean id="xmemcacheManagerFactory" class="com.vteba.cache.spring.xmemcached.MemCacheManagerFactoryBean"> -->
+<!-- 		<property name="cacheManager" ref="xmemcachedManager"/> -->
+<!-- 		<property name="cacheManagerName" value="xmemcacheManager"/> -->
+<!-- 	</bean> -->
+	
+	
+</beans>
