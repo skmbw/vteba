@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +15,10 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
+
+import com.vteba.home.index.model.Category;
+import com.vteba.lang.bytecode.MethodAccess;
+import com.vteba.tm.hibernate.MatchType;
 
 /**
  * 产生Dao和Service的代码引擎。
@@ -22,7 +28,7 @@ import org.apache.velocity.app.VelocityEngine;
 public class GenerateServiceDao {
 	static VelocityEngine velocityEngine;
 	static {
-		String templateBasePath = "/home/yinlei/downloads/vteba/template";
+		String templateBasePath = "D:\\git\\vteba\\vteba\\template";
 		Properties properties = new Properties();
 		properties.setProperty(Velocity.RESOURCE_LOADER, "file");
 		properties.setProperty("file.resource.loader.description", "Velocity File Resource Loader");
@@ -43,10 +49,10 @@ public class GenerateServiceDao {
 	 */
 	public static void main(String[] args) {
 		String schema = "skmbw";//数据库schema
-		String className = "Men";//实体类，类名
-		String tableName = "男装商品";//实体类对应的表的注释名
+		String className = "Category";//实体类，类名
+		String tableName = "商品分类";//实体类对应的表的注释名
 		String pk = "Long";//String Long Integer，主键类型
-		String module = "product.men";//模块名
+		String module = "home.index";//模块名
 		
 		
 		VelocityContext context = new VelocityContext();
@@ -64,25 +70,48 @@ public class GenerateServiceDao {
 		context.put("packages", packages);
 		context.put("currentDate", DateFormat.getDateTimeInstance().format(new Date()));
 
-		String rootPath = "/home/yinlei/downloads/vteba/";
+		//String rootPath = "/home/yinlei/downloads/vteba/";
+		String rootPath = "D:\\git\\vteba\\vteba\\";
 		
 		String srcPath = "src/main/java/";
 		
 		String parentPackagePath = "com/vteba/";
 		
-		String actionTemplateName = "Action.java";
-		String daoTemplateName = "Dao.java";
-		String daoImplTemplateName = "DaoImpl.java";
-		String serviceTemplateName = "Service.java";
-		String serviceImplTemplateName = "ServiceImpl.java";
+//		String actionTemplateName = "Action.java";
+//		String daoTemplateName = "Dao.java";
+//		String daoImplTemplateName = "DaoImpl.java";
+//		String serviceTemplateName = "Service.java";
+//		String serviceImplTemplateName = "ServiceImpl.java";
+		String mapperTemplateName = "Mapper.java";
+		
+		//String classPath = parentPackagePath + pgk + "dao/mapper/" + className;
 		
 		String targetJavaFile = rootPath + srcPath + parentPackagePath + pgk;
 		
-		generateFile(context, actionTemplateName, targetJavaFile + "action/" + className);
-		generateFile(context, daoTemplateName, targetJavaFile + "dao/spi/" + className);
-		generateFile(context, daoImplTemplateName, targetJavaFile + "dao/impl/" + className);
-		generateFile(context, serviceTemplateName, targetJavaFile + "service/spi/" + className);
-		generateFile(context, serviceImplTemplateName, targetJavaFile + "service/impl/" + className);
+		List<MethodBean> methodList = new ArrayList<MethodBean>();
+		
+		MethodAccess methodAccess = MethodAccess.get(Category.class);
+		String[] methodNames = methodAccess.getMethodNames();
+		Class<?>[][] paramTypes = methodAccess.getParameterTypes();
+		int i = 0;
+		for (String methodName : methodNames) {
+			if (methodName.startsWith("set")) {
+				MethodBean methodBean = new MethodBean();
+				methodBean.setMethodName(methodName);
+				MatchType.matchResultSet(methodBean, paramTypes[i][0]);
+				methodList.add(methodBean);
+			}
+			i++;
+		}
+		context.put("methodList", methodList);
+		
+		//generateFile(context, actionTemplateName, targetJavaFile + "action/" + className);
+		//generateFile(context, daoTemplateName, targetJavaFile + "dao/spi/" + className);
+		//generateFile(context, daoImplTemplateName, targetJavaFile + "dao/impl/" + className);
+		//generateFile(context, serviceTemplateName, targetJavaFile + "service/spi/" + className);
+		//generateFile(context, serviceImplTemplateName, targetJavaFile + "service/impl/" + className);
+		
+		generateFile(context, mapperTemplateName, targetJavaFile + "dao/mapper/" + className);
 	}
 
 	/**

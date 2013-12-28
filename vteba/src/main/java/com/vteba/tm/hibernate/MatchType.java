@@ -2,6 +2,7 @@ package com.vteba.tm.hibernate;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import org.hibernate.type.BigDecimalType;
@@ -18,6 +19,9 @@ import org.hibernate.type.ObjectType;
 import org.hibernate.type.ShortType;
 import org.hibernate.type.StringType;
 import org.hibernate.type.Type;
+
+import com.vteba.autotask.MethodBean;
+import com.vteba.util.common.CamelCaseUtils;
 
 /**
  * 类型匹配和转换工具方法。
@@ -98,5 +102,34 @@ public class MatchType {
 			return true;
 		}
 		return false;
+	}
+	
+	public static void matchResultSet(MethodBean methodBean, Class<?> clazz) {
+		String underLine = CamelCaseUtils.toUnderScoreCase(methodBean.getMethodName().substring(3));
+		if (clazz == Integer.class || clazz == Integer.TYPE) {
+			methodBean.setRsName("getInt(\"" + underLine + "\")");
+		} else if (clazz == Long.class || clazz == Long.TYPE) {
+			methodBean.setRsName("getLong(\"" + underLine + "\")");
+		} else if (clazz == String.class) {
+			methodBean.setRsName("getString(\"" + underLine + "\")");
+		} else if (clazz == Double.class || clazz == Double.TYPE) {
+			methodBean.setRsName("getDouble(\"" + underLine + "\")");
+		} else if (clazz == Timestamp.class) {
+			methodBean.setRsName("getTimestamp(\"" + underLine + "\")");
+		} else if (clazz == Date.class || clazz == java.sql.Date.class) {
+			methodBean.setRsName("getDate(\"" + underLine + "\")");
+		} else if (clazz == Boolean.class || clazz == Boolean.TYPE) {
+			methodBean.setRsName("getBoolean(\"" + underLine + "\")");
+		} else if (clazz == BigInteger.class) {
+			methodBean.setRsName("getBigDecimal(\"" + underLine + "\").toBigInteger()");
+		} else if (clazz == BigDecimal.class) {
+			methodBean.setRsName("getBigDecimal(\"" + underLine + "\")");
+		} else if (clazz == Float.class || clazz == Float.TYPE) {
+			methodBean.setRsName("getFloat(\"" + underLine + "\")");
+		} else if (clazz == Short.class || clazz == Short.TYPE) {
+			methodBean.setRsName("getShort(\"" + underLine + "\")");
+		} else if (clazz == Byte.class || clazz == Byte.TYPE) {
+			methodBean.setRsName("getByte(\"" + underLine + "\")");
+		}
 	}
 }
