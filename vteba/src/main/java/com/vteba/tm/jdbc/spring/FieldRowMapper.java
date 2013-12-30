@@ -14,7 +14,7 @@ import com.vteba.tm.hibernate.transformer.ColumnAliasParser;
 import com.vteba.util.reflection.AsmUtils;
 
 /**
- * Spring JdbcTemplate 通用RowMapper。
+ * Spring JdbcTemplate 通用RowMapper，通过访问field实现。
  * @author yinlei
  * date 2013-6-25 下午10:20:06
  * @param <T> RowMapper要转换的对象
