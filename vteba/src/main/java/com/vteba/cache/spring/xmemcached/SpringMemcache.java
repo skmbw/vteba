@@ -71,4 +71,11 @@ public class SpringMemcache implements Cache {
 		cache.flushAll();
 	}
 
+	//spring 4.0 新增
+	@Override
+	public <T> T get(Object key, Class<T> type) {
+		String k = CryptionUtils.toHexString(key);
+		return cache.get(k);
+	}
+
 }
