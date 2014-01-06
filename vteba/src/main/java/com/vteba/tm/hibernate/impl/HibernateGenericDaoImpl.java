@@ -433,6 +433,27 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
+	public <X> List<X> getListByPropEqual(Class<X> entityClass, X model, Map<String, String> maps){
+		if (logger.isInfoEnabled()) {
+			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
+		}
+		Example example = Example.create(model);
+		Criteria criteria = getSession().createCriteria(entityClass).add(example);
+		for (Entry<String, String> entry : maps.entrySet()) {
+			if (entry.getValue().equals("desc")) {
+				criteria.addOrder(Order.desc(entry.getKey()));
+			} else {
+				criteria.addOrder(Order.asc(entry.getKey()));
+			}
+		}
+		List<X> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		
+		return list;
+	}
+	
 	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Object... objects){
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
@@ -450,6 +471,27 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 						criteria.addOrder(Order.asc(entry.getKey()));
 					}
 				}
+			}
+		}
+		List<X> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		return list;
+	}
+	
+	public <X> List<X> getListByPropLike(Class<X> entityClass, X model, Map<String, String> maps){
+		if (logger.isInfoEnabled()) {
+			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
+		}
+		Example example = Example.create(model);
+		example.ignoreCase().enableLike(MatchMode.START);
+		Criteria criteria = getSession().createCriteria(entityClass).add(example);
+		for (Entry<String, String> entry : maps.entrySet()) {
+			if (entry.getValue().equals("desc")) {
+				criteria.addOrder(Order.desc(entry.getKey()));
+			} else {
+				criteria.addOrder(Order.asc(entry.getKey()));
 			}
 		}
 		List<X> list = criteria.list();
@@ -852,7 +894,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 	}
 	
 	public HQLQueryPlan getHQLQueryPlan(String hql) {
-		return getQueryPlanCache().getHQLQueryPlan(hql, false, Collections.emptyMap());
+		return getQueryPlanCache().getHQLQueryPlan(hql, false, Collections.EMPTY_MAP);
 	}
 	
 }
