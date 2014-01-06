@@ -28,7 +28,7 @@
 		<property name="basePackage" value="com.vteba.user,com.vteba.common,com.vteba.hr,com.vteba.oa" />
 		<property name="markerInterface" value="com.vteba.tm.jdbc.mybatis.mapper.BaseMapper"/><!-- 扫描该接口的子接口 -->
 		<property name="annotationClass" value="com.vteba.tm.jdbc.mybatis.annotation.DaoMapper"/><!-- 扫描被该注解标注的接口 -->
-		<property name="sqlSessionFactoryBeanName" value="skmbwSqlSessionFactory"/>
+		<property name="sqlSessionFactoryBeanName" value="skmbwSqlSessionFactory"/><!-- 如果使用sqlSessionFactory，多数据源将出现无法装配bean的问题 -->
 	</bean>
 	
 	<bean id="biziliSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
