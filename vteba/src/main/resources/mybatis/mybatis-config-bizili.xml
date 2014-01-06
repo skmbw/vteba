@@ -32,7 +32,7 @@
 		<package name="domain.blog"/>
 	</typeAliases> -->
 	
-	<!-- 
+	<!-- 数据库和java类型不匹配时映射
 	<typeHandlers>
 		<package name="org.mybatis.example"/>
 	</typeHandlers> -->
