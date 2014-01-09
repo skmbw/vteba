@@ -239,27 +239,32 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public T uniqueResultByHql(String hql, boolean namedQuery, Object... values) {
-		return hibernateGenericDaoImpl.uniqueResultByHql(hql, namedQuery,
-				values);
+	public T uniqueResultByHql(String hql, Object... values) {
+		return hibernateGenericDaoImpl.uniqueResultByHql(hql, values);
+	}
+	
+	@Override
+	public T uniqueResultByNamedHql(String hql, Object... values) {
+		return hibernateGenericDaoImpl.uniqueResultByNamedHql(hql, values);
 	}
 
+	@Override
+	public <X> X uniqueResultByHql(String hql, Class<X> resultClass,
+			boolean namedQuery, Object... values) {
+		return hibernateGenericDaoImpl.uniqueResultByHql(hql, resultClass,
+				namedQuery, values);
+	}
+	
 	@Override
 	public T uniqueResultBySql(String sql, Object... values) {
 		return hibernateGenericDaoImpl.uniqueResultBySql(sql, values);
 	}
 
-	@Override
-	public <X> X getUniqueResultByHql(String hql, Class<X> resultClass,
-			boolean namedQuery, Object... values) {
-		return hibernateGenericDaoImpl.getUniqueResultByHql(hql, resultClass,
-				namedQuery, values);
-	}
 
 	@Override
-	public <X> X getUniqueResultBySql(String sql, Class<X> resultClass,
+	public <X> X uniqueResultBySql(String sql, Class<X> resultClass,
 			Object... values) {
-		return hibernateGenericDaoImpl.getUniqueResultBySql(sql, resultClass,
+		return hibernateGenericDaoImpl.uniqueResultBySql(sql, resultClass,
 				values);
 	}
 
@@ -317,10 +322,10 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 		return hibernateGenericDaoImpl.countSqlResult(sql, values);
 	}
 
-	@Override
-	public Long getSequenceLongValue(String sequenceName) {
-		return hibernateGenericDaoImpl.getSequenceLongValue(sequenceName);
-	}
+//	@Override
+//	public Long getSequenceLongValue(String sequenceName) {
+//		return hibernateGenericDaoImpl.getSequenceLongValue(sequenceName);
+//	}
 	
 //	public ID save(T entity){
 //		return hibernateGenericDaoImpl.save(entity);

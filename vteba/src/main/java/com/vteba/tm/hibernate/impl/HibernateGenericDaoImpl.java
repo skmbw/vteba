@@ -369,18 +369,6 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return (SQLQuery)createNamedQuery(namedQuery, values);
 	}
 	
-	@Deprecated
-	protected Criteria createCriteria(Criterion... criterions) {
-		if (logger.isInfoEnabled()) {
-			logger.info("Create Criteria query by QBC. Entity = [{}].", entityClass.getName());
-		}
-		Criteria criteria = getSession().createCriteria(entityClass);
-		for (Criterion c : criterions) {
-			criteria.add(c);
-		}
-		return criteria;
-	}
-	
 	/**
 	 * 创建指定实体的Criteria
 	 * @param entityClass 指定的实体
@@ -453,33 +441,6 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	@Deprecated
-	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Object... objects) {
-		if (logger.isInfoEnabled()) {
-			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
-		}
-		Example example = Example.create(model);
-		Criteria criteria = getSession().createCriteria(entityClass).add(example);
-		for (int i = 0; i < objects.length; i++) {
-			if (objects[i] instanceof Map) {
-				Map<String, String> map = (Map<String, String>)objects[i];
-				for (Entry<String, String> entry : map.entrySet()) {
-					if (entry.getValue().equals("desc")) {
-						criteria.addOrder(Order.desc(entry.getKey()));
-					} else {
-						criteria.addOrder(Order.asc(entry.getKey()));
-					}
-				}
-			}
-		}
-		List<X> list = criteria.list();
-		if (list == null) {
-			list = Collections.emptyList();
-		}
-		
-		return list;
-	}
-	
 	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Map<String, String> maps) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
@@ -536,33 +497,6 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	@Deprecated
-	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Object... objects){
-		if (logger.isInfoEnabled()) {
-			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
-		}
-		Example example = Example.create(model);
-		example.ignoreCase().enableLike(MatchMode.START);
-		Criteria criteria = getSession().createCriteria(entityClass).add(example);
-		for (int i = 0; i < objects.length; i++) {
-			if (objects[i] instanceof Map) {
-				Map<String, String> map = (Map<String, String>)objects[i];
-				for (Entry<String, String> entry : map.entrySet()) {
-					if (entry.getValue().equals("desc")) {
-						criteria.addOrder(Order.desc(entry.getKey()));
-					} else {
-						criteria.addOrder(Order.asc(entry.getKey()));
-					}
-				}
-			}
-		}
-		List<X> list = criteria.list();
-		if (list == null) {
-			list = Collections.emptyList();
-		}
-		return list;
-	}
-	
 	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Map<String, String> orderMaps){
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
@@ -611,19 +545,15 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return (X) criteria.uniqueResult();
 	}
 	
-	public T uniqueResultByHql(String hql, boolean namedQuery, Object... values){
-		return getUniqueResultByHql(hql, entityClass, namedQuery, values);
+	public T uniqueResultByHql(String hql, Object... values) {
+		return uniqueResultByHql(hql, entityClass, false, values);
 	}
 	
-	@OK
-	public T uniqueResultBySql(String sql, Object... values) {
-		if (logger.isInfoEnabled()) {
-			logger.info("uniqueResultBySql, sql = [{}], parameter = {}.", sql, Arrays.toString(values));
-		}
-		return (T) createSqlQuery(sql, entityClass, values).uniqueResult();
+	public T uniqueResultByNamedHql(String hql, Object... values) {
+		return uniqueResultByHql(hql, entityClass, true, values);
 	}
-
-	public <X> X getUniqueResultByHql(String hql, Class<X> resultClass, boolean namedQuery, Object... values) {
+	
+	public <X> X uniqueResultByHql(String hql, Class<X> resultClass, boolean namedQuery, Object... values) {
 		if (resultClass == null) {
 			throw new BasicException("resultClass can't be null.");
 		}
@@ -641,7 +571,15 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return (X) query.uniqueResult();
 	}
 	
-	public <X> X getUniqueResultBySql(String sql, Class<X> resultClass, Object... values) {
+	@OK
+	public T uniqueResultBySql(String sql, Object... values) {
+		if (logger.isInfoEnabled()) {
+			logger.info("uniqueResultBySql, sql = [{}], parameter = {}.", sql, Arrays.toString(values));
+		}
+		return (T) createSqlQuery(sql, entityClass, values).uniqueResult();
+	}
+	
+	public <X> X uniqueResultBySql(String sql, Class<X> resultClass, Object... values) {
 		if (logger.isInfoEnabled()) {
 			logger.info("getUniqueResultBySql, sql = [{}], parameter = {}, resultClass = [{}].", 
 					sql, Arrays.toString(values), resultClass.getName());
@@ -759,9 +697,10 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		Hibernate.initialize(proxy);
 	}
     
+	//not ok
 	public Long getSequenceLongValue(String sequenceName) {
 		String sql = "select nextValue('" + sequenceName + "')";		
-		Object obj = getUniqueResultBySql(sql, (Class<?>)null);
+		Object obj = uniqueResultBySql(sql, (Class<?>)null);
 		return Long.valueOf(obj.toString());
 	}
 	

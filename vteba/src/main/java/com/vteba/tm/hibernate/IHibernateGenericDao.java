@@ -317,23 +317,22 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 *    from Subject s where .... 同时Subject实体中要有对应的构造函数才行。<br>
 	 * 3、查询任意栏位，hql中的栏位名或别名要和Class&lt;T&gt;实例中的属性名一致。使用AliasedResultTransformer转换任意列。<br>
 	 * @param hql 查询语句
-	 * @param namedQuery 是否命名查询
 	 * @param values hql中绑定的参数值
 	 * @return 当前实体&lt;T&gt;
 	 */
-	public T uniqueResultByHql(String hql, boolean namedQuery, Object... values);
+	public T uniqueResultByHql(String hql, Object... values);
 	
 	/**
-	 * 使用sql获得唯一实体<br>
-	 * 1、sql栏位或者别名要和实体的属性一致，栏位和实体属性名不一致要指定别名。<br>
-	 * 如：select id, subject_code subjectCode, subject_name subjectName from subject s where ....<br>
-	 * 其中id属性和sql栏位一样，不需要指定别名。<br>
-	 * 2、基于别名，使用AliasedResultTransformer，可转换任意列。
-	 * @param sql 要执行的sql
-	 * @param values sql绑定的参数
+	 * 使用命名hql获得唯一实体。<br>
+	 * 1、hql应查询Class&lt;T&gt;实例所有的属性，如：select s from Subject s where .... 。<br>
+	 * 2、使用new T()构造函数指定属性，如：select new Subject(id, subjectCode, subjectName, level) 
+	 *    from Subject s where .... 同时Subject实体中要有对应的构造函数才行。<br>
+	 * 3、查询任意栏位，hql中的栏位名或别名要和Class&lt;T&gt;实例中的属性名一致。使用AliasedResultTransformer转换任意列。<br>
+	 * @param hql 查询语句
+	 * @param values hql中绑定的参数值
 	 * @return 当前实体&lt;T&gt;
 	 */
-	public T uniqueResultBySql(String sql, Object...values);
+	public T uniqueResultByNamedHql(String hql, Object... values);
 	
 	/**
 	 * 通过hql获得唯一实体，hql语句可进行多实体连接。<br>
@@ -348,7 +347,19 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @param values hql参数值
 	 * @return 实体&lt;X&gt;
 	 */
-	public <X> X getUniqueResultByHql(String hql, Class<X> resultClass, boolean namedQuery, Object... values);
+	public <X> X uniqueResultByHql(String hql, Class<X> resultClass, boolean namedQuery, Object... values);
+	
+	/**
+	 * 使用sql获得唯一实体<br>
+	 * 1、sql栏位或者别名要和实体的属性一致，栏位和实体属性名不一致要指定别名。<br>
+	 * 如：select id, subject_code subjectCode, subject_name subjectName from subject s where ....<br>
+	 * 其中id属性和sql栏位一样，不需要指定别名。<br>
+	 * 2、基于别名，使用AliasedResultTransformer，可转换任意列。
+	 * @param sql 要执行的sql
+	 * @param values sql绑定的参数
+	 * @return 当前实体&lt;T&gt;
+	 */
+	public T uniqueResultBySql(String sql, Object...values);
 	
 	/**
 	 * 通过sql获得唯一实体<br>
@@ -362,7 +373,7 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @param values sql参数值
 	 * @return 实体&lt;X&gt;
 	 */
-	public <X> X getUniqueResultBySql(String sql, Class<X> resultClass, Object... values);
+	public <X> X uniqueResultBySql(String sql, Class<X> resultClass, Object... values);
 	
 	/**
 	 * 执行任意hql，常用于update，delete，insert
@@ -477,5 +488,5 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @author yinlei
 	 * date 2012-7-3 下午3:33:12
 	 */
-	public Long getSequenceLongValue(String sequenceName);
+	//public Long getSequenceLongValue(String sequenceName);
 }

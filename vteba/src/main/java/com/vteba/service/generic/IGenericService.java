@@ -299,13 +299,47 @@ public interface IGenericService<T, ID extends Serializable> {
 	public <X> X getUniqueResultByProperty(Class<X> entityClass, Map<String, Object> params);
 
 	/**
+	 * 使用hql获得唯一实体。<br>
+	 * 1、hql应查询Class&lt;T&gt;实例所有的属性，如：select s from Subject s where .... 。<br>
+	 * 2、使用new T()构造函数指定属性，如：select new Subject(id, subjectCode, subjectName, level) 
+	 *    from Subject s where .... 同时Subject实体中要有对应的构造函数才行。<br>
+	 * 3、查询任意栏位，hql中的栏位名或别名要和Class&lt;T&gt;实例中的属性名一致。使用AliasedResultTransformer转换任意列。<br>
+	 * @param hql 查询语句
+	 * @param values hql中绑定的参数值
+	 * @return 当前实体&lt;T&gt;
+	 */
+	public T uniqueResultByHql(String hql, Object... values);
+	
+	/**
+	 * 使用命名hql获得唯一实体。<br>
+	 * 1、hql应查询Class&lt;T&gt;实例所有的属性，如：select s from Subject s where .... 。<br>
+	 * 2、使用new T()构造函数指定属性，如：select new Subject(id, subjectCode, subjectName, level) 
+	 *    from Subject s where .... 同时Subject实体中要有对应的构造函数才行。<br>
+	 * 3、查询任意栏位，hql中的栏位名或别名要和Class&lt;T&gt;实例中的属性名一致。使用AliasedResultTransformer转换任意列。<br>
+	 * @param hql 查询语句
+	 * @param values hql中绑定的参数值
+	 * @return 当前实体&lt;T&gt;
+	 */
+	public T uniqueResultByNamedHql(String hql, Object... values);
+	
+	/**
 	 * @param hql
 	 * @param namedQuery
 	 * @param values
 	 * @return
 	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#uniqueResultByHql(java.lang.String, boolean, java.lang.Object[])
 	 */
-	public T uniqueResultByHql(String hql, boolean namedQuery, Object... values);
+	//public T uniqueResultByHql(String hql, boolean namedQuery, Object... values);
+	
+	/**
+	 * @param hql
+	 * @param resultClass
+	 * @param namedQuery
+	 * @param values
+	 * @return
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#uniqueResultByHql(java.lang.String, java.lang.Class, boolean, java.lang.Object[])
+	 */
+	public <X> X uniqueResultByHql(String hql, Class<X> resultClass, boolean namedQuery, Object... values);
 
 	/**
 	 * @param sql
@@ -316,23 +350,13 @@ public interface IGenericService<T, ID extends Serializable> {
 	public T uniqueResultBySql(String sql, Object... values);
 
 	/**
-	 * @param hql
-	 * @param resultClass
-	 * @param namedQuery
-	 * @param values
-	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getUniqueResultByHql(java.lang.String, java.lang.Class, boolean, java.lang.Object[])
-	 */
-	public <X> X getUniqueResultByHql(String hql, Class<X> resultClass, boolean namedQuery, Object... values);
-
-	/**
 	 * @param sql
 	 * @param resultClass
 	 * @param values
 	 * @return
 	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getUniqueResultBySql(java.lang.String, java.lang.Class, java.lang.Object[])
 	 */
-	public <X> X getUniqueResultBySql(String sql, Class<X> resultClass, Object... values);
+	public <X> X uniqueResultBySql(String sql, Class<X> resultClass, Object... values);
 
 	/**
 	 * @param hql
@@ -427,7 +451,7 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @return
 	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getSequenceLongValue(java.lang.String)
 	 */
-	public Long getSequenceLongValue(String sequenceName);
+	//public Long getSequenceLongValue(String sequenceName);
 
 	/**
 	 * 批量保存一批数据
