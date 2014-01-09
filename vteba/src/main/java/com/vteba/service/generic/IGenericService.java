@@ -436,7 +436,7 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @return
 	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#countHqlResult(java.lang.String, java.lang.Object[])
 	 */
-	public long countHqlResult(String hql, Object... values);
+	//public long countHqlResult(String hql, Object... values);
 
 	/**
 	 * @param sql
@@ -444,7 +444,7 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @return
 	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#countSqlResult(java.lang.String, java.lang.Object[])
 	 */
-	public long countSqlResult(String sql, Object... values);
+	//public long countSqlResult(String sql, Object... values);
 
 	/**
 	 * @param sequenceName

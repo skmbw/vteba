@@ -312,15 +312,15 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 		return hibernateGenericDaoImpl.queryForPageBySql(page, sql, values);
 	}
 
-	@Override
-	public long countHqlResult(String hql, Object... values) {
-		return hibernateGenericDaoImpl.countHqlResult(hql, values);
-	}
-
-	@Override
-	public long countSqlResult(String sql, Object... values) {
-		return hibernateGenericDaoImpl.countSqlResult(sql, values);
-	}
+//	@Override
+//	public long countHqlResult(String hql, Object... values) {
+//		return hibernateGenericDaoImpl.countHqlResult(hql, values);
+//	}
+//
+//	@Override
+//	public long countSqlResult(String sql, Object... values) {
+//		return hibernateGenericDaoImpl.countSqlResult(sql, values);
+//	}
 
 //	@Override
 //	public Long getSequenceLongValue(String sequenceName) {
