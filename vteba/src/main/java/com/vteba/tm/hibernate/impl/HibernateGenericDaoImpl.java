@@ -185,8 +185,8 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 			logger.info("SQL query, will use AliasedResultTransformer mapping the result, sql = [{}], parameter = {}.", 
 					sqlQuery.getQueryString(), Arrays.toString(values));
 		}
-		//setResultTransformer(sqlQuery, resultClass, sqlQuery.getQueryString());
-		setFieldAliasTransformer(sqlQuery, resultClass, sqlQuery.getQueryString());
+		setResultTransformer(sqlQuery, resultClass, sqlQuery.getQueryString());
+		//setFieldAliasTransformer(sqlQuery, resultClass, sqlQuery.getQueryString());
 		List<E> list = sqlQuery.list();
 		if (list == null) {
 			list = Collections.emptyList();
@@ -269,8 +269,8 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 				sqlQuery.setParameter(i, values[i]);
 			}
 		}
-		//setResultTransformer(sqlQuery, resultClass, sql);
-		setFieldAliasTransformer(sqlQuery, resultClass, sql);
+		setResultTransformer(sqlQuery, resultClass, sql);
+		//setFieldAliasTransformer(sqlQuery, resultClass, sql);
 		return sqlQuery;
 	}
 	
