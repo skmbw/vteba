@@ -369,6 +369,18 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return (SQLQuery)createNamedQuery(namedQuery, values);
 	}
 	
+	@Deprecated
+	protected Criteria createCriteria(Criterion... criterions) {
+		if (logger.isInfoEnabled()) {
+			logger.info("Create Criteria query by QBC. Entity = [{}].", entityClass.getName());
+		}
+		Criteria criteria = getSession().createCriteria(entityClass);
+		for (Criterion c : criterions) {
+			criteria.add(c);
+		}
+		return criteria;
+	}
+	
 	/**
 	 * 创建指定实体的Criteria
 	 * @param entityClass 指定的实体
@@ -393,7 +405,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 	 * @author yinlei
 	 * date 2012-6-17 下午10:53:21
 	 */
-	protected <X> Criteria createCriteriaByModel(X entity){
+	protected <X> Criteria createCriteriaByModel(X entity) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
@@ -403,11 +415,46 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return criteria;
 	}
 	
-	public <X> List<X> getAll(Class<X> entityClass){
+	public <X> List<X> getAll(Class<X> entityClass) {
 		return createCriteria(entityClass).list();
 	}
 	
-	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Object... objects){
+	public List<T> getListByPropertyEqual(T model) {
+		if (logger.isInfoEnabled()) {
+			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
+		}
+		Example example = Example.create(model);
+		Criteria criteria = getSession().createCriteria(entityClass).add(example);
+		
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		return list;
+	}
+	
+	public List<T> getListByPropertyEqual(T model, Map<String, String> orderMaps) {
+		if (logger.isInfoEnabled()) {
+			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
+		}
+		Example example = Example.create(model);
+		Criteria criteria = getSession().createCriteria(entityClass).add(example);
+		for (Entry<String, String> entry : orderMaps.entrySet()) {
+			if (entry.getValue().equals("desc")) {
+				criteria.addOrder(Order.desc(entry.getKey()));
+			} else {
+				criteria.addOrder(Order.asc(entry.getKey()));
+			}
+		}
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		return list;
+	}
+	
+	@Deprecated
+	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Object... objects) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
@@ -433,7 +480,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public <X> List<X> getListByPropEqual(Class<X> entityClass, X model, Map<String, String> maps){
+	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Map<String, String> maps) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
@@ -454,6 +501,42 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
+	public List<T> getListByPropertyLike(T model) {
+		if (logger.isInfoEnabled()) {
+			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
+		}
+		Example example = Example.create(model);
+		example.ignoreCase().enableLike(MatchMode.START);
+		Criteria criteria = getSession().createCriteria(entityClass).add(example);
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		return list;
+	}
+	
+	public List<T> getListByPropertyLike(T model, Map<String, String> orderMaps){
+		if (logger.isInfoEnabled()) {
+			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
+		}
+		Example example = Example.create(model);
+		example.ignoreCase().enableLike(MatchMode.START);
+		Criteria criteria = getSession().createCriteria(entityClass).add(example);
+		for (Entry<String, String> entry : orderMaps.entrySet()) {
+			if (entry.getValue().equals("desc")) {
+				criteria.addOrder(Order.desc(entry.getKey()));
+			} else {
+				criteria.addOrder(Order.asc(entry.getKey()));
+			}
+		}
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		return list;
+	}
+	
+	@Deprecated
 	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Object... objects){
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
@@ -480,14 +563,14 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public <X> List<X> getListByPropLike(Class<X> entityClass, X model, Map<String, String> maps){
+	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Map<String, String> orderMaps){
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
 		Example example = Example.create(model);
 		example.ignoreCase().enableLike(MatchMode.START);
 		Criteria criteria = getSession().createCriteria(entityClass).add(example);
-		for (Entry<String, String> entry : maps.entrySet()) {
+		for (Entry<String, String> entry : orderMaps.entrySet()) {
 			if (entry.getValue().equals("desc")) {
 				criteria.addOrder(Order.desc(entry.getKey()));
 			} else {
@@ -501,12 +584,25 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
+	public T getUniqueResultByProperty(String proName, Object value) {
+		Criterion criterion = Restrictions.eq(proName, value);
+		return (T) createCriteria(entityClass, criterion).uniqueResult();
+	}
+	
 	@OK
 	public <X> X getUniqueResultByProperty(Class<X> entityClass, String proName, Object value) {
 		Criterion criterion = Restrictions.eq(proName, value);
 		return (X) createCriteria(entityClass, criterion).uniqueResult();
 	}
 
+	public T getUniqueResultByProperty(Map<String, Object> params) {
+		Criteria criteria = createCriteria(entityClass);
+		for (Entry<String, Object> entry : params.entrySet()) {
+			criteria.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+		}
+		return (T) criteria.uniqueResult();
+	}
+	
 	public <X> X getUniqueResultByProperty(Class<X> entityClass, Map<String, Object> params) {
 		Criteria criteria = createCriteria(entityClass);
 		for (Entry<String, Object> entry : params.entrySet()) {

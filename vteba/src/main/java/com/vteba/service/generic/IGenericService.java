@@ -163,22 +163,53 @@ public interface IGenericService<T, ID extends Serializable> {
 	public <X> List<X> getAll(Class<X> entityClass);
 
 	/**
-	 * @param entityClass
-	 * @param model
-	 * @param objects
-	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getListByPropertyEqual(java.lang.Class, java.lang.Object, java.lang.Object[])
+	 * 根据属性equal查询，使用QBE实现
+	 * @param model 携带查询条件model
+	 * @return list 查询结果List&lt;T&gt;
 	 */
-	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Object... objects);
-
+	public List<T> getListByPropertyEqual(T model);
+	
+	/**
+	 * 根据属性equal查询，使用QBE实现
+	 * @param model 携带查询条件model
+	 * @param orderMaps 使用Map传参，key是排序字段，value是asc或desc。
+	 * @return list 查询结果List&lt;T&gt;
+	 * @see 
+	 */
+	public List<T> getListByPropertyEqual(T model, Map<String, String> orderMaps);
+	
 	/**
 	 * @param entityClass
 	 * @param model
-	 * @param objects
+	 * @param orderMaps
 	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getListByPropertyLike(java.lang.Class, java.lang.Object, java.lang.Object[])
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getListByPropertyEqual(java.lang.Class, java.lang.Object, java.util.Map)
 	 */
-	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Object... objects);
+	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Map<String, String> orderMaps);
+
+	/**
+	 * 根据属性like查询，使用QBE实现
+	 * @param model 携带查询条件model
+	 * @return list 查询结果List&lt;X&gt;
+	 */
+	public List<T> getListByPropertyLike(T model);
+	
+	/**
+	 * 根据属性like查询，使用QBE实现
+	 * @param model 携带查询条件model
+	 * @param orderMaps 使用Map传参，key是排序字段，value是asc或desc
+	 * @return list 查询结果List&lt;X&gt;
+	 */
+	public List<T> getListByPropertyLike(T model, Map<String, String> orderMaps);
+	
+	/**
+	 * @param entityClass
+	 * @param model
+	 * @param orderMaps
+	 * @return
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getListByPropertyLike(java.lang.Class, java.lang.Object, java.util.Map)
+	 */
+	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Map<String, String> orderMaps);
 
 	/**
 	 * @param sql
@@ -234,6 +265,14 @@ public interface IGenericService<T, ID extends Serializable> {
 	public <X> X hqlQueryForObject(String hql, Class<X> clazz, Object... values);
 
 	/**
+	 * 获得唯一实体，请确保属性具有唯一性
+	 * @param propertyName 属性名
+	 * @param value 属性值
+	 * @return 实体&lt;T&gt;
+	 */
+	public T getUniqueResultByProperty(String propertyName, Object value);
+	
+	/**
 	 * @param entityClass
 	 * @param propertyName
 	 * @param value
@@ -242,6 +281,15 @@ public interface IGenericService<T, ID extends Serializable> {
 	 */
 	public <X> X getUniqueResultByProperty(Class<X> entityClass, String propertyName, Object value);
 
+	/**
+	 * 获得唯一实体，请确保属性具有唯一性
+	 * @param params 携带查询参数，key为属性名，value为值
+	 * @return 实体&lt;X&gt;
+	 * @author yinlei
+	 * date 2013-6-11 下午5:19:04
+	 */
+	public T getUniqueResultByProperty(Map<String, Object> params);
+	
 	/**
 	 * @param entityClass
 	 * @param params

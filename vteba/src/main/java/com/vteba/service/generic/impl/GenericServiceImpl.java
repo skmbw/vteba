@@ -149,19 +149,35 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 	public <X> List<X> getAll(Class<X> entityClass) {
 		return hibernateGenericDaoImpl.getAll(entityClass);
 	}
-
+	
 	@Override
-	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model,
-			Object... objects) {
-		return hibernateGenericDaoImpl.getListByPropertyEqual(entityClass,
-				model, objects);
+	public List<T> getListByPropertyEqual(T model) {
+		return hibernateGenericDaoImpl.getListByPropertyEqual(model);
 	}
 
 	@Override
-	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model,
-			Object... objects) {
-		return hibernateGenericDaoImpl.getListByPropertyLike(entityClass,
-				model, objects);
+	public List<T> getListByPropertyEqual(T model, Map<String, String> orderMaps) {
+		return hibernateGenericDaoImpl.getListByPropertyEqual(model, orderMaps);
+	}
+	
+	@Override
+	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Map<String, String> orderMaps) {
+		return hibernateGenericDaoImpl.getListByPropertyEqual(entityClass, model, orderMaps);
+	}
+
+	@Override
+	public List<T> getListByPropertyLike(T model) {
+		return hibernateGenericDaoImpl.getListByPropertyLike(model);
+	}
+	
+	@Override
+	public List<T> getListByPropertyLike(T model, Map<String, String> orderMaps) {
+		return hibernateGenericDaoImpl.getListByPropertyLike(model, orderMaps);
+	}
+	
+	@Override
+	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Map<String, String> orderMaps) {
+		return hibernateGenericDaoImpl.getListByPropertyLike(entityClass, model, orderMaps);
 	}
 
 	@Override
@@ -199,12 +215,22 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 	}
 
 	@Override
+	public T getUniqueResultByProperty(String propertyName, Object value) {
+		return hibernateGenericDaoImpl.getUniqueResultByProperty(propertyName, value);
+	}
+	
+	@Override
 	public <X> X getUniqueResultByProperty(Class<X> entityClass,
 			String propertyName, Object value) {
 		return hibernateGenericDaoImpl.getUniqueResultByProperty(entityClass,
 				propertyName, value);
 	}
 
+	@Override
+	public T getUniqueResultByProperty(Map<String, Object> params) {
+		return hibernateGenericDaoImpl.getUniqueResultByProperty(params);
+	}
+	
 	@Override
 	public <X> X getUniqueResultByProperty(Class<X> entityClass,
 			Map<String, Object> params) {
