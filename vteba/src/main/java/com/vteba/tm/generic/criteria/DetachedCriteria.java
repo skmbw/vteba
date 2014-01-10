@@ -1,13 +1,17 @@
 package com.vteba.tm.generic.criteria;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DetachedCriteria {
 	private String clazzName;
 	private List<Criterion> criterionList = new ArrayList<Criterion>();
 	private boolean distinct;
 	private List<String> orderBy = new ArrayList<String>();
+	
+	private Map<String, Object> maps = new HashMap<String, Object>();
 	
 	protected DetachedCriteria() {
 		super();
@@ -81,4 +85,22 @@ public class DetachedCriteria {
 				+ orderBy + "]";
 	}
 	
+	public String toQuery() {
+		StringBuilder sb = new StringBuilder("select u from ");
+		sb.append(clazzName);
+		
+		if (criterionList.size() > 0) {
+			sb.append("where");
+			for (Criterion criterion : criterionList) {
+				if (criterion instanceof SimpleCriterion) {
+					SimpleCriterion c = (SimpleCriterion)criterion;
+					sb.append(" ").append(c.getExpression()).append(" ");
+					maps.put(c.getExpression(), c.getValue());
+				}
+			}
+		}
+		
+		
+		return sb.toString();
+	}
 }
