@@ -1,5 +1,8 @@
 package com.vteba.tm.generic.criteria;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SimpleCriterion implements Criterion {
 	private String expression;
 	private String label;
@@ -44,9 +47,11 @@ public class SimpleCriterion implements Criterion {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-
-	@Override
-	public String toString() {
-		return null;
+	
+	public Map<String, Object> getMaps() {
+		Map<String, Object> maps = new HashMap<String, Object>();
+		maps.put(":" + label, value);
+		return maps;
 	}
+	
 }

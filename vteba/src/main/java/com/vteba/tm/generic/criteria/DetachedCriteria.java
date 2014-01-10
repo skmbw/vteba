@@ -97,43 +97,48 @@ public class DetachedCriteria {
 		if (criterionList.size() > 0) {
 			sb.append(" u where");
 			for (Criterion criterion : criterionList) {
-				if (criterion instanceof SimpleCriterion) {
-					SimpleCriterion c = (SimpleCriterion)criterion;
-					if (!maps.isEmpty()) {
-						sb.append(" and ");
-					}
-					sb.append(" ").append(c.getExpression()).append(" ");
-					maps.put(c.getLabel(), c.getValue());
-				} else if (criterion instanceof InCriterion) {
-					InCriterion c = (InCriterion)criterion;
-					if (!maps.isEmpty()) {
-						sb.append(" and ");
-					}
-					sb.append(" ").append(c.getExpression()).append(" ");
-					maps.put(c.getLabel(), c.getValue());
-				} else if (criterion instanceof BetweenCriterion) {
-					BetweenCriterion c = (BetweenCriterion)criterion;
-					if (!maps.isEmpty()) {
-						sb.append(" and ");
-					}
-					sb.append(" ").append(c.getExpression()).append(" ");
-					maps.put("l" + c.getLabel(), c.getLowValue());
-					maps.put("h" + c.getLabel(), c.getHighValue());
-				} else if (criterion instanceof Conjunction) {
-					Conjunction c = (Conjunction)criterion;
-					if (!maps.isEmpty()) {
-						sb.append(" and ");
-					}
-					sb.append(c.toQuery());
-					maps.putAll(c.getMaps());
-				} else if (criterion instanceof Disjunction) {
-					Disjunction c = (Disjunction)criterion;
-					if (!maps.isEmpty()) {
-						sb.append(" and ");
-					}
-					sb.append(c.toQuery());
-					maps.putAll(c.getMaps());
+				if (!maps.isEmpty()) {
+					sb.append(" and ");
 				}
+				sb.append(" ").append(criterion.getExpression()).append(" ");
+				maps.putAll(criterion.getMaps());
+//				if (criterion instanceof SimpleCriterion) {
+//					SimpleCriterion c = (SimpleCriterion)criterion;
+//					if (!maps.isEmpty()) {
+//						sb.append(" and ");
+//					}
+//					sb.append(" ").append(c.getExpression()).append(" ");
+//					maps.put(c.getLabel(), c.getValue());
+//				} else if (criterion instanceof InCriterion) {
+//					InCriterion c = (InCriterion)criterion;
+//					if (!maps.isEmpty()) {
+//						sb.append(" and ");
+//					}
+//					sb.append(" ").append(c.getExpression()).append(" ");
+//					maps.put(c.getLabel(), c.getValue());
+//				} else if (criterion instanceof BetweenCriterion) {
+//					BetweenCriterion c = (BetweenCriterion)criterion;
+//					if (!maps.isEmpty()) {
+//						sb.append(" and ");
+//					}
+//					sb.append(" ").append(c.getExpression()).append(" ");
+//					maps.put("l" + c.getLabel(), c.getLowValue());
+//					maps.put("h" + c.getLabel(), c.getHighValue());
+//				} else if (criterion instanceof Conjunction) {
+//					Conjunction c = (Conjunction)criterion;
+//					if (!maps.isEmpty()) {
+//						sb.append(" and ");
+//					}
+//					sb.append(c.getExpression());
+//					maps.putAll(c.getMaps());
+//				} else if (criterion instanceof Disjunction) {
+//					Disjunction c = (Disjunction)criterion;
+//					if (!maps.isEmpty()) {
+//						sb.append(" and ");
+//					}
+//					sb.append(c.getExpression());
+//					maps.putAll(c.getMaps());
+//				}
 			}
 		}
 		

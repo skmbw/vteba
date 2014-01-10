@@ -1,6 +1,8 @@
 package com.vteba.tm.generic.criteria;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InCriterion implements Criterion {
 	private String expression;
@@ -42,9 +44,10 @@ public class InCriterion implements Criterion {
 		this.label = label;
 	}
 
-	@Override
-	public String toString() {
-		return "InCriterion [expression=" + expression + ", value=" + value + "]";
+	public Map<String, Object> getMaps() {
+		Map<String, Object> maps = new HashMap<String, Object>();
+		maps.put(":" + label, value);
+		return maps;
 	}
 	
 }

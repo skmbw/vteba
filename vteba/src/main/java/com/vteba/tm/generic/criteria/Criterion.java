@@ -1,5 +1,8 @@
 package com.vteba.tm.generic.criteria;
 
-public interface Criterion {
+import java.util.Map;
 
+public interface Criterion {
+	public String getExpression();
+	public Map<String, Object> getMaps();
 }

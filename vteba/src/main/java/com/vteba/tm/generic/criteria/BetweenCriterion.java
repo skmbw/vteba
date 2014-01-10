@@ -1,5 +1,8 @@
 package com.vteba.tm.generic.criteria;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BetweenCriterion implements Criterion {
 	private String expression;
 	private String label;
@@ -50,9 +53,11 @@ public class BetweenCriterion implements Criterion {
 		this.highValue = highValue;
 	}
 
-	@Override
-	public String toString() {
-		return null;
+	public Map<String, Object> getMaps() {
+		Map<String, Object> maps = new HashMap<String, Object>();
+		maps.put(":l" + label, lowValue);
+		maps.put(":h" + label, highValue);
+		return maps;
 	}
 
 }

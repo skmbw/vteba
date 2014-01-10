@@ -18,7 +18,7 @@ public class Disjunction implements Criterion {
 		Collections.addAll(junctionList, criterions);
 	}
 	
-	public String toQuery() {
+	public String getExpression() {
 		StringBuilder sb = new StringBuilder("(");
 		for (Criterion criterion : junctionList) {
 			if (criterion instanceof SimpleCriterion) {
