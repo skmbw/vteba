@@ -215,29 +215,39 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public T getUniqueResultByProperty(String propertyName, Object value) {
-		return hibernateGenericDaoImpl.getUniqueResultByProperty(propertyName, value);
+	public T uniqueResultByProperty(String propertyName, Object value) {
+		return hibernateGenericDaoImpl.uniqueResultByProperty(propertyName, value);
 	}
 	
 	@Override
-	public <X> X getUniqueResultByProperty(Class<X> entityClass,
+	public <X> X uniqueResultByProperty(Class<X> entityClass,
 			String propertyName, Object value) {
-		return hibernateGenericDaoImpl.getUniqueResultByProperty(entityClass,
+		return hibernateGenericDaoImpl.uniqueResultByProperty(entityClass,
 				propertyName, value);
 	}
 
 	@Override
-	public T getUniqueResultByProperty(Map<String, Object> params) {
-		return hibernateGenericDaoImpl.getUniqueResultByProperty(params);
+	public T uniqueResultByProperty(Map<String, Object> params) {
+		return hibernateGenericDaoImpl.uniqueResultByProperty(params);
 	}
 	
 	@Override
-	public <X> X getUniqueResultByProperty(Class<X> entityClass,
+	public <X> X uniqueResultByProperty(Class<X> entityClass,
 			Map<String, Object> params) {
-		return hibernateGenericDaoImpl.getUniqueResultByProperty(entityClass,
+		return hibernateGenericDaoImpl.uniqueResultByProperty(entityClass,
 				params);
 	}
 
+	@Override
+	public T uniqueResultByModel(T model) {
+		return hibernateGenericDaoImpl.uniqueResultByModel(model);
+	}
+	
+	@Override
+	public <X> X uniqueResultByModel(Class<X> entityClass, X model) {
+		return hibernateGenericDaoImpl.uniqueResultByModel(entityClass, model);
+	}
+	
 	@Override
 	public T uniqueResultByHql(String hql, Object... values) {
 		return hibernateGenericDaoImpl.uniqueResultByHql(hql, values);

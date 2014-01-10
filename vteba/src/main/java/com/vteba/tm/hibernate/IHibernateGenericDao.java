@@ -163,6 +163,14 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	
 	/**
 	 * 根据属性equal查询，使用QBE实现
+	 * @param propertyName 属性名
+	 * @param propertyValue 属性值
+	 * @return list 查询结果List&lt;T&gt;
+	 */
+	public List<T> getListByPropertyEqual(String propertyName, Object propertyValue);
+	
+	/**
+	 * 根据属性equal查询，使用QBE实现
 	 * @param model 携带查询条件model
 	 * @return list 查询结果List&lt;T&gt;
 	 */
@@ -184,6 +192,14 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @return list 查询结果List&lt;X&gt;
 	 */
 	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Map<String, String> orderMaps);
+	
+	/**
+	 * 根据属性like查询，使用QBE实现，一般是String值。
+	 * @param propertyName 属性名
+	 * @param propertyValue 属性值
+	 * @return list 查询结果List&lt;T&gt;
+	 */
+	public List<T> getListByPropertyLike(String propertyName, String propertyValue);
 	
 	/**
 	 * 根据属性like查询，使用QBE实现
@@ -280,7 +296,7 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @param value 属性值
 	 * @return 实体&lt;T&gt;
 	 */
-	public T getUniqueResultByProperty(String propertyName, Object value);
+	public T uniqueResultByProperty(String propertyName, Object value);
 	
 	/**
 	 * 获得唯一实体，请确保属性具有唯一性
@@ -289,7 +305,7 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @param value 属性值
 	 * @return 实体&lt;X&gt;
 	 */
-	public <X> X getUniqueResultByProperty(Class<X> entityClass, String propertyName, Object value);
+	public <X> X uniqueResultByProperty(Class<X> entityClass, String propertyName, Object value);
 	
 	/**
 	 * 获得唯一实体，请确保属性具有唯一性
@@ -298,7 +314,7 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @author yinlei
 	 * date 2013-6-11 下午5:19:04
 	 */
-	public T getUniqueResultByProperty(Map<String, Object> params);
+	public T uniqueResultByProperty(Map<String, Object> params);
 	
 	/**
 	 * 获得唯一实体，请确保属性具有唯一性
@@ -308,7 +324,26 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @author yinlei
 	 * date 2013-6-11 下午5:19:04
 	 */
-	public <X> X getUniqueResultByProperty(Class<X> entityClass, Map<String, Object> params);
+	public <X> X uniqueResultByProperty(Class<X> entityClass, Map<String, Object> params);
+	
+	/**
+	 * 获得唯一实体，请确保属性具有唯一性
+	 * @param model 携带查询参数实体
+	 * @return 实体&lt;T&gt;实例
+	 * @author yinlei
+	 * date 2013-6-11 下午5:21:11
+	 */
+	public T uniqueResultByModel(T model);
+	
+	/**
+	 * 获得唯一实体，请确保属性具有唯一性
+	 * @param entityClass 要查询的实体类
+	 * @param model 携带查询参数实体
+	 * @return 实体&lt;X&gt;实例
+	 * @author yinlei
+	 * date 2013-6-11 下午5:22:34
+	 */
+	public <X> X uniqueResultByModel(Class<X> entityClass, X model);
 	
 	/**
 	 * 使用hql获得唯一实体。<br>

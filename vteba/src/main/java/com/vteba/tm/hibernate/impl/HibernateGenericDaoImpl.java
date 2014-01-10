@@ -15,6 +15,7 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
@@ -407,6 +408,16 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return createCriteria(entityClass).list();
 	}
 	
+	public List<T> getListByPropertyEqual(String propertyName, Object propertyValue) {
+		Criteria criteria = getSession().createCriteria(entityClass);
+		criteria.add(Restrictions.eq(propertyName, propertyValue));
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		return list;
+	}
+	
 	public List<T> getListByPropertyEqual(T model) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
@@ -459,6 +470,33 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 			list = Collections.emptyList();
 		}
 		
+		return list;
+	}
+	
+	public DetachedCriteria getDetachedCriteria() {
+		return DetachedCriteria.forClass(entityClass);
+	}
+	
+	public <X> DetachedCriteria getDetachedCriteria(Class<X> entityClass) {
+		return DetachedCriteria.forClass(entityClass);
+	}
+	
+	public List<T> getListByCriteria(DetachedCriteria detachedCriteria) {
+		Criteria criteria = detachedCriteria.getExecutableCriteria(getSession());
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		return list;
+	}
+	
+	public List<T> getListByPropertyLike(String propertyName, String propertyValue) {
+		Criteria criteria = getSession().createCriteria(entityClass);
+		criteria.add(Restrictions.like(propertyName, propertyValue));
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
 		return list;
 	}
 	
@@ -518,18 +556,18 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public T getUniqueResultByProperty(String proName, Object value) {
+	public T uniqueResultByProperty(String proName, Object value) {
 		Criterion criterion = Restrictions.eq(proName, value);
 		return (T) createCriteria(entityClass, criterion).uniqueResult();
 	}
 	
 	@OK
-	public <X> X getUniqueResultByProperty(Class<X> entityClass, String proName, Object value) {
+	public <X> X uniqueResultByProperty(Class<X> entityClass, String proName, Object value) {
 		Criterion criterion = Restrictions.eq(proName, value);
 		return (X) createCriteria(entityClass, criterion).uniqueResult();
 	}
 
-	public T getUniqueResultByProperty(Map<String, Object> params) {
+	public T uniqueResultByProperty(Map<String, Object> params) {
 		Criteria criteria = createCriteria(entityClass);
 		for (Entry<String, Object> entry : params.entrySet()) {
 			criteria.add(Restrictions.eq(entry.getKey(), entry.getValue()));
@@ -537,12 +575,21 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return (T) criteria.uniqueResult();
 	}
 	
-	public <X> X getUniqueResultByProperty(Class<X> entityClass, Map<String, Object> params) {
+	public <X> X uniqueResultByProperty(Class<X> entityClass, Map<String, Object> params) {
 		Criteria criteria = createCriteria(entityClass);
 		for (Entry<String, Object> entry : params.entrySet()) {
 			criteria.add(Restrictions.eq(entry.getKey(), entry.getValue()));
 		}
 		return (X) criteria.uniqueResult();
+	}
+	
+	public T uniqueResultByModel(T model) {
+		return uniqueResultByModel(entityClass, model);
+	}
+	
+	public <X> X uniqueResultByModel(Class<X> entityClass, X model) {
+		Example example = Example.create(model);
+		return (X) createCriteria(entityClass, example).uniqueResult();
 	}
 	
 	public T uniqueResultByHql(String hql, Object... values) {

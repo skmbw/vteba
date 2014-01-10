@@ -82,14 +82,15 @@ public class EmpUserServiceImpl extends GenericServiceImpl<EmpUser, Long> implem
 		}
 		return authorities;
 	}
-	public EmpUser queryEmpUserByUserAccount(String userAccount){
+	
+	public EmpUser queryEmpUserByUserAccount(String userAccount) {
 		EmpUser empUser = new EmpUser();
-		empUser = empUserDaoImpl.getUniqueResultByProperty(EmpUser.class , "userAccount", userAccount);
+		empUser = empUserDaoImpl.uniqueResultByProperty("userAccount", userAccount);
 		return empUser;
 	}
 	
 	//@Cacheable(value="getAllAuthorities", key="'getAllAuthorities'")
-	public List<String> getAllAuthorities(){
+	public List<String> getAllAuthorities() {
 		List<String> authList = new ArrayList<String>();
 		String hql = "select a.authName from Authorities a where a.enabled = 1";
 		authList = empUserDaoImpl.hqlQueryForList(hql, String.class);

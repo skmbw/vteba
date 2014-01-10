@@ -270,16 +270,16 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @param value 属性值
 	 * @return 实体&lt;T&gt;
 	 */
-	public T getUniqueResultByProperty(String propertyName, Object value);
+	public T uniqueResultByProperty(String propertyName, Object value);
 	
 	/**
 	 * @param entityClass
 	 * @param propertyName
 	 * @param value
 	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getUniqueResultByProperty(java.lang.Class, java.lang.String, java.lang.Object)
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#uniqueResultByProperty(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
-	public <X> X getUniqueResultByProperty(Class<X> entityClass, String propertyName, Object value);
+	public <X> X uniqueResultByProperty(Class<X> entityClass, String propertyName, Object value);
 
 	/**
 	 * 获得唯一实体，请确保属性具有唯一性
@@ -288,16 +288,35 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @author yinlei
 	 * date 2013-6-11 下午5:19:04
 	 */
-	public T getUniqueResultByProperty(Map<String, Object> params);
+	public T uniqueResultByProperty(Map<String, Object> params);
 	
 	/**
 	 * @param entityClass
 	 * @param params
 	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getUniqueResultByProperty(java.lang.Class, java.util.Map)
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#uniqueResultByProperty(java.lang.Class, java.util.Map)
 	 */
-	public <X> X getUniqueResultByProperty(Class<X> entityClass, Map<String, Object> params);
+	public <X> X uniqueResultByProperty(Class<X> entityClass, Map<String, Object> params);
 
+	/**
+	 * 获得唯一实体，请确保属性具有唯一性
+	 * @param model 携带查询参数实体
+	 * @return 实体&lt;T&gt;实例
+	 * @author yinlei
+	 * date 2013-6-11 下午5:21:11
+	 */
+	public T uniqueResultByModel(T model);
+	
+	/**
+	 * 获得唯一实体，请确保属性具有唯一性
+	 * @param entityClass 要查询的实体类
+	 * @param model 携带查询参数实体
+	 * @return 实体&lt;X&gt;实例
+	 * @author yinlei
+	 * date 2013-6-11 下午5:22:34
+	 */
+	public <X> X uniqueResultByModel(Class<X> entityClass, X model);
+	
 	/**
 	 * 使用hql获得唯一实体。<br>
 	 * 1、hql应查询Class&lt;T&gt;实例所有的属性，如：select s from Subject s where .... 。<br>
