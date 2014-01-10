@@ -2,6 +2,7 @@ package com.vteba.tm.generic.criteria;
 
 public class SimpleCriterion implements Criterion {
 	private String expression;
+	private String label;
 	private Object value;
 
 	public SimpleCriterion() {
@@ -13,9 +14,10 @@ public class SimpleCriterion implements Criterion {
 		this.expression = expression;
 	}
 	
-	public SimpleCriterion(String expression, Object value) {
+	public SimpleCriterion(String expression, String label, Object value) {
 		super();
 		this.expression = expression;
+		this.label = label;
 		this.value = value;
 	}
 
@@ -33,6 +35,14 @@ public class SimpleCriterion implements Criterion {
 
 	public void setValue(Object value) {
 		this.value = value;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	@Override

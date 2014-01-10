@@ -2,6 +2,7 @@ package com.vteba.tm.generic.criteria;
 
 public class BetweenCriterion implements Criterion {
 	private String expression;
+	private String label;
 	private Object lowValue;
 	private Object highValue;
 
@@ -9,9 +10,10 @@ public class BetweenCriterion implements Criterion {
 		super();
 	}
 
-	public BetweenCriterion(String expression, Object lowValue, Object highValue) {
+	public BetweenCriterion(String expression, String label, Object lowValue, Object highValue) {
 		super();
 		this.expression = expression;
+		this.label = label;
 		this.lowValue = lowValue;
 		this.highValue = highValue;
 	}
@@ -22,6 +24,14 @@ public class BetweenCriterion implements Criterion {
 
 	public void setExpression(String expression) {
 		this.expression = expression;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	public Object getLowValue() {
