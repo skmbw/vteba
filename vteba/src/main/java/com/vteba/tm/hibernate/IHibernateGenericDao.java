@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.vteba.tm.generic.IGenericDao;
 import com.vteba.tm.generic.Page;
 
@@ -163,18 +165,33 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	
 	/**
 	 * 根据属性equal查询，使用QBE实现
+	 * @param detachedCriteria 携带查询条件，DetachedCriteria实例，复杂条件
+	 * @return list 查询结果List&lt;T&gt;
+	 */
+	public List<T> getListByCriteria(DetachedCriteria detachedCriteria);
+	
+	/**
+	 * 根据属性equal查询，使用QBE实现
+	 * @param model 携带查询条件，实体实例，简单条件，一般是等于
+	 * @param detachedCriteria 携带查询条件，DetachedCriteria实例，复杂条件
+	 * @return list 查询结果List&lt;T&gt;
+	 */
+	public List<T> getListByCriteria(T model, DetachedCriteria detachedCriteria);
+	
+	/**
+	 * 根据属性equal查询，使用QBE实现
 	 * @param propertyName 属性名
 	 * @param propertyValue 属性值
 	 * @return list 查询结果List&lt;T&gt;
 	 */
-	public List<T> getListByPropertyEqual(String propertyName, Object propertyValue);
+	public List<T> getListByCriteria(String propertyName, Object propertyValue);
 	
 	/**
 	 * 根据属性equal查询，使用QBE实现
 	 * @param model 携带查询条件model
 	 * @return list 查询结果List&lt;T&gt;
 	 */
-	public List<T> getListByPropertyEqual(T model);
+	public List<T> getListByCriteria(T model);
 	
 	/**
 	 * 根据属性equal查询，使用QBE实现
@@ -182,7 +199,7 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @param orderMaps 使用Map传参，key是排序字段，value是asc或desc。
 	 * @return list 查询结果List&lt;T&gt;
 	 */
-	public List<T> getListByPropertyEqual(T model, Map<String, String> orderMaps);
+	public List<T> getListByCriteria(T model, Map<String, String> orderMaps);
 	
 	/**
 	 * 根据属性equal查询，使用QBE实现
@@ -191,39 +208,39 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * @param orderMaps 使用Map传参，key是排序字段，value是asc或desc。
 	 * @return list 查询结果List&lt;X&gt;
 	 */
-	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Map<String, String> orderMaps);
+	public <X> List<X> getListByCriteria(Class<X> entityClass, X model, Map<String, String> orderMaps);
 	
 	/**
-	 * 根据属性like查询，使用QBE实现，一般是String值。
+	 * String属性like查询，使用QBE实现
 	 * @param propertyName 属性名
 	 * @param propertyValue 属性值
 	 * @return list 查询结果List&lt;T&gt;
 	 */
-	public List<T> getListByPropertyLike(String propertyName, String propertyValue);
+	public List<T> getListByCriteriaLike(String propertyName, String propertyValue);
 	
 	/**
-	 * 根据属性like查询，使用QBE实现
+	 * String属性like查询，其它等于，使用QBE实现
 	 * @param model 携带查询条件model
 	 * @return list 查询结果List&lt;X&gt;
 	 */
-	public List<T> getListByPropertyLike(T model);
+	public List<T> getListByCriteriaLike(T model);
 	
 	/**
-	 * 根据属性like查询，使用QBE实现
+	 * String属性like查询，其它等于，使用QBE实现
 	 * @param model 携带查询条件model
 	 * @param orderMaps 使用Map传参，key是排序字段，value是asc或desc
 	 * @return list 查询结果List&lt;X&gt;
 	 */
-	public List<T> getListByPropertyLike(T model, Map<String, String> orderMaps);
+	public List<T> getListByCriteriaLike(T model, Map<String, String> orderMaps);
 	
 	/**
-	 * 根据属性like查询，使用QBE实现
+	 * String属性like查询，其它等于，使用QBE实现
 	 * @param entityClass 要查询的实体类
 	 * @param model 携带查询条件model
 	 * @param orderMaps 使用Map传参，key是排序字段，value是asc或desc
 	 * @return list 查询结果List&lt;X&gt;
 	 */
-	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Map<String, String> orderMaps);
+	public <X> List<X> getListByCriteriaLike(Class<X> entityClass, X model, Map<String, String> orderMaps);
 
 	/**
 	 * sql查询标量值，返回List&lt;Object[]&gt;
@@ -291,59 +308,59 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	public <X> X hqlQueryForObject(String hql, Class<X> clazz, Object... values);
 	
 	/**
-	 * 获得唯一实体，请确保属性具有唯一性
+	 * QBC条件查询获得唯一实体，请确保属性具有唯一性
 	 * @param propertyName 属性名
 	 * @param value 属性值
 	 * @return 实体&lt;T&gt;
 	 */
-	public T uniqueResultByProperty(String propertyName, Object value);
+	public T uniqueResultByCriteria(String propertyName, Object value);
 	
 	/**
-	 * 获得唯一实体，请确保属性具有唯一性
+	 * QBC条件查询获得唯一实体，请确保属性具有唯一性
 	 * @param entityClass 要查询的实体类
 	 * @param propertyName 属性名
 	 * @param value 属性值
 	 * @return 实体&lt;X&gt;
 	 */
-	public <X> X uniqueResultByProperty(Class<X> entityClass, String propertyName, Object value);
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, String propertyName, Object value);
 	
 	/**
-	 * 获得唯一实体，请确保属性具有唯一性
+	 * QBC条件查询获得唯一实体，请确保属性具有唯一性
 	 * @param params 携带查询参数，key为属性名，value为值
 	 * @return 实体&lt;X&gt;
 	 * @author yinlei
 	 * date 2013-6-11 下午5:19:04
 	 */
-	public T uniqueResultByProperty(Map<String, Object> params);
+	public T uniqueResultByCriteria(Map<String, Object> params);
 	
 	/**
-	 * 获得唯一实体，请确保属性具有唯一性
+	 * QBE条件查询获得唯一实体，请确保属性具有唯一性
 	 * @param entityClass 要查询的实体类
 	 * @param params 携带查询参数，key为属性名，value为值
 	 * @return 实体&lt;X&gt;
 	 * @author yinlei
 	 * date 2013-6-11 下午5:19:04
 	 */
-	public <X> X uniqueResultByProperty(Class<X> entityClass, Map<String, Object> params);
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, Map<String, Object> params);
 	
 	/**
-	 * 获得唯一实体，请确保属性具有唯一性
+	 * QBE条件查询获得唯一实体，请确保属性具有唯一性
 	 * @param model 携带查询参数实体
 	 * @return 实体&lt;T&gt;实例
 	 * @author yinlei
 	 * date 2013-6-11 下午5:21:11
 	 */
-	public T uniqueResultByModel(T model);
+	public T uniqueResultByCriteria(T model);
 	
 	/**
-	 * 获得唯一实体，请确保属性具有唯一性
+	 * QBE条件查询获得唯一实体，请确保属性具有唯一性
 	 * @param entityClass 要查询的实体类
 	 * @param model 携带查询参数实体
 	 * @return 实体&lt;X&gt;实例
 	 * @author yinlei
 	 * date 2013-6-11 下午5:22:34
 	 */
-	public <X> X uniqueResultByModel(Class<X> entityClass, X model);
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, X model);
 	
 	/**
 	 * 使用hql获得唯一实体。<br>
@@ -435,12 +452,33 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	/**
 	 * 分页查询，使用criteria实现
 	 * @param page 分页数据
-	 * @param entity 携带查询条件
+	 * @param entity 携带查询条件，一般简单“等于”条件
 	 * @return Page&lt;T&gt;分页，携带查询结果
 	 * @author yinlei
 	 * date 2012-7-8 下午10:34:23
 	 */
-	public Page<T> queryForPageByModel(Page<T> page, T entity);
+	public Page<T> queryForPageByCriteria(Page<T> page, T entity);
+	
+	/**
+	 * 分页查询，使用criteria实现
+	 * @param page 分页数据
+	 * @param detachedCriteria 携带查询条件，DetachedCriteria实例，复杂条件
+	 * @return Page&lt;T&gt;分页，携带查询结果
+	 * @author yinlei
+	 * date 2012-7-8 下午10:35:13
+	 */
+	public Page<T> queryForPageByCriteria(Page<T> page, DetachedCriteria detachedCriteria);
+	
+	/**
+	 * 分页查询，使用criteria实现
+	 * @param page 分页数据
+	 * @param entity 携带查询条件，实体实例，一般简单条件
+	 * @param detachedCriteria 携带查询条件，DetachedCriteria实例，复杂条件
+	 * @return Page&lt;T&gt;分页，携带查询结果
+	 * @author yinlei
+	 * date 2012-7-8 下午10:37:22
+	 */
+	public Page<T> queryForPageByCriteria(Page<T> page, T entity, DetachedCriteria detachedCriteria);
 	
 	/**
 	 * 分页查询，使用criteria实现，左外连接立即初始化延迟加载的集合

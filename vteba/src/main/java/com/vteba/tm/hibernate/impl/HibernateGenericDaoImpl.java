@@ -408,7 +408,34 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return createCriteria(entityClass).list();
 	}
 	
-	public List<T> getListByPropertyEqual(String propertyName, Object propertyValue) {
+	public DetachedCriteria getDetachedCriteria() {
+		return DetachedCriteria.forClass(entityClass);
+	}
+	
+	public <X> DetachedCriteria getDetachedCriteria(Class<X> entityClass) {
+		return DetachedCriteria.forClass(entityClass);
+	}
+	
+	public List<T> getListByCriteria(DetachedCriteria detachedCriteria) {
+		Criteria criteria = detachedCriteria.getExecutableCriteria(getSession());
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		return list;
+	}
+	
+	public List<T> getListByCriteria(T model, DetachedCriteria detachedCriteria) {
+		Criteria criteria = detachedCriteria.getExecutableCriteria(getSession());
+		criteria.add(Example.create(model));
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		return list;
+	}
+	
+	public List<T> getListByCriteria(String propertyName, Object propertyValue) {
 		Criteria criteria = getSession().createCriteria(entityClass);
 		criteria.add(Restrictions.eq(propertyName, propertyValue));
 		List<T> list = criteria.list();
@@ -418,7 +445,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public List<T> getListByPropertyEqual(T model) {
+	public List<T> getListByCriteria(T model) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
@@ -432,7 +459,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public List<T> getListByPropertyEqual(T model, Map<String, String> orderMaps) {
+	public List<T> getListByCriteria(T model, Map<String, String> orderMaps) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
@@ -452,7 +479,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Map<String, String> maps) {
+	public <X> List<X> getListByCriteria(Class<X> entityClass, X model, Map<String, String> maps) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
@@ -473,24 +500,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public DetachedCriteria getDetachedCriteria() {
-		return DetachedCriteria.forClass(entityClass);
-	}
-	
-	public <X> DetachedCriteria getDetachedCriteria(Class<X> entityClass) {
-		return DetachedCriteria.forClass(entityClass);
-	}
-	
-	public List<T> getListByCriteria(DetachedCriteria detachedCriteria) {
-		Criteria criteria = detachedCriteria.getExecutableCriteria(getSession());
-		List<T> list = criteria.list();
-		if (list == null) {
-			list = Collections.emptyList();
-		}
-		return list;
-	}
-	
-	public List<T> getListByPropertyLike(String propertyName, String propertyValue) {
+	public List<T> getListByCriteriaLike(String propertyName, String propertyValue) {
 		Criteria criteria = getSession().createCriteria(entityClass);
 		criteria.add(Restrictions.like(propertyName, propertyValue));
 		List<T> list = criteria.list();
@@ -500,7 +510,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public List<T> getListByPropertyLike(T model) {
+	public List<T> getListByCriteriaLike(T model) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
@@ -514,7 +524,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public List<T> getListByPropertyLike(T model, Map<String, String> orderMaps){
+	public List<T> getListByCriteriaLike(T model, Map<String, String> orderMaps){
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
@@ -535,7 +545,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Map<String, String> orderMaps){
+	public <X> List<X> getListByCriteriaLike(Class<X> entityClass, X model, Map<String, String> orderMaps){
 		if (logger.isInfoEnabled()) {
 			logger.info("Create Criteria query by QBE. Entity = [{}].", entityClass.getName());
 		}
@@ -556,18 +566,17 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return list;
 	}
 	
-	public T uniqueResultByProperty(String proName, Object value) {
+	public T uniqueResultByCriteria(String proName, Object value) {
 		Criterion criterion = Restrictions.eq(proName, value);
 		return (T) createCriteria(entityClass, criterion).uniqueResult();
 	}
 	
-	@OK
-	public <X> X uniqueResultByProperty(Class<X> entityClass, String proName, Object value) {
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, String proName, Object value) {
 		Criterion criterion = Restrictions.eq(proName, value);
 		return (X) createCriteria(entityClass, criterion).uniqueResult();
 	}
 
-	public T uniqueResultByProperty(Map<String, Object> params) {
+	public T uniqueResultByCriteria(Map<String, Object> params) {
 		Criteria criteria = createCriteria(entityClass);
 		for (Entry<String, Object> entry : params.entrySet()) {
 			criteria.add(Restrictions.eq(entry.getKey(), entry.getValue()));
@@ -575,7 +584,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return (T) criteria.uniqueResult();
 	}
 	
-	public <X> X uniqueResultByProperty(Class<X> entityClass, Map<String, Object> params) {
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, Map<String, Object> params) {
 		Criteria criteria = createCriteria(entityClass);
 		for (Entry<String, Object> entry : params.entrySet()) {
 			criteria.add(Restrictions.eq(entry.getKey(), entry.getValue()));
@@ -583,11 +592,11 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return (X) criteria.uniqueResult();
 	}
 	
-	public T uniqueResultByModel(T model) {
-		return uniqueResultByModel(entityClass, model);
+	public T uniqueResultByCriteria(T model) {
+		return uniqueResultByCriteria(entityClass, model);
 	}
 	
-	public <X> X uniqueResultByModel(Class<X> entityClass, X model) {
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, X model) {
 		Example example = Example.create(model);
 		return (X) createCriteria(entityClass, example).uniqueResult();
 	}
@@ -761,7 +770,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return page;
 	}
 
-	public Page<T> queryForPageByModel(Page<T> page, T entity) {
+	public Page<T> queryForPageByCriteria(Page<T> page, T entity) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Criteria Paged Query, entity = [{}], page from [{}] to [{}].", 
 					entity.getClass().getName(), page.getStartIndex(), page.getPageSize());
@@ -775,6 +784,35 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return page;
 	}
 	
+	public Page<T> queryForPageByCriteria(Page<T> page, DetachedCriteria detachedCriteria) {
+		Criteria criteria = detachedCriteria.getExecutableCriteria(getSession());
+		long totalRecordCount = countCriteriaResult(criteria);
+		page.setTotalRecordCount(totalRecordCount);
+		setParameterToCriteria(page, criteria);
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		page.setResult(list);
+		return page;
+	}
+	
+	public Page<T> queryForPageByCriteria(Page<T> page, T entity, DetachedCriteria detachedCriteria) {
+		Criteria criteria = detachedCriteria.getExecutableCriteria(getSession());
+		Example example = Example.create(entity);
+		criteria.add(example);
+		long totalRecordCount = countCriteriaResult(criteria);
+		page.setTotalRecordCount(totalRecordCount);
+		setParameterToCriteria(page, criteria);
+		List<T> list = criteria.list();
+		if (list == null) {
+			list = Collections.emptyList();
+		}
+		page.setResult(list);
+		return page;
+	}
+	
+	@Deprecated
 	public Page<T> queryForPageBySubSelect(Page<T> page, T entity, Object... objects){
 		if (logger.isInfoEnabled()) {
 			logger.info("Criteria Paged Query, entity = [{}], page from [{}] to [{}].", 
@@ -793,6 +831,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		return page;
 	}
 	
+	@Deprecated
 	public Page<T> queryForPageByLeftJoin(Page<T> page, T entity, Object... objects) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Criteria Paged Query, entity = [{}], page from [{}] to [{}].", 

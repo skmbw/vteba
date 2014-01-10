@@ -85,7 +85,7 @@ public class EmpUserServiceImpl extends GenericServiceImpl<EmpUser, Long> implem
 	
 	public EmpUser queryEmpUserByUserAccount(String userAccount) {
 		EmpUser empUser = new EmpUser();
-		empUser = empUserDaoImpl.uniqueResultByProperty("userAccount", userAccount);
+		empUser = empUserDaoImpl.uniqueResultByCriteria("userAccount", userAccount);
 		return empUser;
 	}
 	

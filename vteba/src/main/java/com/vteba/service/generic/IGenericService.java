@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.vteba.tm.generic.Page;
 
 /**
@@ -164,10 +166,25 @@ public interface IGenericService<T, ID extends Serializable> {
 
 	/**
 	 * 根据属性equal查询，使用QBE实现
+	 * @param detachedCriteria 携带查询条件，DetachedCriteria实例，复杂条件
+	 * @return list 查询结果List&lt;T&gt;
+	 */
+	public List<T> getListByCriteria(DetachedCriteria detachedCriteria);
+	
+	/**
+	 * 根据属性equal查询，使用QBE实现
+	 * @param model 携带查询条件，实体实例，简单条件，一般是等于
+	 * @param detachedCriteria 携带查询条件，DetachedCriteria实例，复杂条件
+	 * @return list 查询结果List&lt;T&gt;
+	 */
+	public List<T> getListByCriteria(T model, DetachedCriteria detachedCriteria);
+	
+	/**
+	 * 根据属性equal查询，使用QBE实现
 	 * @param model 携带查询条件model
 	 * @return list 查询结果List&lt;T&gt;
 	 */
-	public List<T> getListByPropertyEqual(T model);
+	public List<T> getListByCriteria(T model);
 	
 	/**
 	 * 根据属性equal查询，使用QBE实现
@@ -176,40 +193,41 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @return list 查询结果List&lt;T&gt;
 	 * @see 
 	 */
-	public List<T> getListByPropertyEqual(T model, Map<String, String> orderMaps);
+	public List<T> getListByCriteria(T model, Map<String, String> orderMaps);
 	
 	/**
 	 * @param entityClass
 	 * @param model
 	 * @param orderMaps
 	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getListByPropertyEqual(java.lang.Class, java.lang.Object, java.util.Map)
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getListByCriteria(java.lang.Class, java.lang.Object, java.util.Map)
 	 */
-	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Map<String, String> orderMaps);
+	public <X> List<X> getListByCriteria(Class<X> entityClass, X model, Map<String, String> orderMaps);
 
 	/**
-	 * 根据属性like查询，使用QBE实现
+	 * String属性like查询，其它等于，使用QBE实现
 	 * @param model 携带查询条件model
 	 * @return list 查询结果List&lt;X&gt;
 	 */
-	public List<T> getListByPropertyLike(T model);
+	public List<T> getListByCriteriaLike(T model);
 	
 	/**
-	 * 根据属性like查询，使用QBE实现
+	 * String属性like查询，其它等于，使用QBE实现
 	 * @param model 携带查询条件model
 	 * @param orderMaps 使用Map传参，key是排序字段，value是asc或desc
 	 * @return list 查询结果List&lt;X&gt;
 	 */
-	public List<T> getListByPropertyLike(T model, Map<String, String> orderMaps);
+	public List<T> getListByCriteriaLike(T model, Map<String, String> orderMaps);
 	
 	/**
+	 * String属性like查询，其它等于，使用QBE实现
 	 * @param entityClass
 	 * @param model
 	 * @param orderMaps
 	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getListByPropertyLike(java.lang.Class, java.lang.Object, java.util.Map)
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#getListByCriteriaLike(java.lang.Class, java.lang.Object, java.util.Map)
 	 */
-	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Map<String, String> orderMaps);
+	public <X> List<X> getListByCriteriaLike(Class<X> entityClass, X model, Map<String, String> orderMaps);
 
 	/**
 	 * @param sql
@@ -270,16 +288,16 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @param value 属性值
 	 * @return 实体&lt;T&gt;
 	 */
-	public T uniqueResultByProperty(String propertyName, Object value);
+	public T uniqueResultByCriteria(String propertyName, Object value);
 	
 	/**
 	 * @param entityClass
 	 * @param propertyName
 	 * @param value
 	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#uniqueResultByProperty(java.lang.Class, java.lang.String, java.lang.Object)
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#uniqueResultByCriteria(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
-	public <X> X uniqueResultByProperty(Class<X> entityClass, String propertyName, Object value);
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, String propertyName, Object value);
 
 	/**
 	 * 获得唯一实体，请确保属性具有唯一性
@@ -288,15 +306,15 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @author yinlei
 	 * date 2013-6-11 下午5:19:04
 	 */
-	public T uniqueResultByProperty(Map<String, Object> params);
+	public T uniqueResultByCriteria(Map<String, Object> params);
 	
 	/**
 	 * @param entityClass
 	 * @param params
 	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#uniqueResultByProperty(java.lang.Class, java.util.Map)
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#uniqueResultByCriteria(java.lang.Class, java.util.Map)
 	 */
-	public <X> X uniqueResultByProperty(Class<X> entityClass, Map<String, Object> params);
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, Map<String, Object> params);
 
 	/**
 	 * 获得唯一实体，请确保属性具有唯一性
@@ -305,7 +323,7 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @author yinlei
 	 * date 2013-6-11 下午5:21:11
 	 */
-	public T uniqueResultByModel(T model);
+	public T uniqueResultByCriteria(T model);
 	
 	/**
 	 * 获得唯一实体，请确保属性具有唯一性
@@ -315,7 +333,7 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @author yinlei
 	 * date 2013-6-11 下午5:22:34
 	 */
-	public <X> X uniqueResultByModel(Class<X> entityClass, X model);
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, X model);
 	
 	/**
 	 * 使用hql获得唯一实体。<br>
@@ -398,9 +416,9 @@ public interface IGenericService<T, ID extends Serializable> {
 	 * @param page
 	 * @param entity
 	 * @return
-	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#queryForPageByModel(com.vteba.tm.generic.Page, java.lang.Object)
+	 * @see com.vteba.tm.hibernate.IHibernateGenericDao#queryForPageByCriteria(com.vteba.tm.generic.Page, java.lang.Object)
 	 */
-	public Page<T> queryForPageByModel(Page<T> page, T entity);
+	public Page<T> queryForPageByCriteria(Page<T> page, T entity);
 
 	/**
 	 * @param page

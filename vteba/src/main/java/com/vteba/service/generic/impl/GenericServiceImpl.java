@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.vteba.service.generic.IGenericService;
 import com.vteba.tm.generic.Page;
 import com.vteba.tm.hibernate.IHibernateGenericDao;
@@ -151,33 +153,43 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 	}
 	
 	@Override
-	public List<T> getListByPropertyEqual(T model) {
-		return hibernateGenericDaoImpl.getListByPropertyEqual(model);
+	public List<T> getListByCriteria(DetachedCriteria detachedCriteria) {
+		return hibernateGenericDaoImpl.getListByCriteria(detachedCriteria);
+	}
+	
+	@Override
+	public List<T> getListByCriteria(T model, DetachedCriteria detachedCriteria) {
+		return hibernateGenericDaoImpl.getListByCriteria(model, detachedCriteria);
+	}
+	
+	@Override
+	public List<T> getListByCriteria(T model) {
+		return hibernateGenericDaoImpl.getListByCriteria(model);
 	}
 
 	@Override
-	public List<T> getListByPropertyEqual(T model, Map<String, String> orderMaps) {
-		return hibernateGenericDaoImpl.getListByPropertyEqual(model, orderMaps);
+	public List<T> getListByCriteria(T model, Map<String, String> orderMaps) {
+		return hibernateGenericDaoImpl.getListByCriteria(model, orderMaps);
 	}
 	
 	@Override
-	public <X> List<X> getListByPropertyEqual(Class<X> entityClass, X model, Map<String, String> orderMaps) {
-		return hibernateGenericDaoImpl.getListByPropertyEqual(entityClass, model, orderMaps);
+	public <X> List<X> getListByCriteria(Class<X> entityClass, X model, Map<String, String> orderMaps) {
+		return hibernateGenericDaoImpl.getListByCriteria(entityClass, model, orderMaps);
 	}
 
 	@Override
-	public List<T> getListByPropertyLike(T model) {
-		return hibernateGenericDaoImpl.getListByPropertyLike(model);
+	public List<T> getListByCriteriaLike(T model) {
+		return hibernateGenericDaoImpl.getListByCriteriaLike(model);
 	}
 	
 	@Override
-	public List<T> getListByPropertyLike(T model, Map<String, String> orderMaps) {
-		return hibernateGenericDaoImpl.getListByPropertyLike(model, orderMaps);
+	public List<T> getListByCriteriaLike(T model, Map<String, String> orderMaps) {
+		return hibernateGenericDaoImpl.getListByCriteriaLike(model, orderMaps);
 	}
 	
 	@Override
-	public <X> List<X> getListByPropertyLike(Class<X> entityClass, X model, Map<String, String> orderMaps) {
-		return hibernateGenericDaoImpl.getListByPropertyLike(entityClass, model, orderMaps);
+	public <X> List<X> getListByCriteriaLike(Class<X> entityClass, X model, Map<String, String> orderMaps) {
+		return hibernateGenericDaoImpl.getListByCriteriaLike(entityClass, model, orderMaps);
 	}
 
 	@Override
@@ -215,37 +227,36 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public T uniqueResultByProperty(String propertyName, Object value) {
-		return hibernateGenericDaoImpl.uniqueResultByProperty(propertyName, value);
+	public T uniqueResultByCriteria(String propertyName, Object value) {
+		return hibernateGenericDaoImpl.uniqueResultByCriteria(propertyName, value);
 	}
 	
 	@Override
-	public <X> X uniqueResultByProperty(Class<X> entityClass,
+	public <X> X uniqueResultByCriteria(Class<X> entityClass,
 			String propertyName, Object value) {
-		return hibernateGenericDaoImpl.uniqueResultByProperty(entityClass,
+		return hibernateGenericDaoImpl.uniqueResultByCriteria(entityClass,
 				propertyName, value);
 	}
 
 	@Override
-	public T uniqueResultByProperty(Map<String, Object> params) {
-		return hibernateGenericDaoImpl.uniqueResultByProperty(params);
+	public T uniqueResultByCriteria(Map<String, Object> params) {
+		return hibernateGenericDaoImpl.uniqueResultByCriteria(params);
 	}
 	
 	@Override
-	public <X> X uniqueResultByProperty(Class<X> entityClass,
+	public <X> X uniqueResultByCriteria(Class<X> entityClass,
 			Map<String, Object> params) {
-		return hibernateGenericDaoImpl.uniqueResultByProperty(entityClass,
-				params);
+		return hibernateGenericDaoImpl.uniqueResultByCriteria(entityClass, params);
 	}
 
 	@Override
-	public T uniqueResultByModel(T model) {
-		return hibernateGenericDaoImpl.uniqueResultByModel(model);
+	public T uniqueResultByCriteria(T model) {
+		return hibernateGenericDaoImpl.uniqueResultByCriteria(model);
 	}
 	
 	@Override
-	public <X> X uniqueResultByModel(Class<X> entityClass, X model) {
-		return hibernateGenericDaoImpl.uniqueResultByModel(entityClass, model);
+	public <X> X uniqueResultByCriteria(Class<X> entityClass, X model) {
+		return hibernateGenericDaoImpl.uniqueResultByCriteria(entityClass, model);
 	}
 	
 	@Override
@@ -272,10 +283,8 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 
 
 	@Override
-	public <X> X uniqueResultBySql(String sql, Class<X> resultClass,
-			Object... values) {
-		return hibernateGenericDaoImpl.uniqueResultBySql(sql, resultClass,
-				values);
+	public <X> X uniqueResultBySql(String sql, Class<X> resultClass, Object... values) {
+		return hibernateGenericDaoImpl.uniqueResultBySql(sql, resultClass, values);
 	}
 
 	@Override
@@ -289,22 +298,18 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public Page<T> queryForPageByModel(Page<T> page, T entity) {
-		return hibernateGenericDaoImpl.queryForPageByModel(page, entity);
+	public Page<T> queryForPageByCriteria(Page<T> page, T entity) {
+		return hibernateGenericDaoImpl.queryForPageByCriteria(page, entity);
 	}
 
 	@Override
-	public Page<T> queryForPageByLeftJoin(Page<T> page, T entity,
-			Object... objects) {
-		return hibernateGenericDaoImpl.queryForPageByLeftJoin(page, entity,
-				objects);
+	public Page<T> queryForPageByLeftJoin(Page<T> page, T entity, Object... objects) {
+		return hibernateGenericDaoImpl.queryForPageByLeftJoin(page, entity, objects);
 	}
 
 	@Override
-	public Page<T> queryForPageBySubSelect(Page<T> page, T entity,
-			Object... objects) {
-		return hibernateGenericDaoImpl.queryForPageBySubSelect(page, entity,
-				objects);
+	public Page<T> queryForPageBySubSelect(Page<T> page, T entity, Object... objects) {
+		return hibernateGenericDaoImpl.queryForPageBySubSelect(page, entity, objects);
 	}
 
 	@Override
