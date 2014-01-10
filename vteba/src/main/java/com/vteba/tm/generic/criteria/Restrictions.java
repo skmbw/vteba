@@ -36,6 +36,14 @@ public class Restrictions {
 		return new SimpleCriterion(name + " <= :" + name, value);
 	}
 	
+	public static SimpleCriterion like(String name, String value) {
+		return new SimpleCriterion(name + " like :" + name + " ", value);
+	}
+	
+	public static SimpleCriterion notLike(String name, String value) {
+		return new SimpleCriterion(name + " not like :" + name + " ", value);
+	}
+	
 	public static InCriterion in(String name, List<?> value) {
 		return new InCriterion(name + " in (:" + name + ") ", value);
 	}
