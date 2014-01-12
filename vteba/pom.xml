@@ -102,25 +102,25 @@
 <!-- 	</dependency> -->
             
     <!-- struts2 start -->
-    <dependency>
-	  <groupId>org.apache.struts</groupId>
-	  <artifactId>struts2-core</artifactId>
-	  <version>${struts2-version}</version>
-	  <exclusions>
-	    <exclusion>
-	      <groupId>javassist</groupId>
-          <artifactId>javassist</artifactId>
-	    </exclusion>
-	    <exclusion>
-	    	<groupId>asm</groupId>
-			<artifactId>asm</artifactId>
-	    </exclusion>
-	    <exclusion>
-	    	<groupId>asm</groupId>
-			<artifactId>asm-commons</artifactId>
-	    </exclusion>
-	  </exclusions>
-	</dependency>
+<!--     <dependency> -->
+<!-- 	  <groupId>org.apache.struts</groupId> -->
+<!-- 	  <artifactId>struts2-core</artifactId> -->
+<!-- 	  <version>${struts2-version}</version> -->
+<!-- 	  <exclusions> -->
+<!-- 	    <exclusion> -->
+<!-- 	      <groupId>javassist</groupId> -->
+<!--           <artifactId>javassist</artifactId> -->
+<!-- 	    </exclusion> -->
+<!-- 	    <exclusion> -->
+<!-- 	    	<groupId>asm</groupId> -->
+<!-- 			<artifactId>asm</artifactId> -->
+<!-- 	    </exclusion> -->
+<!-- 	    <exclusion> -->
+<!-- 	    	<groupId>asm</groupId> -->
+<!-- 			<artifactId>asm-commons</artifactId> -->
+<!-- 	    </exclusion> -->
+<!-- 	  </exclusions> -->
+<!-- 	</dependency> -->
 
 <!-- 	<dependency> -->
 <!-- 	  <groupId>org.apache.ant</groupId> -->
@@ -241,11 +241,11 @@
 <!-- 	  <version>${struts2-version}</version> -->
 <!-- 	</dependency> -->
 
-	<dependency>
-	  <groupId>org.apache.struts</groupId>
-      <artifactId>struts2-spring-plugin</artifactId>
-      <version>${struts2-version}</version>
-	</dependency>
+<!-- 	<dependency> -->
+<!-- 	  <groupId>org.apache.struts</groupId> -->
+<!--       <artifactId>struts2-spring-plugin</artifactId> -->
+<!--       <version>${struts2-version}</version> -->
+<!-- 	</dependency> -->
 
 
 	<dependency>
