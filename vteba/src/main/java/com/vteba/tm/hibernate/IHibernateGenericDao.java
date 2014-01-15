@@ -43,12 +43,12 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
      * hql查询VO Bean List，一般用于多实体连接<br> 
      * 1、使用select new查询VO Bean，select new com.vteba.warehouse.model.AUser(i.sbillno,u) from Inventory i, User u 
      *    where i.scustomerno = u.userAccount，VO中要有对应的构造函数<br>
-     * 2、使用别名查询VO Bean，select i.sbillno as id,u as user from Inventory i, User u where i.scustomerno =<br>
-     *    u.userAccount，栏位别名要和VO中的属性名一致<br>
+     * 2、使用别名查询VO Bean，select i.sbillno as id,u as user from Inventory i, User u where i.scustomerno<br>
+     *    = u.userAccount，栏位别名要和VO中的属性名一致<br>
      * 3、如果不使用别名，则返回List&lt;Object[]&gt;，对于2中的结果返回{“sbillno”, User}，不建议这么使用<br> 
      * 4、查询PO也是可以的，但是强烈建议使用{@link #getEntityListByHql(String, Object...)}代替<br> 
 	 * @param hql 可用Jpa风格参数： ?1、?2，命名参数： :subjectName，Hibernate参数： ? (deprecated)
-	 * @param clazz 结果类型Class&lt;E&gt;。
+	 * @param clazz 结果类型Class&lt;E&gt;。如果使用select new语法，该参数请设为null
 	 * @param values hql参数，可以使用单个参数，Map，List，AstModel实例，传参。
 	 * @author yinlei
 	 * date 2012-12-17 下午10:35:09
@@ -63,7 +63,7 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * 3、查询任意栏位，hql中的栏位名或别名要和Class&lt;E&gt;实例中的属性名一致。使用AliasedResultTransformer转换任意列。<br>
 	 * 4、否则返回List&lt;Object[]&gt;。
 	 * @param namedQuery 命名hql语句名，可用Jpa风格参数： ?1、?2，命名参数： :subjectName
-	 * @param clazz 结果类型Class&lt;E&gt;。
+	 * @param clazz 结果类型Class&lt;E&gt;。如果使用select new语法，该参数请设为null
 	 * @param values hql参数，可以使用单个参数，Map，List，AstModel实例，传参。
 	 * @author yinlei
 	 * date 2012-12-17 下午10:35:09
