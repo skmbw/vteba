@@ -227,9 +227,9 @@ public class SpringJdbcTemplate {
     }
 	
 	/**
-	 * 执行查询语句。
+	 * 执行查询语句。只能查询基本类型。
 	 * @param sql sql语句，以？为占位符
-	 * @param elementType 泛型基本类型
+	 * @param elementType 基本类型封装类
 	 * @param args sql参数
 	 * @return 基本类型List
 	 * @throws DataAccessException
@@ -270,9 +270,9 @@ public class SpringJdbcTemplate {
 	}
 
 	/**
-	 * 执行查询语句。
+	 * 执行查询语句。只能查询基本类型。
 	 * @param sql sql语句，以？为占位符
-	 * @param requiredType 泛型基本类型类
+	 * @param requiredType 基本类型类
 	 * @param args sql参数
 	 * @return 基本类型
 	 * @throws DataAccessException
@@ -385,7 +385,7 @@ public class SpringJdbcTemplate {
 	}
 
 	/**
-	 * 执行查询语句。
+	 * 执行查询语句。只能查询基本类型。
 	 * @param sql 命名参数sql语句
 	 * @param paramMap sql参数，key为命名参数名
 	 * @param elementType 泛型基本类型类
@@ -428,7 +428,7 @@ public class SpringJdbcTemplate {
 	}
 
 	/**
-	 * 执行查询语句。
+	 * 执行查询语句。只能查询基本类型。
 	 * @param sql 命名参数sql语句
 	 * @param paramMap sql参数，key为命名参数名
 	 * @param requiredType 参数基本类型类
