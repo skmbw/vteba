@@ -1,5 +1,7 @@
 package com.vteba.tm.jdbc.spring;
 
+import java.sql.Blob;
+import java.sql.Clob;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -54,7 +56,7 @@ public class GenericRowMapper<T> implements RowMapper<T> {
 				
 				String methodName = "set" + CamelCaseUtils.toCapitalizeCamelCase(columnLabel);
 				methodNames[c] = methodName;
-				methodAccess.invoke(entity, methodName, rs.getObject(columnLabel));
+				methodAccess.invoke(entity, methodName, getResultSetValue(rs, c + 1));
 			}
 			RowMapInfo rowMapInfo = new RowMapInfo();
 			rowMapInfo.setColumnCount(columnCount);
@@ -63,10 +65,39 @@ public class GenericRowMapper<T> implements RowMapper<T> {
 			RowMapInfoCache.getInstance().put(this.sql, rowMapInfo);
 		} else {
 			for (int c = 0; c < columnCount; c++) {
-				methodAccess.invoke(entity, methodNames[c], rs.getObject(columnLabels[c]));
+				methodAccess.invoke(entity, methodNames[c], getResultSetValue(rs, c + 1));
 			}
 		}
         return entity;
 	}
 	
+	public Object getResultSetValue(ResultSet rs, int index) throws SQLException {
+		Object obj = rs.getObject(index);
+		String className = null;
+		if (obj != null) {
+			className = obj.getClass().getName();
+		}
+		if (obj instanceof Blob) {
+			obj = rs.getBytes(index);
+		} else if (obj instanceof Clob) {
+			obj = rs.getString(index);
+		} else if (className != null &&
+				("oracle.sql.TIMESTAMP".equals(className) || "oracle.sql.TIMESTAMPTZ".equals(className))) {
+			obj = rs.getTimestamp(index);
+		} else if (className != null && className.startsWith("oracle.sql.DATE")) {
+			
+			String metaDataClassName = rs.getMetaData().getColumnClassName(index);
+			if ("java.sql.Timestamp".equals(metaDataClassName) ||
+					"oracle.sql.TIMESTAMP".equals(metaDataClassName)) {
+				obj = rs.getTimestamp(index);
+			} else {
+				obj = rs.getDate(index);
+			}
+		} else if (obj != null && obj instanceof java.sql.Date) {
+			if ("java.sql.Timestamp".equals(rs.getMetaData().getColumnClassName(index))) {
+				obj = rs.getTimestamp(index);
+			}
+		}
+		return obj;
+	}
 }

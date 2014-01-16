@@ -2,6 +2,8 @@ package com.vteba.tm.jdbc.spring;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Blob;
+import java.sql.Clob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -68,7 +70,7 @@ public class FieldRowMapper<T> implements RowMapper<T> {
 		T entity = constructorAccess.newInstance();
 		int columnCount = fieldIndexes.length;
 		for (int i = 0; i < columnCount; i++) {
-			Object value = getValue(rs, fieldTypes[i], columnLabels[i]);
+			Object value = getResultSetValue(rs, i + 1);//getValue(rs, fieldTypes[i], columnLabels[i]);
 			fieldAccess.set(entity, fieldIndexes[i], value);
 		}
         return entity;
@@ -91,8 +93,6 @@ public class FieldRowMapper<T> implements RowMapper<T> {
 			} else if (clazz == Float.class || clazz == Float.TYPE) {
 				return rs.getFloat(columnLabel);
 			} else if (clazz == BigInteger.class) {
-//				String value = rs.getString(columnLabel);
-//				return new BigInteger(value);
 				return rs.getBigDecimal(columnLabel).toBigInteger();
 			} else if (clazz == BigDecimal.class) {
 				return rs.getBigDecimal(columnLabel);
@@ -105,5 +105,35 @@ public class FieldRowMapper<T> implements RowMapper<T> {
 			
 		}
 		return null;
+	}
+	
+	public Object getResultSetValue(ResultSet rs, int index) throws SQLException {
+		Object obj = rs.getObject(index);
+		String className = null;
+		if (obj != null) {
+			className = obj.getClass().getName();
+		}
+		if (obj instanceof Blob) {
+			obj = rs.getBytes(index);
+		} else if (obj instanceof Clob) {
+			obj = rs.getString(index);
+		} else if (className != null &&
+				("oracle.sql.TIMESTAMP".equals(className) || "oracle.sql.TIMESTAMPTZ".equals(className))) {
+			obj = rs.getTimestamp(index);
+		} else if (className != null && className.startsWith("oracle.sql.DATE")) {
+			
+			String metaDataClassName = rs.getMetaData().getColumnClassName(index);
+			if ("java.sql.Timestamp".equals(metaDataClassName) ||
+					"oracle.sql.TIMESTAMP".equals(metaDataClassName)) {
+				obj = rs.getTimestamp(index);
+			} else {
+				obj = rs.getDate(index);
+			}
+		} else if (obj != null && obj instanceof java.sql.Date) {
+			if ("java.sql.Timestamp".equals(rs.getMetaData().getColumnClassName(index))) {
+				obj = rs.getTimestamp(index);
+			}
+		}
+		return obj;
 	}
 }
