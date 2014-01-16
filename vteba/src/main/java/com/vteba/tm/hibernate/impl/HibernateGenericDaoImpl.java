@@ -628,7 +628,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 			query = createQuery(hql, values);
 		}
 		if (logger.isInfoEnabled()) {
-			logger.info("getUniqueResultByHql, hql = [{}], parameter = {}, resultClass = [{}].", 
+			logger.info("uniqueResultByHql, hql = [{}], parameter = {}, resultClass = [{}].", 
 					(namedQuery ? query.getQueryString() : hql), Arrays.toString(values), resultClass.getName());
 		}
 		query.setResultTransformer(new AliasedResultTransformer(resultClass, hql, true));
@@ -645,7 +645,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 	
 	public <X> X uniqueResultBySql(String sql, Class<X> resultClass, Object... values) {
 		if (logger.isInfoEnabled()) {
-			logger.info("getUniqueResultBySql, sql = [{}], parameter = {}, resultClass = [{}].", 
+			logger.info("uniqueResultBySql, sql = [{}], parameter = {}, resultClass = [{}].", 
 					sql, Arrays.toString(values), resultClass.getName());
 		}
 		return (X) createSqlQuery(sql, resultClass, values).uniqueResult();
