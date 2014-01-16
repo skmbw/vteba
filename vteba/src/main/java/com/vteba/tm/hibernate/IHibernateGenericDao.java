@@ -367,7 +367,6 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * 1、hql应查询Class&lt;T&gt;实例所有的属性，如：select s from Subject s where .... 。<br>
 	 * 2、使用new T()构造函数指定属性，如：select new Subject(id, subjectCode, subjectName, level) 
 	 *    from Subject s where .... 同时Subject实体中要有对应的构造函数才行。<br>
-	 * 3、查询任意栏位，hql中的栏位名或别名要和Class&lt;T&gt;实例中的属性名一致。使用AliasedResultTransformer转换任意列。<br>
 	 * @param hql 查询语句
 	 * @param values hql中绑定的参数值
 	 * @return 当前实体&lt;T&gt;
@@ -379,7 +378,6 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	 * 1、hql应查询Class&lt;T&gt;实例所有的属性，如：select s from Subject s where .... 。<br>
 	 * 2、使用new T()构造函数指定属性，如：select new Subject(id, subjectCode, subjectName, level) 
 	 *    from Subject s where .... 同时Subject实体中要有对应的构造函数才行。<br>
-	 * 3、查询任意栏位，hql中的栏位名或别名要和Class&lt;T&gt;实例中的属性名一致。使用AliasedResultTransformer转换任意列。<br>
 	 * @param hql 查询语句
 	 * @param values hql中绑定的参数值
 	 * @return 当前实体&lt;T&gt;
@@ -389,11 +387,31 @@ public interface IHibernateGenericDao<T, ID extends Serializable> extends IGener
 	/**
 	 * 通过hql获得唯一实体，hql语句可进行多实体连接。<br>
 	 * 1、hql应查询Class&lt;X&gt;实例所有的属性，如：select s from Subject s where .... 。<br>
-	 * 2、使用new X()构造函数指定属性，如：select new Subject(id, subjectCode, subjectName, level) 
-	 *    from Subject s where .... 同时Subject实体中要有对应的构造函数才行。<br>
+	 *    这种方式建议使用{@link #uniqueResultByHql(String, Object...)}<br>
+	 * 2、使用new X()构造函数指定属性，如：select new Subject(id, subjectCode, subjectName, level) <br>
+	 *    from Subject s where .... 同时Subject中要有对应的构造函数才行。<br>
+	 *    Subject不是实体类，可以使用这种方式。<br>
+	 *    如果Subject是实体类，建议使用{@link #uniqueResultByHql(String, Object...)}<br>
 	 * 3、查询任意栏位，hql中的栏位名或别名要和Class&lt;X&gt;实例中的属性名一致。使用AliasedResultTransformer转换任意列。<br>
 	 * @param <X> 查询的实体
 	 * @param hql 要执行的hql语句
+	 * @param resultClass 结果类型Class&lt;X&gt;
+	 * @param values hql参数值
+	 * @return 实体&lt;X&gt;
+	 */
+	public <X> X uniqueResultByHql(String hql, Class<X> resultClass, Object... values);
+	
+	/**
+	 * 通过hql获得唯一实体，hql语句可进行多实体连接。<br>
+	 * 1、hql应查询Class&lt;X&gt;实例所有的属性，如：select s from Subject s where .... 。<br>
+	 *    这种方式建议使用{@link #uniqueResultByHql(String, Object...)}<br>
+	 * 2、使用new X()构造函数指定属性，如：select new Subject(id, subjectCode, subjectName, level) <br>
+	 *    from Subject s where .... 同时Subject中要有对应的构造函数才行。<br>
+	 *    Subject不是实体类，可以使用这种方式。<br>
+	 *    如果Subject是实体类，建议使用{@link #uniqueResultByHql(String, Object...)}<br>
+	 * 3、查询任意栏位，hql中的栏位名或别名要和Class&lt;X&gt;实例中的属性名一致。使用AliasedResultTransformer转换任意列。<br>
+	 * @param <X> 查询的实体
+	 * @param hql 要执行的hql语句/命名hql名称
 	 * @param resultClass 结果类型Class&lt;X&gt;
 	 * @param namedQuery 是否命名查询
 	 * @param values hql参数值

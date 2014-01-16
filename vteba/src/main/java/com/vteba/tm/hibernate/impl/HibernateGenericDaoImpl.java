@@ -602,11 +602,19 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 	}
 	
 	public T uniqueResultByHql(String hql, Object... values) {
-		return uniqueResultByHql(hql, entityClass, false, values);
+		Query query = createQuery(hql, values);
+		return (T) query.uniqueResult();
+		//return uniqueResultByHql(hql, entityClass, false, values);
 	}
 	
 	public T uniqueResultByNamedHql(String hql, Object... values) {
-		return uniqueResultByHql(hql, entityClass, true, values);
+		Query query = createNamedQuery(hql, values);
+		return (T) query.uniqueResult();
+		//return uniqueResultByHql(hql, entityClass, true, values);
+	}
+	
+	public <X> X uniqueResultByHql(String hql, Class<X> resultClass, Object... values) {
+		return uniqueResultByHql(hql, resultClass, false, values);
 	}
 	
 	public <X> X uniqueResultByHql(String hql, Class<X> resultClass, boolean namedQuery, Object... values) {
