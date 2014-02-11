@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:amq="http://activemq.apache.org/schema/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+  http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+	<!-- 定义受环境影响易变的变量 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>/application.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- activeMQ 配置 -->
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${jms.brokerURL}"></property>
+	</bean>
+
+	<!-- 接收 短邮传彩等 -->
+	<bean id="dyccQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="DYCC" />
+	</bean>
+	
+	<!-- 接收 日志信息等 -->
+	<bean id="logQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="LOG" />
+	</bean>
+
+	<!-- 接收前置机器和核心机器发送的 在线信息 -->
+	<bean id="onlineQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="ONLINE" />
+	</bean>
+
+	<!-- 向交易前置和备用核心 广播 切换消息 -->
+	<bean id="switchTopic" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="SWITCH" />
+	</bean>
+	
+	<!-- 接收管理发送的reload配置文件的queue  -->
+	<bean id="reloadQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="RELOAD" />
+	</bean>
+
+	<!-- Spring Caching 连接工厂 -->
+	<bean id="cachingConnectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="jmsConnectionFactory" />
+		<property name="sessionCacheSize" value="10" />
+	</bean>
+
+	<!-- Spring JMS Template -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cachingConnectionFactory" />
+		<!-- 使 deliveryMode, priority, timeToLive设置生效 -->
+		<property name="explicitQosEnabled" value="true" />
+		<!-- 设置优先级, 默认为4 -->
+		<property name="priority" value="4" />
+	</bean>
+
+	<!-- 使用Spring JmsTemplate的消息生产者 -->
+	<bean id="messageProducer" class="  com.frogsing.info.message.MessageProducer">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="switchTopic" ref="switchTopic" />
+	</bean>
+
+	<!-- 处理短邮传彩消息 -->
+	<bean id="dyccMessageListener" class="com.frogsing.info.message.DYCCMessage"></bean>
+	<!-- 处理前置机器和核心机器在线消息 -->
+	<bean id="onlineMessageListener" class="com.frogsing.info.message.OnlineMessage"></bean>
+	<!-- 处理reload配置文件的消息 -->
+	<bean id="reloadMessageListener" class="com.frogsing.info.message.ReloadMessage"></bean>
+	<!-- 处理日志的消息 -->
+	<bean id="logMessageListener" class="com.frogsing.info.message.LogMessage"></bean>
+	
+	<!-- 短邮传彩监听器 -->
+	<bean id="dyccMessageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory"></property>
+		<property name="destination" ref="dyccQueue"></property>
+		<property name="messageListener" ref="dyccMessageListener"></property>
+		<!-- 初始20个Consumer, 可动态扩展到10 -->
+		<property name="concurrentConsumers" value="10" />
+		<property name="maxConcurrentConsumers" value="100" />
+		<!-- 设置消息确认模式为Client -->
+		<property name="sessionAcknowledgeModeName" value="CLIENT_ACKNOWLEDGE" />
+	</bean>
+	
+	<!-- 日志在线监听器 -->
+	<bean id="logMessageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory"></property>
+		<property name="destination" ref="logQueue"></property>
+		<property name="messageListener" ref="logMessageListener"></property>
+		<!-- 初始5个Consumer, 可动态扩展到10 -->
+		<property name="concurrentConsumers" value="10" />
+		<property name="maxConcurrentConsumers" value="100" />
+		<!-- 设置消息确认模式为Client -->
+		<property name="sessionAcknowledgeModeName" value="CLIENT_ACKNOWLEDGE" />
+	</bean>
+
+	<!-- 在线监听器 -->
+	<bean id="onlieMessageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory"></property>
+		<property name="destination" ref="onlineQueue"></property>
+		<property name="messageListener" ref="onlineMessageListener"></property>
+		<!-- 初始5个Consumer, 可动态扩展到10 -->
+		<property name="concurrentConsumers" value="1" />
+		<property name="maxConcurrentConsumers" value="2" />
+		<!-- 设置消息确认模式为Client -->
+		<property name="sessionAcknowledgeModeName" value="CLIENT_ACKNOWLEDGE" />
+	</bean>
+
+	<!-- 重新加载properties -->
+	<bean id="reloadMessageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory"></property>
+		<property name="destination" ref="reloadQueue"></property>
+		<property name="messageListener" ref="reloadMessageListener"></property>
+		<!-- 初始5个Consumer, 可动态扩展到10 -->
+		<property name="concurrentConsumers" value="1" />
+		<property name="maxConcurrentConsumers" value="1" />
+		<!-- 设置消息确认模式为Client -->
+		<property name="sessionAcknowledgeModeName" value="CLIENT_ACKNOWLEDGE" />
+	</bean>
+
+	<!-- 邮件发送器 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${email.host}" />
+		<property name="protocol" value="smtp"/>
+		<property name="port" value="25"/>
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="username" value="${email.username}" />
+		<property name="password" value="${email.password}" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<!-- 使用gmail smtp server的必须参数 -->
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="imessage" class="com.frogsing.info.message.sms.emayimpl.YMMessageImpl"></bean>
+</beans>

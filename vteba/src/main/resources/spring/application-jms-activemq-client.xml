@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+
+	<!-- activeMQ 配置 -->
+	<!-- queue 连接工厂 -->
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${jms.brokerURL}"></property>
+	</bean>
+
+	<!-- Spring Caching 连接工厂 -->
+	<bean id="cachingConnectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="jmsConnectionFactory" />
+		<property name="sessionCacheSize" value="10" />
+	</bean>
+
+	<!-- Spring JMS Template -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cachingConnectionFactory" />
+		<!-- 使 deliveryMode, priority, timeToLive设置生效 -->
+		<property name="explicitQosEnabled" value="true" />
+		<!-- 设置优先级, 默认为4 -->
+		<property name="priority" value="4" />
+	</bean>
+
+	<!-- 使用Spring JmsTemplate的消息生产者 -->
+	<bean id="messageProducer" class="com.frogsing.heart.business.transfer.MessageProducer">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="dyccQueue" ref="dyccQueue" />
+		<property name="logQueue" ref="logQueue" />
+		<property name="onlineQueue" ref="onlineQueue" />
+		<property name="serverType" value="${server.type}" />
+		<property name="serverIp" value="${server.ip}" />
+		<property name="serverName" value="${server.name}" />
+	</bean>
+
+	<!-- 发送 短邮传彩等 -->
+	<bean id="dyccQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="DYCC" />
+	</bean>
+	
+	<!-- 发送 短邮传彩等 -->
+	<bean id="logQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="LOG" />
+	</bean>
+
+	<!-- 向 控制中心报告 在线 -->
+	<bean id="onlineQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="ONLINE" />
+	</bean>
+
+	<!-- 定期执行的业务类 -->
+	<bean id="onlineJob" class="com.frogsing.heart.business.transfer.OnlineJob"
+		lazy-init="false">
+		<!-- 每次执行间隔10秒 -->
+		<property name="period" value="30" />
+		<!-- 首次执行延期2秒 -->
+		<property name="initialDelay" value="5" />
+		<!-- shutdown时等待任务完成, 最多等待20秒 -->
+		<property name="shutdownTimeout" value="5" />
+	</bean>
+
+	<!-- 接收控制中心发来的切换核心 广播 接受切换核心监听器 <bean id="switchTopic" class="org.apache.activemq.command.ActiveMQTopic"> 
+		<constructor-arg value="SWITCH" /> </bean> <bean id="switchMessage" class="com.frogsing.heart.business.transfer.SwitchMessage" 
+		/> <bean id="switchListener" class="org.springframework.jms.listener.DefaultMessageListenerContainer" 
+		lazy-init="false"> <property name="connectionFactory" ref="jmsConnectionFactory"></property> 
+		<property name="destination" ref="switchTopic"></property> <property name="messageListener" 
+		ref="switchMessage" /> </bean> -->
+
+</beans>
