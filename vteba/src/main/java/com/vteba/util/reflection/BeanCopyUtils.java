@@ -192,8 +192,17 @@ public class BeanCopyUtils {
         BeanCopyUtils.get().beanToMap(user, toMap);  
           
         Map<String, Object> toMap2 = BeanCopyUtils.get().beanToMap(user);  
-          
-        System.out.println(toMap2);  
+        
+        Map<String, Object> retMap = new HashMap<String, Object>();
+        
+        retMap.putAll(toMap2);
+        
+        System.out.println(toMap2);
+        
+        String userName = retMap.get("userName").toString();
+        System.out.println(userName);
+        System.out.println(userName);
+        
     }  
     
     /**
@@ -225,11 +234,12 @@ public class BeanCopyUtils {
 
 		@SuppressWarnings("unchecked")
 		Map<String, Object> toMap = beanMap;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
 		for (Entry<String, Object> entry : toMap.entrySet()) {
 			if (entry.getValue() != null) {
-				toMap.put(entry.getKey(), entry.getValue());
+				returnMap.put(entry.getKey(), entry.getValue());
 			}
 		}
-		return toMap;
+		return returnMap;
 	}
 }
