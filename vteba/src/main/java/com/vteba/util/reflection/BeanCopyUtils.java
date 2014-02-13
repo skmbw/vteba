@@ -84,6 +84,26 @@ public class BeanCopyUtils {
                 }
             } 
         }
+    }
+    
+    /**
+     * 将Bean转换为Map，使用MethodAccess实现。性能最好。
+     * @param fromBean 源JavaBean
+     * @param toMap 目标Map
+     */
+    public Map<String, Object> beanToMaps(Object fromBean) {
+        MethodAccess methodAccess = AsmUtils.get().createMethodAccess(fromBean.getClass());
+        String[] methodNames = methodAccess.getMethodNames(); 
+        Map<String, Object> toMap = new HashMap<String, Object>();
+        for (String methodName : methodNames){ 
+            if (methodName.startsWith("get")){ 
+                Object value = methodAccess.invoke(fromBean, methodName, (Object[])null);
+                if (value != null) {
+                	toMap.put(StringUtils.uncapitalize(methodName.substring(3)), value); 
+                }
+            } 
+        }
+        return toMap;
     } 
     
     /**
@@ -95,7 +115,7 @@ public class BeanCopyUtils {
         MethodAccess methodAccess = AsmUtils.get().createMethodAccess(toBean.getClass());
         for (Map.Entry<String, Object> entry : fromMap.entrySet()){ 
             String methodName = "set" + StringUtils.capitalize(entry.getKey()); 
-            methodAccess.invoke(toBean, methodName.toString(), entry.getValue()); 
+            methodAccess.invoke(toBean, methodName, entry.getValue()); 
         }
     }
     
