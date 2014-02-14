@@ -52,7 +52,7 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
-	<bean id="propertyConfigurer" class="com.vteba.config.spring.EncryptPropHolderConfigurer">
+	<bean id="propertyConfigurer" class="com.vteba.config.spring.EncryptPropHolder">
 		<property name="locations">
 			<list>
 				<value>classpath:jndi.properties</value>
