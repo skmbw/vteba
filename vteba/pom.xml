@@ -17,7 +17,7 @@
       <hibernate-version>4.3.0.Final</hibernate-version>
       <jibx-version>1.2.4.5</jibx-version>
       <cxf-version>2.7.7</cxf-version>
-      <activemq-version>5.8.0</activemq-version>
+      <activemq-version>5.9.0</activemq-version>
       <infinispan-version>5.3.0.Final</infinispan-version>
       <asm-version>4.1</asm-version>
       <hornetq-version>2.2.21.Final</hornetq-version>
@@ -403,17 +403,17 @@
 	
 	<!-- jms start -->
 
-<!-- 	<dependency> -->
-<!-- 	  <groupId>org.apache.activemq</groupId> -->
-<!-- 	  <artifactId>activemq-all</artifactId> -->
-<!-- 	  <version>${activemq-version}</version> -->
-<!-- 	</dependency> -->
+	<dependency>
+	  <groupId>org.apache.activemq</groupId>
+	  <artifactId>activemq-all</artifactId>
+	  <version>${activemq-version}</version>
+	</dependency>
 	
-<!-- 	<dependency> -->
-<!-- 	  <groupId>org.jboss.spec.javax.jms</groupId> -->
-<!-- 	  <artifactId>jboss-jms-api_1.1_spec</artifactId> -->
-<!-- 	  <version>1.0.1.Final</version> -->
-<!-- 	</dependency> -->
+	<dependency>
+	  <groupId>org.jboss.spec.javax.jms</groupId>
+	  <artifactId>jboss-jms-api_1.1_spec</artifactId>
+	  <version>1.0.1.Final</version>
+	</dependency>
 	
 <!-- 	<dependency> -->
 <!-- 		<groupId>org.hornetq</groupId> -->
@@ -719,11 +719,11 @@
 			</exclusion>
 		</exclusions>
 	</dependency>
-<!-- 	<dependency> -->
-<!-- 		<groupId>javax.mail</groupId> -->
-<!-- 		<artifactId>mail</artifactId> -->
-<!-- 		<version>1.4.7</version> -->
-<!-- 	</dependency> -->
+	<dependency>
+		<groupId>javax.mail</groupId>
+		<artifactId>javax.mail-api</artifactId>
+		<version>1.5.1</version>
+	</dependency>
 <!--     <dependency> -->
 <!-- 		<groupId>org.jboss.resteasy</groupId> -->
 <!-- 		<artifactId>resteasy-jackson2-provider</artifactId> -->
