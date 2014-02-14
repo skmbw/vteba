@@ -16,13 +16,13 @@ public class MailService {
 	@Inject
 	private JavaMailSender mailSenderImpl;
 	
-	public void sendMail(Map<String, Object> maps) {
+	public void sendMail(Map<String, Object> params) {
 		try {
 			MimeMessage mimeMessage = mailSenderImpl.createMimeMessage();
 			
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			
-			helper.setFrom(maps.get("server.mail").toString());
+			helper.setFrom(params.get("server.mail").toString());
 			helper.setTo("yinlei@eecn.com.cn");
 			
 			mimeMessage.setSubject("这是标题呀");

@@ -13,22 +13,22 @@ import javax.jms.MessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vteba.jms.activemq.service.MessageSenderService;
+import com.vteba.jms.activemq.service.MailSenderService;
 
 @Named
 public class MailMessageListener implements MessageListener {
 	private static final Logger logger = LoggerFactory.getLogger(MailMessageListener.class);
 	
 	@Inject
-	private MessageSenderService messageSenderService;
+	private MailSenderService mailSenderService;
 	
 	@Override
 	public void onMessage(Message message) {
 		try {
 			MapMessage mapMessage = (MapMessage) message;
 			Map<String, Object> maps = new HashMap<String, Object>();
-			maps.put("", mapMessage.getString(""));
-			//mailService.sendMail(maps);
+			maps.put("subject_", mapMessage.getString("subject_"));
+			mailSenderService.sendMail(maps);
 		} catch (JMSException e) {
 			logger.info("", e);
 		}
