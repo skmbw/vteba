@@ -41,6 +41,11 @@ public class EncryptPropHolder extends PropertyPlaceholderConfigurer {
 		return false;
 	}
 
+	/**
+	 * 获得配置的属性值
+	 * @param name 属性名
+	 * @return 属性值
+	 */
 	public static String get(String name) {
 		return propertiesMap.get(name);
 	}
