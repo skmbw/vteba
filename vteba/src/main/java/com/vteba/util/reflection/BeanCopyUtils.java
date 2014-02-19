@@ -219,7 +219,7 @@ public class BeanCopyUtils {
         
         System.out.println(toMap2);
         
-        String userName = retMap.get("userName").toString();
+        String userName = retMap.get("userAccount").toString();
         System.out.println(userName);
         System.out.println(userName);
         
