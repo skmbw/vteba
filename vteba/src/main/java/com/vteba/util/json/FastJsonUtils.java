@@ -30,6 +30,13 @@ public class FastJsonUtils{
     	return instance;
     }
     
+    /**
+     * 将对象序列化成json字符串。
+     * @param obj 要被序列化的对象
+     * @return json字符串
+     * @author yinlei
+     * @date 2013年10月13日 下午1:55:21
+     */
     public static String toJson(Object obj) {
     	String json = JSON.toJSONString(obj, SerializerFeature.WriteDateUseDateFormat);
     	if (logger.isInfoEnabled()) {
@@ -38,6 +45,13 @@ public class FastJsonUtils{
         return json;
     }
     
+    /**
+     * 将对象序列化成字节数组
+     * @param obj 要被序列化的对象
+     * @return 字节数组
+     * @author yinlei
+     * @date 2013年10月13日 下午1:56:41
+     */
     public static byte[] toJsonBytes(Object obj) {
     	byte[] json = JSON.toJSONBytes(obj, SerializerFeature.WriteDateUseDateFormat);
         return json;
