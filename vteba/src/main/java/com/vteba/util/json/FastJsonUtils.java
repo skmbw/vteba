@@ -20,15 +20,15 @@ import com.vteba.user.model.User;
  */
 public class FastJsonUtils{
 	private static Logger logger = LoggerFactory.getLogger(FastJsonUtils.class);
-    private static FastJsonUtils instance = new FastJsonUtils();
+//    private static FastJsonUtils instance = new FastJsonUtils();
     
     private FastJsonUtils(){
     	
     }
     
-    public static FastJsonUtils getInstance() {
-    	return instance;
-    }
+//    public static FastJsonUtils getInstance() {
+//    	return instance;
+//    }
     
     /**
      * 将对象序列化成json字符串。
