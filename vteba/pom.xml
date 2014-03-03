@@ -23,7 +23,7 @@
       <hornetq-version>2.2.21.Final</hornetq-version>
       <jackson-version>2.2.3</jackson-version>
       <resteasy-version>3.0.4.Final</resteasy-version>
-      <httpcomp-version>4.2.5</httpcomp-version>
+      <httpcomp-version>4.3.2</httpcomp-version>
   </properties>
   
   <profiles>
@@ -629,6 +629,11 @@
 <!-- 	</dependency> -->
 	
 	<!-- jackson jaxrs start -->
+	<dependency>
+		<groupId>com.fasterxml</groupId>
+		<artifactId>classmate</artifactId>
+		<version>1.0.0</version>
+	</dependency>
 	<dependency>
 		<groupId>com.fasterxml.jackson.jaxrs</groupId>
 		<artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -1372,7 +1377,21 @@
 		    <artifactId>jedis</artifactId>
 		    <version>2.2.0</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>us.codecraft</groupId>
+			<artifactId>webmagic-core</artifactId>
+			<version>0.4.2</version>
+		</dependency>
+		<dependency>
+	        <groupId>us.codecraft</groupId>
+	        <artifactId>webmagic-extension</artifactId>
+	        <version>0.4.2</version>
+	    </dependency>
+<!--         <dependency> -->
+<!-- 			<groupId>commons-httpclient</groupId> -->
+<!-- 			<artifactId>commons-httpclient</artifactId> -->
+<!-- 			<version>3.1</version> -->
+<!-- 		</dependency>     -->
   </dependencies>
   
   <build>
