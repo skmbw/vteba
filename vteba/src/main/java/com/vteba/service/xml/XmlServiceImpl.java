@@ -179,7 +179,7 @@ public class XmlServiceImpl {
 		Marshaller marshaller = jibxMarshallerFactory.getJibxMarshaller(serializerType);
 		if (marshaller == null) {
 			if (logger.isWarnEnabled()) {
-				logger.warn("从JibxMarshallerFactory类没有获取类[" + object.getClass().getName() + "]的JibxMarshaller，将使用XStreamMarshaller。");
+				logger.warn("从JibxMarshallerFactory类没有获取类[" + serializerType.getName() + "]的JibxMarshaller，将使用XStreamMarshaller。");
 			}
 			marshaller = xstreamMarshaller;
 		}
