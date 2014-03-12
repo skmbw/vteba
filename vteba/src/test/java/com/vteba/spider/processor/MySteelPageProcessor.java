@@ -1,4 +1,4 @@
-package com.vteba.spider;
+package com.vteba.spider.processor;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
@@ -16,7 +16,12 @@ import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-public class SpiderPageProcessor implements PageProcessor {
+/**
+ * 我的钢铁的基于webmagic的网页抓取器。
+ * @author yinlei
+ * 2014-3-5 上午11:01:56
+ */
+public class MySteelPageProcessor implements PageProcessor {
 	//http://list.sososteel.com/res/p--------------------------------100.html
     private Site site = Site.me().setDomain("list.sososteel.com");
        //.addStartUrl("http://my.oschina.net/flashsword/blog");
@@ -46,7 +51,7 @@ public class SpiderPageProcessor implements PageProcessor {
 //    		return;
 //    	}
     	
-        Spider spider = Spider.create(new SpiderPageProcessor());
+        Spider spider = Spider.create(new MySteelPageProcessor());
         Pipeline filePipeline = new FilePipeline("c:\\cbc.txt");
         spider.addPipeline(filePipeline);
         ResultItems resultItems = spider.<ResultItems>get("http://list.sososteel.com/res/p--------------------------------1.html");
