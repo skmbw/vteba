@@ -28,7 +28,7 @@
 	</bean>
 
 	<!-- 使用Spring JmsTemplate的消息生产者 -->
-	<bean id="messageProducer" class="com.frogsing.heart.business.transfer.MessageProducer">
+	<bean id="messageProducer" class="com.vteba.jms.activemq.producer.MessageProducer">
 		<property name="jmsTemplate" ref="jmsTemplate" />
 		<property name="dyccQueue" ref="dyccQueue" />
 		<property name="logQueue" ref="logQueue" />
@@ -51,17 +51,6 @@
 	<!-- 向 控制中心报告 在线 -->
 	<bean id="onlineQueue" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg value="ONLINE" />
-	</bean>
-
-	<!-- 定期执行的业务类 -->
-	<bean id="onlineJob" class="com.frogsing.heart.business.transfer.OnlineJob"
-		lazy-init="false">
-		<!-- 每次执行间隔10秒 -->
-		<property name="period" value="30" />
-		<!-- 首次执行延期2秒 -->
-		<property name="initialDelay" value="5" />
-		<!-- shutdown时等待任务完成, 最多等待20秒 -->
-		<property name="shutdownTimeout" value="5" />
 	</bean>
 
 	<!-- 接收控制中心发来的切换核心 广播 接受切换核心监听器 <bean id="switchTopic" class="org.apache.activemq.command.ActiveMQTopic"> 
