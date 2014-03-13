@@ -77,6 +77,9 @@ public class AliasedResultTransformer extends AliasedTupleSubsetResultTransforme
 					for (int i = 0; i < tempMethodNames.length; i++) {
 						String methodName = tempMethodNames[i];
 						if (methodName.startsWith("set")) {
+							if (tempArgsTypes[i][0].isInterface()) {//接口类直接滤过
+								continue;
+							}
 							try {
 								columnAlias[j] = CamelCaseUtils.toUnderScoreCase(StringUtils.uncapitalize(methodName.substring(3)));
 								methodIndexs[j] = methodAccess.getIndex(methodName);

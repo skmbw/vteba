@@ -27,6 +27,7 @@ import org.hibernate.engine.query.spi.QueryPlanCache;
 import org.hibernate.internal.CriteriaImpl;
 import org.hibernate.internal.SessionFactoryImpl;
 import org.hibernate.transform.ResultTransformer;
+import org.hibernate.type.LongType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -289,7 +290,9 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 			Class<?>[][] argsTypes = transformer.getArgsTypes();
 			String[] columnAlias = transformer.getColumnAlias();
 			for (int j = 0; j < columnAlias.length; j++) {
-				sqlQuery.addScalar(columnAlias[j], MatchType.matchResultType(argsTypes[j][0]));
+				if (columnAlias[j] != null) {
+					sqlQuery.addScalar(columnAlias[j], MatchType.matchResultType(argsTypes[j][0]));
+				}
 			}
 			sqlQuery.setResultTransformer(transformer);
 		}
@@ -676,8 +679,12 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 			logger.info("sqlQueryForList, sql = [{}], parameter = {}, resultClass = [{}].", sql, Arrays.toString(values), clazz.getName());
 		}
 		SQLQuery query = createSqlQuery(sql, null, values);
-		String[] columns = ColumnAliasParser.getInstance().parseColumnAlias(sql, true);
-		query.addScalar(columns[0], MatchType.matchResultType(clazz));
+		if (sql.indexOf("nextValue('") > -1) {//sequence
+			query.addScalar("seq", LongType.INSTANCE);
+		} else {
+			String[] columns = ColumnAliasParser.getInstance().parseColumnAlias(sql, true);
+			query.addScalar(columns[0], MatchType.matchResultType(clazz));
+		}
 		List<X> list = query.list();
 		if (list == null) {
 			list = Collections.emptyList();
@@ -761,11 +768,10 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		Hibernate.initialize(proxy);
 	}
     
-	//not ok
 	public Long getSequenceLongValue(String sequenceName) {
-		String sql = "select nextValue('" + sequenceName + "')";		
-		Object obj = uniqueResultBySql(sql, (Class<?>)null);
-		return Long.valueOf(obj.toString());
+		String sql = "select nextValue('" + sequenceName + "') seq";
+		Long seq = sqlQueryForObject(sql, Long.class);
+		return seq;
 	}
 	
 	protected Page<T> queryForPage(Page<T> page, Criterion... criterions) {
