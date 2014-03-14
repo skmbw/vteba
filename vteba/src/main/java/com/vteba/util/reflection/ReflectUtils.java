@@ -22,7 +22,9 @@ import com.vteba.lang.bytecode.MethodAccess;
  * date 2012-5-7 上午10:28:19
  */
 public class ReflectUtils {
-	private static Logger logger = LoggerFactory.getLogger(ReflectUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReflectUtils.class);
+	private static final String GET = "get";
+	private static final String SET = "set";
 	private static final String CGLIB_CLASS_SEPARATOR = "$$";
 	
 	/**
@@ -167,55 +169,18 @@ public class ReflectUtils {
 	}
 
 	/**
-	 * 通过反射，获得Class定义中声明的父类的泛型参数的类型，如无法找到，返回Object.class
-	 * 如：public UserDao extends HibernateDao&ltUser&gt
-	 * @param clazz 泛型参数所在的类的class，如：HibernateDao.class
-	 * @return 第一个泛型参数的类型，如果没有找到返回Object.class
-	 */
-	public static Class<? extends Object> getSuperClassGenericType(Class<? extends Object> clazz) {
-		return getSuperClassGenericType(clazz, 0);
-	}
-	
-	/**
 	 * 反射，获得Class定义中声明的泛型参数的类型，如无法找到，返回null
-	 * 如：public UserDao&ltUser&gt
+	 * 如：public UserDao&lt;User&gt;
 	 * @param clazz 泛型参数所在的类的class，如：UserDao.class
 	 * @return 第一个泛型参数的类型User.class，如果没有找到返回null
 	 */
 	public static <T> Class<T>  getClassGenericType(Class<? extends Object> clazz) {
 		return getClassGenericType(clazz, 0);
 	}
-	/**
-	 * 通过反射，获得Class定义中声明的父类的泛型参数的类型，如无法找到，返回Object.class.
-	 * 如public UserDao extends HibernateDao&ltUser, Long&gt
-	 * @param 泛型参数所在的类的class
-	 * @param index 第几个泛型参数，从 0开始
-	 * @return 泛型参数类型，没有返回Objec.class
-	 */
-	@Deprecated
-	public static Class<? extends Object> getSuperClassGenericType(Class<? extends Object> clazz, int index) {
-		Type genType = clazz.getGenericSuperclass();
-		if (!(genType instanceof ParameterizedType)) {
-			//logger.info(clazz.getSimpleName() + "'s superclass not ParameterizedType");
-			return Object.class;
-		}
-		Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-		if (index >= params.length || index < 0) {
-			//logger.info("Index: " + index + ", Size of " + clazz.getSimpleName() + "'s Parameterized Type: " + params.length);
-			return Object.class;
-		}
-		if (!(params[index] instanceof Class)) {
-			//logger.info(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
-			return Object.class;
-		}
-		@SuppressWarnings("unchecked")
-		Class<? extends Object> ret = (Class<? extends Object>) params[index];
-		return ret;
-	}
 	
 	/**
 	 * 通过反射，获得Class定义中声明的父类的泛型参数的类型，如无法找到，返回null
-	 * 如public UserDao&ltUser, Long&gt
+	 * 如public UserDao&lt;User, Long&gt;
 	 * @param 泛型参数所在的类的class
 	 * @param index 第几个泛型参数，从 0开始
 	 * @return 泛型参数类型，没有返回null
@@ -250,7 +215,6 @@ public class ReflectUtils {
 			}
 		}
 		return clazz;
-
 	}
 	
 	/**
@@ -289,4 +253,29 @@ public class ReflectUtils {
 		return new RuntimeException("Unexpected Checked Exception.", e);
 	}
 	
+	/**
+	 * 如果对象的String属性值为""，则将其转换为null
+	 * @param object 要转换的对象
+	 */
+	public static void emptyToNulls(Object object){
+		MethodAccess methodAccess = AsmUtils.get().createMethodAccess(object.getClass());
+		String[] methodNames = methodAccess.getMethodNames();
+		Class<?>[][] paramTypes = methodAccess.getParameterTypes();
+		int i = 0;
+		for (Class<?>[] paramType : paramTypes) {
+			if (paramType.length > 0) {
+				Class<?> clazz = paramType[0];
+				if (clazz == String.class) {
+					String methodName = methodNames[i];
+					if (methodName.startsWith(SET)) {
+						Object value = methodAccess.invoke(object, GET + methodName.substring(3));
+						if (value != null && value.equals("")) {
+							methodAccess.invoke(object, methodName, new Object[]{ null });
+						}
+					}
+				}
+			}
+			i++;
+		}
+	}
 }
