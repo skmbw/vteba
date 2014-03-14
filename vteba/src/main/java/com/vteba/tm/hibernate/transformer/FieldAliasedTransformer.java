@@ -51,7 +51,7 @@ public class FieldAliasedTransformer extends AliasedTupleSubsetResultTransformer
 			this.sqlQueryAll = statement.isSqlQueryAll();
 		} else {
 			if (hql) {
-				this.hqlQueryAll = ColumnAliasParser.getInstance().isQueryAll(sql);
+				this.hqlQueryAll = ColumnAliasParser.get().isQueryAll(sql);
 				if (hqlQueryAll) {
 					QueryStatement stmt = new QueryStatement();
 					stmt.setHqlQueryAll(hqlQueryAll);
@@ -88,7 +88,7 @@ public class FieldAliasedTransformer extends AliasedTupleSubsetResultTransformer
 					putSqlCache(sql);
 				} else {// hql/sql基于别名的转换
 					logger.info("执行{}查询，使用基于栏位别名的结果集转换。", (hql ? "hql" : "sql"));
-					this.columnAlias = ColumnAliasParser.getInstance().parseColumnAlias(sql, true);
+					this.columnAlias = ColumnAliasParser.get().parseColumnAlias(sql, true);
 					String[] fieldNames = this.fieldAccess.getFieldNames();
 					Class<?>[] fieldType = this.fieldAccess.getFieldTypes();
 					if (fieldType == null || fieldType.length == 0) {

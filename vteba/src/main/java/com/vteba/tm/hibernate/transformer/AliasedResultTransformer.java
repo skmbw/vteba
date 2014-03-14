@@ -53,7 +53,7 @@ public class AliasedResultTransformer extends AliasedTupleSubsetResultTransforme
 			this.sqlQueryAll = statement.isSqlQueryAll();
 		} else {
 			if (hql) {
-				this.hqlQueryAll = ColumnAliasParser.getInstance().isQueryAll(sql);
+				this.hqlQueryAll = ColumnAliasParser.get().isQueryAll(sql);
 				if (hqlQueryAll) {
 					QueryStatement stmt = new QueryStatement();
 					stmt.setHqlQueryAll(hqlQueryAll);
@@ -92,7 +92,7 @@ public class AliasedResultTransformer extends AliasedTupleSubsetResultTransforme
 					}
 					putSqlCache(sql);
 				} else {// hql/sql基于别名的转换
-					this.columnAlias = ColumnAliasParser.getInstance().parseColumnAlias(sql, true);
+					this.columnAlias = ColumnAliasParser.get().parseColumnAlias(sql, true);
 					String[] tempMethodNames = this.methodAccess.getMethodNames();
 					this.methodIndexs = new int[columnAlias.length];
 					this.argsTypes = new Class<?>[columnAlias.length][];

@@ -42,7 +42,7 @@ public class FieldRowMapper<T> implements RowMapper<T> {
 		} else {
 			String[] fieldNames = fieldAccess.getFieldNames();
 			Class<?>[] fieldType = fieldAccess.getFieldTypes();
-			columnLabels = ColumnAliasParser.getInstance().parseColumnAlias(sql, true);
+			columnLabels = ColumnAliasParser.get().parseColumnAlias(sql, true);
 			int columnCount = columnLabels.length;
 			this.fieldTypes = new Class<?>[columnCount];
 			this.fieldIndexes = new int[columnCount];

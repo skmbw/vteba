@@ -682,7 +682,7 @@ public abstract class HibernateGenericDaoImpl<T, ID extends Serializable>
 		if (sql.indexOf("nextValue('") > -1) {//sequence
 			query.addScalar("seq", LongType.INSTANCE);
 		} else {
-			String[] columns = ColumnAliasParser.getInstance().parseColumnAlias(sql, true);
+			String[] columns = ColumnAliasParser.get().parseColumnAlias(sql, true);
 			query.addScalar(columns[0], MatchType.matchResultType(clazz));
 		}
 		List<X> list = query.list();
