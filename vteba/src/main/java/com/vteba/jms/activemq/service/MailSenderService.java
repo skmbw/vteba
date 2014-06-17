@@ -3,11 +3,10 @@ package com.vteba.jms.activemq.service;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import com.vteba.email.MailService;
 
-@Named
+//@Named
 public class MailSenderService {
 	@Inject
 	private MailService mailService;

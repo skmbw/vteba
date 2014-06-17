@@ -8,7 +8,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Named;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
@@ -21,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
-@Named
+//@Named
 public class MessageProducer {
 	private static final Logger logger = LoggerFactory.getLogger(MessageProducer.class);
 	private JmsTemplate jmsTemplate;

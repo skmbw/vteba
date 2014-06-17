@@ -160,7 +160,8 @@
       <eviction maxEntries="10000" strategy="LRU"/>
       <expiration maxIdle="100000" wakeUpInterval="5000"/>
       <lazyDeserialization enabled="true"/>
-      <transaction transactionManagerLookupClass="com.vteba.tm.bitronix.infinispan.BitronixTransactionManagerLookup" useSynchronization="false"
+      <!-- transactionManagerLookupClass="com.vteba.tm.bitronix.infinispan.BitronixTransactionManagerLookup" -->
+      <transaction  useSynchronization="false"
       		transactionMode="TRANSACTIONAL" autoCommit="false" lockingMode="OPTIMISTIC"/>
    </namedCache>
    <namedCache name="springSecurityUserCache">

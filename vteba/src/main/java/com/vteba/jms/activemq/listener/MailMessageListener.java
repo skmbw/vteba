@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Message;
@@ -15,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.vteba.jms.activemq.service.MailSenderService;
 
-@Named
+//@Named
 public class MailMessageListener implements MessageListener {
 	private static final Logger logger = LoggerFactory.getLogger(MailMessageListener.class);
 	
