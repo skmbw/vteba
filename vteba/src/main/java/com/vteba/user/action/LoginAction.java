@@ -9,8 +9,6 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vteba.cache.memcached.spi.Memcache;
-import com.vteba.cache.redis.JedisTemplate;
 import com.vteba.service.xml.XmlServiceImpl;
 import com.vteba.service.xml.jibx.Customer;
 import com.vteba.service.xml.jibx.Person;
@@ -29,8 +27,8 @@ import com.vteba.web.action.BaseAction;
 public class LoginAction extends BaseAction {
 	public static final String VTEBA_PASS_SALT_VALUE = "vteba_V_pass_salt_Fn_skmbw";
 	
-	private JedisTemplate jedisTemplate;
-	private Memcache memcacheImpl;
+//	private JedisTemplate jedisTemplate;
+//	private Memcache memcacheImpl;
 	
 	@Inject
 	private CookieService cookieServiceImpl;
@@ -57,15 +55,16 @@ public class LoginAction extends BaseAction {
 		System.out.println(cacheUser.getUserName() + " : " + (System.currentTimeMillis() - ad));
 		
 		//***************Redis*********************//
-		long da2 = System.currentTimeMillis();
-		jedisTemplate.set("keys", "尹雷");
-		String keys = jedisTemplate.get("keys");
-		System.out.println(keys + " : " + (System.currentTimeMillis() - da2));
+//		long da2 = System.currentTimeMillis();
+//		jedisTemplate.set("keys", "尹雷");
+//		String keys = jedisTemplate.get("keys");
+//		System.out.println(keys + " : " + (System.currentTimeMillis() - da2));
+//		
+//		long da3 = System.currentTimeMillis();
+//		memcacheImpl.add(keys, 0, keys);
+//		String memKey = memcacheImpl.get(keys);
+//		System.out.println(memKey + " : " + (System.currentTimeMillis() - da3));
 		
-		long da3 = System.currentTimeMillis();
-		memcacheImpl.add(keys, 0, keys);
-		String memKey = memcacheImpl.get(keys);
-		System.out.println(memKey + " : " + (System.currentTimeMillis() - da3));
 //		String path = "\\WEB-INF\\classes\\com\\vteba\\service\\xml\\jibx\\data.xml";
 //		path = RequestContextHolder.getSession().getServletContext().getRealPath(path);
 //		File file = new File(path);
@@ -105,18 +104,18 @@ public class LoginAction extends BaseAction {
 		custom.setNameList(nameList);
 		
 		//***************Jedis*********************//
-		long da4 = System.currentTimeMillis();
-		jedisTemplate.set("customer", custom);
-		
-		jedisTemplate.get("customer", Customer.class);
-		System.out.println(System.currentTimeMillis() - da4);
+//		long da4 = System.currentTimeMillis();
+//		jedisTemplate.set("customer", custom);
+//		
+//		jedisTemplate.get("customer", Customer.class);
+//		System.out.println(System.currentTimeMillis() - da4);
 		
 		//***************Jedis*********************//
-		long da5 = System.currentTimeMillis();
-		memcacheImpl.put("customer", 0, custom);
-		
-		memcacheImpl.get("customer");
-		System.out.println(System.currentTimeMillis() - da5);
+//		long da5 = System.currentTimeMillis();
+//		memcacheImpl.put("customer", 0, custom);
+//		
+//		memcacheImpl.get("customer");
+//		System.out.println(System.currentTimeMillis() - da5);
 		//*****************Memcache***********************//
 		
 //		String[] names = new String[2];
@@ -226,14 +225,14 @@ public class LoginAction extends BaseAction {
     	return passEqual;
     }
     
-    @Inject
-	public void setJedisTemplate(JedisTemplate jedisTemplate) {
-		this.jedisTemplate = jedisTemplate;
-	}
-
-    @Inject
-	public void setMemcacheImpl(Memcache memcacheImpl) {
-		this.memcacheImpl = memcacheImpl;
-	}
+//    @Inject
+//	public void setJedisTemplate(JedisTemplate jedisTemplate) {
+//		this.jedisTemplate = jedisTemplate;
+//	}
+//
+//    @Inject
+//	public void setMemcacheImpl(Memcache memcacheImpl) {
+//		this.memcacheImpl = memcacheImpl;
+//	}
     
 }

@@ -105,7 +105,7 @@
                 <prop key="hibernate.cache.use_structured_entries">${hibernate.cache.use_structured_entries}</prop>
                 <prop key="hibernate.cache.infinispan.cachemanager">java:jboss/infinispan/container/hibernate</prop>
 				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.infinispan.JndiInfinispanRegionFactory</prop>
-                <prop key="hibernate.cache.infinispan.cfg">infinispan-configs.xml</prop>
+<!--                 <prop key="hibernate.cache.infinispan.cfg">infinispan-configs.xml</prop> -->
 
 <!-- <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.infinispan.JndiInfinispanRegionFactory</prop> -->
 <!-- <prop key="hibernate.cache.infinispan.cachemanager">java:jboss/infinispan/container/hibernate</prop> -->
@@ -181,7 +181,7 @@
 <!--                 <prop key="hibernate.cache.use_structured_entries">${hibernate.cache.use_structured_entries}</prop> -->
 				<prop key="hibernate.cache.infinispan.cachemanager">java:jboss/infinispan/container/hibernate</prop>
 				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.infinispan.JndiInfinispanRegionFactory</prop>
-				<prop key="hibernate.cache.infinispan.cfg">infinispan-configs.xml</prop>
+<!-- 				<prop key="hibernate.cache.infinispan.cfg">infinispan-configs.xml</prop> -->
 
 <!-- <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.infinispan.JndiInfinispanRegionFactory</prop> -->
 <!-- <prop key="hibernate.cache.infinispan.cachemanager">java:jboss/infinispan/container/hibernate</prop> -->
@@ -229,7 +229,7 @@
                 <prop key="hibernate.cache.use_structured_entries">${hibernate.cache.use_structured_entries}</prop>
 				<prop key="hibernate.cache.infinispan.cachemanager">java:jboss/infinispan/container/hibernate</prop>
 				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.infinispan.JndiInfinispanRegionFactory</prop>
-				<prop key="hibernate.cache.infinispan.cfg">infinispan-configs.xml</prop>
+<!-- 				<prop key="hibernate.cache.infinispan.cfg">infinispan-configs.xml</prop> -->
 
 <!-- <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.infinispan.JndiInfinispanRegionFactory</prop> -->
 <!-- <prop key="hibernate.cache.infinispan.cachemanager">java:jboss/infinispan/container/hibernate</prop> -->

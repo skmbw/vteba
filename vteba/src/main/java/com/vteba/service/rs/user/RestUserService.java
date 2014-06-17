@@ -19,7 +19,6 @@ import com.vteba.product.clothing.model.Clothing;
 import com.vteba.service.xml.XmlServiceImpl;
 import com.vteba.service.xml.jibx.Customer;
 import com.vteba.service.xml.jibx.Person;
-import com.vteba.user.dao.spi.MongoUserDao;
 import com.vteba.user.model.User;
 import com.vteba.user.service.spi.UserService;
 import com.vteba.util.json.JacksonUtils;
@@ -32,8 +31,8 @@ public class RestUserService {
 	private UserService userServiceImpl;
 	@Inject
 	private XmlServiceImpl xmlServiceImpl;
-	@Inject
-	private MongoUserDao mongoUserDaoImpl;
+//	@Inject
+//	private MongoUserDao mongoUserDaoImpl;
 	
 	@GET
 	@Path("/list")
@@ -66,7 +65,7 @@ public class RestUserService {
 		System.out.println(list6);
 		
 		User user = userServiceImpl.get(4L);
-		user = mongoUserDaoImpl.findOne(user.getUserId());
+		//user = mongoUserDaoImpl.findOne(user.getUserId());
 		JacksonUtils.get().toJson(user);
 		
 		Customer customer = new Customer();
