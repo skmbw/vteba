@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.vteba.shop.shopcart.model.Item;
 import com.vteba.shop.shopcart.service.spi.ShopCartService;
 import com.vteba.util.web.ServletUtils;
+import com.vteba.utils.consts.Consts;
 
 /**
  * 购物车控制器
@@ -27,7 +28,6 @@ import com.vteba.util.web.ServletUtils;
 public class ShopCartAction {
 	
 	private static Logger logger = LoggerFactory.getLogger(ShopCartAction.class);
-	public static final String VTEBA_SHOPCART_COOKIE = "vteba_shopcart_cookie";
 	
 	@Inject
 	private ShopCartService shopCartServiceImpl;
@@ -56,13 +56,13 @@ public class ShopCartAction {
 				//cookie中是否存在响应的cookie，默认不存在
 				boolean exist = false;
 				for (Cookie cookie : cookies) {
-					if (cookie.getName().equals(VTEBA_SHOPCART_COOKIE + item.getItemId())) {
+					if (cookie.getName().equals(Consts.VTEBA_SHOPCART_COOKIE + item.getItemId())) {
 						exist = true;//cookie存在，需要更新
-						ServletUtils.updateCookie(cookie, VTEBA_SHOPCART_COOKIE + item.getItemId());
+						ServletUtils.updateCookie(cookie, Consts.VTEBA_SHOPCART_COOKIE + item.getItemId());
 					}
 				}
 				if (!exist) {//cookie不存在，需要新增
-					ServletUtils.addCookie(VTEBA_SHOPCART_COOKIE + item.getItemId(), item.getItemId().toString());
+					ServletUtils.addCookie(Consts.VTEBA_SHOPCART_COOKIE + item.getItemId(), item.getItemId().toString());
 				}
 			}
 		}
@@ -99,7 +99,7 @@ public class ShopCartAction {
 		if (cookies != null) {
 			List<Item> itemList = new ArrayList<Item>();
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().startsWith(VTEBA_SHOPCART_COOKIE)) {
+				if (cookie.getName().startsWith(Consts.VTEBA_SHOPCART_COOKIE)) {
 					Item item = new Item();
 					item.setItemId(Long.valueOf(cookie.getValue()));
 					itemList.add(item);

@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import com.vteba.service.context.RequestContextHolder;
-import com.vteba.shop.shopcart.action.ShopCartAction;
 import com.vteba.util.cryption.CryptionUtils;
+import com.vteba.utils.consts.Consts;
 
 /**
  * Servlet工具类
@@ -234,7 +234,7 @@ public class ServletUtils {
         Cookie cookies[] = RequestContextHolder.getRequest().getCookies();
         if (cookies != null) {
             for (Cookie c : cookies) {
-            	if (c.getName().startsWith(ShopCartAction.VTEBA_SHOPCART_COOKIE)) {
+            	if (c.getName().startsWith(Consts.VTEBA_SHOPCART_COOKIE)) {
             		c.setMaxAge(0);//设置为0，即失效
             		RequestContextHolder.getResponse().addCookie(c);
             	}
