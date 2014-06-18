@@ -12,8 +12,8 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import com.vteba.service.context.RequestContextHolder;
 import com.vteba.shop.shopcart.service.spi.CookieService;
 import com.vteba.user.model.User;
-import com.vteba.util.cryption.DESUtils;
-import com.vteba.util.web.ServletUtils;
+import com.vteba.utils.cryption.DESUtils;
+import com.vteba.utils.web.ServletUtils;
 
 /**
  * 基于Cookies的服务实现。

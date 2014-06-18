@@ -1,7 +1,7 @@
 package com.vteba.test;
 
 import com.thoughtworks.xstream.XStream;
-import com.vteba.util.mapper.JaxbMapper;
+import com.vteba.utils.mapper.JaxbMapper;
 
 @SuppressWarnings("deprecation")
 public class JaxbMapperTest {

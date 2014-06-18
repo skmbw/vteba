@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.apache.commons.collections.functors.CloneTransformer;
 
-import com.vteba.util.serialize.NativeSerializerUtils;
+import com.vteba.utils.serialize.NativeSerializerUtils;
 
 /**
  * 抽象缓存对象封装

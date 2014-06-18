@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vteba.service.context.RequestContextHolder;
-import com.vteba.util.web.HtmlUtils;
+import com.vteba.utils.web.HtmlUtils;
 
 /**
  * 控制器基类，提供一些工具方法，简化控制器的实现。

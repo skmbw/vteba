@@ -18,9 +18,9 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
 import redis.clients.jedis.exceptions.JedisException;
 
 import com.vteba.cache.redis.support.JedisUtils;
-import com.vteba.util.charstr.ByteUtils;
-import com.vteba.util.charstr.Char;
-import com.vteba.util.serialize.Kryos;
+import com.vteba.utils.charstr.ByteUtils;
+import com.vteba.utils.charstr.Char;
+import com.vteba.utils.serialize.Kryos;
 
 /**
  * JedisTemplate提供了一个template方法，负责对Jedis连接的获取与归还。<br>

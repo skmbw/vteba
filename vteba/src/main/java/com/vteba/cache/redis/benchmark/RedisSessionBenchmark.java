@@ -9,7 +9,7 @@ import com.vteba.cache.redis.JedisTemplate;
 import com.vteba.cache.redis.JedisTemplate.JedisNoResultAction;
 import com.vteba.cache.redis.support.JedisPoolFactory;
 import com.vteba.cache.redis.support.JedisUtils;
-import com.vteba.util.mapper.JsonMapper;
+import com.vteba.utils.mapper.JsonMapper;
 
 /**
  * 测试Redis用于Session管理的setEx()与get()方法性能, 使用JSON格式存储数据.

@@ -1,7 +1,7 @@
 package com.vteba.cache.memcached.store.compound;
 
 import com.vteba.cache.memcached.Element;
-import com.vteba.util.serialize.Kryos;
+import com.vteba.utils.serialize.Kryos;
 
 /**
  * A copy strategy that can use partial (if both copy on read and copy on write are set) or full Serialization to copy the object graph

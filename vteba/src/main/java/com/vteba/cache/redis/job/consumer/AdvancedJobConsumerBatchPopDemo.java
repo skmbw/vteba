@@ -10,7 +10,7 @@ import com.vteba.cache.redis.scheduler.AdvancedConsumer;
 import com.vteba.cache.redis.scheduler.SimpleJobConsumer;
 import com.vteba.cache.redis.support.JedisPoolFactory;
 import com.vteba.cache.redis.support.JedisUtils;
-import com.vteba.util.common.Threads;
+import com.vteba.utils.common.Threads;
 
 /**
  * 多线程运行BatchJobConsumer，从"ss.job:ready" list中popup job进行处理。

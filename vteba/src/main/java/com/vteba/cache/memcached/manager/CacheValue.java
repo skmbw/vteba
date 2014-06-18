@@ -1,6 +1,6 @@
 package com.vteba.cache.memcached.manager;
 
-import com.vteba.util.serialize.NativeSerializerUtils;
+import com.vteba.utils.serialize.NativeSerializerUtils;
 
 /**
  * 缓存值封转

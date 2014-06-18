@@ -1,8 +1,8 @@
 package com.vteba.test;
 
 import com.vteba.user.model.User;
-import com.vteba.util.mapper.BeanMapper;
-import com.vteba.util.reflection.BeanCopyUtils;
+import com.vteba.utils.mapper.BeanMapper;
+import com.vteba.utils.reflection.BeanCopyUtils;
 
 @SuppressWarnings("deprecation")
 public class TestBeanCopy {

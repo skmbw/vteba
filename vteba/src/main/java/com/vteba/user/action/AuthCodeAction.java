@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vteba.shop.shopcart.service.spi.CookieService;
-import com.vteba.util.common.RandomNumber;
+import com.vteba.utils.common.RandomNumber;
 import com.vteba.web.action.BaseAction;
 
 /**

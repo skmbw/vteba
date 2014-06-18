@@ -6,7 +6,7 @@ import java.util.Arrays;
 import org.jibx.runtime.IXMLWriter;
 import org.jibx.runtime.impl.StreamWriterBase;
 
-import com.vteba.util.charstr.CharUtils;
+import com.vteba.utils.charstr.CharUtils;
 
 /**
  * JiBX的GBK编码流StreamWriter

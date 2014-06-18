@@ -21,7 +21,7 @@ import org.hibernate.type.StringType;
 import org.hibernate.type.Type;
 
 import com.vteba.autotask.MethodBean;
-import com.vteba.util.common.CamelCaseUtils;
+import com.vteba.utils.common.CamelCaseUtils;
 
 /**
  * 类型匹配和转换工具方法。

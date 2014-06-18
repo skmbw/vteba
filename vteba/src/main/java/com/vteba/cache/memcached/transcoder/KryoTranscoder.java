@@ -6,7 +6,7 @@ import net.rubyeye.xmemcached.transcoders.BaseSerializingTranscoder;
 import net.rubyeye.xmemcached.transcoders.CachedData;
 import net.rubyeye.xmemcached.transcoders.Transcoder;
 
-import com.vteba.util.serialize.Kryos;
+import com.vteba.utils.serialize.Kryos;
 
 /**
  * XMemcached基于Kryo的序列化转换器。

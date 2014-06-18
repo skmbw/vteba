@@ -29,7 +29,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.vteba.service.xml.jibx.jaxrs.ClassKey;
-import com.vteba.util.common.MediaTypes;
+import com.vteba.utils.common.MediaTypes;
 
 /**
  * 基于fastjson的jax-rx的json provider。

@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vteba.spider.tx.IGenericDao;
-import com.vteba.util.reflection.ReflectUtils;
+import com.vteba.utils.reflection.ReflectUtils;
 
 /**
  * 泛型DAO抽象类。用于继承，简化子类实现。

@@ -10,8 +10,8 @@ import redis.clients.jedis.JedisPool;
 
 import com.google.common.collect.Lists;
 import com.vteba.cache.redis.support.JedisScriptExecutor;
-import com.vteba.util.common.Threads;
-import com.vteba.util.common.Threads.WrapExceptionRunnable;
+import com.vteba.utils.common.Threads;
+import com.vteba.utils.common.Threads.WrapExceptionRunnable;
 
 /**
  * 定时分发任务的线程，定时从scheduled job sorted set 中取出到期的任务放入ready job list，并在高可靠模式下，将lock job 中 已超时的任务重新放入 ready job.

@@ -23,7 +23,7 @@ import com.vteba.cache.memcached.Element;
 import com.vteba.cache.memcached.manager.XMemcachedManager;
 import com.vteba.cache.memcached.spi.Memcache;
 import com.vteba.cache.memcached.spi.MemcacheExceptionHandler;
-import com.vteba.util.exception.Exceptions;
+import com.vteba.utils.exception.Exceptions;
 
 /**
  * 对XMemcached封装的实现。

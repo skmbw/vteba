@@ -14,7 +14,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.vteba.user.model.User;
 import com.vteba.user.service.spi.UserService;
-import com.vteba.util.exception.Exceptions;
+import com.vteba.utils.exception.Exceptions;
 
 /**
  * 基于 Guava的本地缓存。

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="GBK"?>
+<project name="vteba" default="build">
+	<property name="ProjectPath" value="." />
+	<property name="src" value="${ProjectPath}/src/main/java" />
+	<property name="resources" value="${ProjectPath}/src/main/resources" />
+	<property name="lib" value="${org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER}"></property>
+	<property name="classes" value="${ProjectPath}/target/classes" />
+	
+	<target name="clean">
+		<delete includeEmptyDirs="true">
+			<fileset dir="${classes}" includes="**/*" defaultexcludes="no" />
+		</delete>
+	</target>
+
+	<target name="init">
+		<mkdir dir="${classes}" />
+	</target>
+
+	<target name="compile" description="编译源代码">
+		<javac destdir="${classes}" verbose="false" debug="on" target="1.7" deprecation="true" includeantruntime="true">
+			<src path="${src}" />
+			<classpath>
+				<path location="${lib}">
+					<fileset dir="${lib}" includes="**/*.jar">
+					</fileset>
+				</path>
+			</classpath>
+		</javac>
+		<copy todir="${classes}">
+			<fileset dir="${src}" excludes="**/*.java" />
+			<fileset dir="${resources}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="build" depends="compile" description="Generator Binding File">
+		<echo>Generator Binding File Start</echo>
+		<echo>${classpath}</echo>
+		<java classname="com.vteba.ext.codegen.CodeGenerator">
+			<arg value="skmbw"/>
+			<arg value="Cate"/>
+			<arg value="分类"/>
+			<arg value="Long"/>
+			<arg value="home.index2"/>
+			<classpath>
+				<!--<path location="${classes}">
+					<fileset dir="${classes}" includes="**/*" />
+				</path>-->
+				
+			</classpath>
+		</java>
+	</target>
+
+</project>

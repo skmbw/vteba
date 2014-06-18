@@ -11,7 +11,7 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
 
 import com.vteba.cache.redis.JedisTemplate;
 import com.vteba.cache.redis.JedisTemplate.JedisAction;
-import com.vteba.util.common.Threads;
+import com.vteba.utils.common.Threads;
 
 /**
  * 简单的基于brpop()API, 阻塞的取出任务。

@@ -11,7 +11,7 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
 import com.google.common.collect.Lists;
 import com.vteba.cache.redis.JedisTemplate;
 import com.vteba.cache.redis.support.JedisScriptExecutor;
-import com.vteba.util.common.Threads;
+import com.vteba.utils.common.Threads;
 
 /**
  * 高级的使用Lua脚本取回任务，支持高可靠性和批量取回任务，但不会阻塞，如果没有任务即时返回。

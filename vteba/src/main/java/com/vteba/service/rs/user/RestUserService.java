@@ -21,8 +21,8 @@ import com.vteba.service.xml.jibx.Customer;
 import com.vteba.service.xml.jibx.Person;
 import com.vteba.user.model.User;
 import com.vteba.user.service.spi.UserService;
-import com.vteba.util.json.JacksonUtils;
-import com.vteba.util.reflection.BeanCopyUtils;
+import com.vteba.utils.json.JacksonUtils;
+import com.vteba.utils.reflection.BeanCopyUtils;
 
 @Path("/restUser")
 @Named

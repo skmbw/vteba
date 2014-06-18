@@ -3,7 +3,7 @@ package com.vteba.cache.redis;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
-import com.vteba.util.serialize.Kryos;
+import com.vteba.utils.serialize.Kryos;
 
 /**
  * 基于Kryo的RedisSerializer。

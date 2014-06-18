@@ -18,8 +18,8 @@ import redis.clients.jedis.JedisPool;
 import com.vteba.cache.redis.JedisTemplate;
 import com.vteba.cache.redis.JedisTemplate.JedisNoResultAction;
 import com.vteba.cache.redis.support.JedisUtils;
-import com.vteba.util.common.Threads;
-import com.vteba.util.common.Threads.WrapExceptionRunnable;
+import com.vteba.utils.common.Threads;
+import com.vteba.utils.common.Threads.WrapExceptionRunnable;
 
 /**
  * Master选举实现, 基于setNx()与expire()两大API.

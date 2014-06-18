@@ -4,6 +4,15 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module archiveName="vteba-core-1.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/vteba-core/vteba-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="vteba-utils-1.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/vteba-utils/vteba-utils">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="vteba-ext-1.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/vteba-ext/vteba-ext">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="vteba"/>
         <property name="java-output-path" value="/vteba/target/classes"/>
         <property name="component.exclusion.patterns"/>

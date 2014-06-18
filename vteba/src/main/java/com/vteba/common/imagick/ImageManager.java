@@ -20,7 +20,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.vteba.common.exception.BasicException;
-import com.vteba.util.common.SystemUtils;
+import com.vteba.utils.common.SystemUtils;
 
 /**
  * 图片处理管理
