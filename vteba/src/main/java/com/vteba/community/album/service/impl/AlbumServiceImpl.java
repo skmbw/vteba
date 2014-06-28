@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 import com.vteba.community.album.dao.spi.AlbumDao;
 import com.vteba.community.album.model.Album;
 import com.vteba.community.album.service.spi.AlbumService;

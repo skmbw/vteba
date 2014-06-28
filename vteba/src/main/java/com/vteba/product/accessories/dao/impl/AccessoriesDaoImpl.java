@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tm.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
 import com.vteba.product.accessories.dao.spi.AccessoriesDao;
 import com.vteba.product.accessories.model.Accessories;
 

@@ -1,5 +1,6 @@
 package com.vteba.product.accessories.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.accessories.model.Accessories;
 import com.vteba.product.accessories.service.spi.AccessoriesService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/accessories")
-public class AccessoriesAction extends BaseAction {
+public class AccessoriesAction extends BaseAction<Accessories> {
 	@Inject
 	private AccessoriesService accessoriesServiceImpl;
 	
@@ -39,5 +41,12 @@ public class AccessoriesAction extends BaseAction {
 		page.setPageSize(10);
 		List<Accessories> list = accessoriesServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Accessories, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

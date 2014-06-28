@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vteba.shop.shopcart.service.spi.CookieService;
 import com.vteba.utils.common.RandomNumber;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BaseExtAction;
 
 /**
  * 验证码控制器。
@@ -21,7 +21,7 @@ import com.vteba.web.action.BaseAction;
  * date 2013-9-3 下午6:13:12
  */
 @Controller
-public class AuthCodeAction extends BaseAction {
+public class AuthCodeAction extends BaseExtAction {
 	private static Logger logger = LoggerFactory.getLogger(AuthCodeAction.class);
 	
 	@Inject
@@ -35,7 +35,7 @@ public class AuthCodeAction extends BaseAction {
 	 */
 	@RequestMapping("/authCode")
 	public void authCode(OutputStream os) {
-		RandomNumber randomNumber = RandomNumber.getInstance();
+		RandomNumber randomNumber = RandomNumber.Instance();
 		try {
 			IOUtils.copy(randomNumber.getImage(), os);
 		} catch (IOException e) {

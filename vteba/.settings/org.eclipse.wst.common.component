@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="vteba">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
@@ -11,6 +12,9 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="vteba-ext-1.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/vteba-ext/vteba-ext">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="vteba-web-1.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/vteba-web/vteba-web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="vteba"/>

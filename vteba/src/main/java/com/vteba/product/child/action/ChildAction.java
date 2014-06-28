@@ -1,5 +1,6 @@
 package com.vteba.product.child.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.child.model.Child;
 import com.vteba.product.child.service.spi.ChildService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/child")
-public class ChildAction extends BaseAction {
+public class ChildAction extends BaseAction<Child> {
 	@Inject
 	private ChildService childServiceImpl;
 	
@@ -39,5 +41,12 @@ public class ChildAction extends BaseAction {
 		page.setPageSize(10);
 		List<Child> list = childServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Child, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

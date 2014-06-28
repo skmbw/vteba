@@ -56,7 +56,7 @@
 	</bean>
 	
 	<!--验证主体实现-->
-	<bean id="userDetailServiceImpl" class="com.vteba.security.spring.UserDetailServiceImpl"/>
+	<bean id="userDetailServiceImpl" class="com.vteba.user.service.impl.UserDetailServiceImpl"/>
 	
 	<!--security hash algorithm-->
 	<bean id="shaPasswordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">

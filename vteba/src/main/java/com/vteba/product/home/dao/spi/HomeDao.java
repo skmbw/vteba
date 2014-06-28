@@ -1,6 +1,6 @@
 package com.vteba.product.home.dao.spi;
 
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 import com.vteba.product.home.model.Home;
 
 /**

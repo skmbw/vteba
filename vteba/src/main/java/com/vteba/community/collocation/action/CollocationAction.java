@@ -1,5 +1,6 @@
 package com.vteba.community.collocation.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Lists;
 import com.vteba.community.collocation.model.Collocation;
 import com.vteba.community.collocation.service.spi.CollocationService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -21,7 +23,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/collocation")
-public class CollocationAction extends BaseAction {
+public class CollocationAction extends BaseAction<Collocation> {
 	@Inject
 	private CollocationService collocationServiceImpl;
 	
@@ -41,6 +43,13 @@ public class CollocationAction extends BaseAction {
 		page.setPageSize(10);
 		list = collocationServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Collocation, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

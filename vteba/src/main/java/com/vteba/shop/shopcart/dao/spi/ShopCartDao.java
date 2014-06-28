@@ -1,7 +1,7 @@
 package com.vteba.shop.shopcart.dao.spi;
 
 import com.vteba.shop.shopcart.model.Item;
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 
 /**
  * 购物车Dao接口。

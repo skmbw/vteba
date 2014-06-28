@@ -13,9 +13,17 @@
 <!-- 		<property name="targetClass" value="com.vteba.test.Customer"/> -->
 <!-- 		<property name="bindingName" value="Binding"/> -->
 <!-- 	</bean> -->
+<!-- 	<bean id="xstream" class="com.thoughtworks.xstream.XStream"></bean> -->
+	
+	<bean id="fieldConverter" class="com.vteba.service.xml.xstream.FieldConverter"></bean>
 	
 	<bean id="xstreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
 <!-- 		<property name="autodetectAnnotations" value="true"/> -->
+		<property name="converters">
+			<list>
+				<ref bean="fieldConverter"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="jibxMarshallerFactory" class="com.vteba.service.xml.jibx.JibxMarshallerFactory">
@@ -28,4 +36,6 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="xmlServiceImpl" class="com.vteba.service.xml.XmlServiceImpl"></bean>
 </beans>

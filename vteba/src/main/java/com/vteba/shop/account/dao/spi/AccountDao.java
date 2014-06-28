@@ -1,6 +1,6 @@
 package com.vteba.shop.account.dao.spi;
 
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 import com.vteba.shop.account.model.Account;
 
 /**

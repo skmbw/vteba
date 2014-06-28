@@ -1,5 +1,6 @@
 package com.vteba.community.album.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Lists;
 import com.vteba.community.album.model.Album;
 import com.vteba.community.album.service.spi.AlbumService;
+import com.vteba.service.generic.IGenericService;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/album")
-public class AlbumAction extends BaseAction {
+public class AlbumAction extends BaseAction<Album> {
 	@Inject
 	private AlbumService albumServiceImpl;
 	
@@ -39,5 +41,12 @@ public class AlbumAction extends BaseAction {
 		String hql = "select distinct a from Album a left join fetch a.imagesList";
 		list = albumServiceImpl.getEntityListByHql(hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Album, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

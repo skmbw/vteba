@@ -1,5 +1,6 @@
 package com.vteba.home.index.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.home.index.model.Banner;
 import com.vteba.home.index.service.spi.BannerService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/banner")
-public class BannerAction extends BaseAction {
+public class BannerAction extends BaseAction<Banner> {
 	@Inject
 	private BannerService bannerServiceImpl;
 	
@@ -39,5 +41,12 @@ public class BannerAction extends BaseAction {
 		page.setPageSize(4);
 		List<Banner> list = bannerServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Banner, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

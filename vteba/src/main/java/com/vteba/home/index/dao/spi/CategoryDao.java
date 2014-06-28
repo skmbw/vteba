@@ -1,7 +1,7 @@
 package com.vteba.home.index.dao.spi;
 
 import com.vteba.home.index.model.Category;
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 
 /**
  * 商品分类Dao接口。

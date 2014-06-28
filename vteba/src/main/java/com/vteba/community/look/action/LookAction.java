@@ -1,5 +1,6 @@
 package com.vteba.community.look.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.community.look.model.Look;
 import com.vteba.community.look.service.spi.LookService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/look")
-public class LookAction extends BaseAction {
+public class LookAction extends BaseAction<Look> {
 	@Inject
 	private LookService lookServiceImpl;
 	
@@ -39,5 +41,12 @@ public class LookAction extends BaseAction {
 		page.setPageSize(18);
 		List<Look> list = lookServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Look, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 import com.vteba.community.collocation.dao.spi.CollocationDao;
 import com.vteba.community.collocation.model.Collocation;
 import com.vteba.community.collocation.service.spi.CollocationService;

@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 import com.vteba.product.beauty.dao.spi.BeautyDao;
 import com.vteba.product.beauty.model.Beauty;
 import com.vteba.product.beauty.service.spi.BeautyService;

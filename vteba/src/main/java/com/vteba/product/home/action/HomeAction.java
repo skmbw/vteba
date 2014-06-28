@@ -1,5 +1,6 @@
 package com.vteba.product.home.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.home.model.Home;
 import com.vteba.product.home.service.spi.HomeService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/home")
-public class HomeAction extends BaseAction {
+public class HomeAction extends BaseAction<Home> {
 	@Inject
 	private HomeService homeServiceImpl;
 	
@@ -39,5 +41,12 @@ public class HomeAction extends BaseAction {
 		page.setPageSize(10);
 		List<Home> list = homeServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Home, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

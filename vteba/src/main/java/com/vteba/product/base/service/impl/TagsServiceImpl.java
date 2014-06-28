@@ -10,8 +10,8 @@ import com.vteba.product.base.dao.spi.TagsDao;
 import com.vteba.product.base.model.Tags;
 import com.vteba.product.base.service.spi.TagsService;
 import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tm.generic.Page;
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.generic.Page;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 
 /**
  * 商品标签Service实现。

@@ -1,5 +1,6 @@
 package com.vteba.product.bag.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.bag.model.Bag;
 import com.vteba.product.bag.service.spi.BagService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/bag")
-public class BagAction extends BaseAction {
+public class BagAction extends BaseAction<Bag> {
 	@Inject
 	private BagService bagServiceImpl;
 	
@@ -39,5 +41,12 @@ public class BagAction extends BaseAction {
 		page.setPageSize(10);
 		List<Bag> list = bagServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Bag, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

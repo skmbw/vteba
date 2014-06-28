@@ -1,5 +1,6 @@
 package com.vteba.product.base.action;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Maps;
 import com.vteba.product.base.model.Tags;
 import com.vteba.product.base.service.spi.TagsService;
+import com.vteba.service.generic.IGenericService;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/tags")
-public class TagsAction extends BaseAction {
+public class TagsAction extends BaseAction<Tags> {
 	
 	@Inject
 	private TagsService tagsServiceImpl;
@@ -44,5 +46,12 @@ public class TagsAction extends BaseAction {
 		countMap.put(4, 6);
 		Tags pTags = tagsServiceImpl.queryTagsTreeById(tags, countMap);
 		return pTags;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Tags, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

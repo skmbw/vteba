@@ -9,10 +9,10 @@ import javax.servlet.http.Cookie;
 
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
-import com.vteba.service.context.RequestContextHolder;
 import com.vteba.shop.shopcart.service.spi.CookieService;
 import com.vteba.user.model.User;
 import com.vteba.utils.cryption.DESUtils;
+import com.vteba.utils.web.RequestContextHolder;
 import com.vteba.utils.web.ServletUtils;
 
 /**

@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 
 import com.vteba.product.bag.dao.spi.BagDao;
 import com.vteba.product.bag.model.Bag;
-import com.vteba.tm.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
 
 /**
  * 包包类商品Dao实现。

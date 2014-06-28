@@ -1,9 +1,12 @@
 package com.vteba.home.search.action;
 
+import java.io.Serializable;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vteba.web.action.BaseAction;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.web.action.BaseExtAction;
 
 /**
  * 站内搜索控制器。
@@ -11,7 +14,7 @@ import com.vteba.web.action.BaseAction;
  * date 2013-8-24 上午10:42:49
  */
 @Controller
-public class SearchAction extends BaseAction {
+public class SearchAction extends BaseExtAction {
 	//private Logger logger = LoggerFactory.getLogger(SearchAction.class);
 	
 	/**
@@ -24,5 +27,12 @@ public class SearchAction extends BaseAction {
 	public String search() {
 		
 		return "searchList";
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Object, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

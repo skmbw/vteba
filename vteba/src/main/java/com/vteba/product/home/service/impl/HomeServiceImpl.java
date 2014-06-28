@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 import com.vteba.product.home.dao.spi.HomeDao;
 import com.vteba.product.home.model.Home;
 import com.vteba.product.home.service.spi.HomeService;

@@ -9,7 +9,7 @@ import com.vteba.service.generic.impl.GenericServiceImpl;
 import com.vteba.shop.shopcart.dao.spi.ShopCartDao;
 import com.vteba.shop.shopcart.model.Item;
 import com.vteba.shop.shopcart.service.spi.ShopCartService;
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 
 /**
  * 基于持久化的购物车服务实现。

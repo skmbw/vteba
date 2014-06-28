@@ -1,7 +1,9 @@
 package com.vteba.user.action;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,6 +11,8 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.common.collect.Maps;
+import com.vteba.service.generic.IGenericService;
 import com.vteba.service.xml.XmlServiceImpl;
 import com.vteba.service.xml.jibx.Customer;
 import com.vteba.service.xml.jibx.Person;
@@ -24,7 +28,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/user")
-public class LoginAction extends BaseAction {
+public class LoginAction extends BaseAction<User> {
 	public static final String VTEBA_PASS_SALT_VALUE = "vteba_V_pass_salt_Fn_skmbw";
 	
 //	private JedisTemplate jedisTemplate;
@@ -144,6 +148,8 @@ public class LoginAction extends BaseAction {
 //		IOUtils.closeQuietly(outputStream);
 		
 		//---------------XStream----------------------//
+		Map<String, Person> maps = Maps.newHashMap();
+		custom.setPersonMap(maps);
 		long d2 = System.currentTimeMillis();
 		for (int i = 0; i < 1000; i++) {
 			String xml = xmlServiceImpl.toXml(custom);
@@ -224,6 +230,13 @@ public class LoginAction extends BaseAction {
     	boolean passEqual = shaPasswordEncoder.isPasswordValid(encodePass, rawPass, VTEBA_PASS_SALT_VALUE);
     	return passEqual;
     }
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<User, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
+	}
     
 //    @Inject
 //	public void setJedisTemplate(JedisTemplate jedisTemplate) {

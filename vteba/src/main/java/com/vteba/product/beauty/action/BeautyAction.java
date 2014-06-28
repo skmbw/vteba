@@ -1,5 +1,6 @@
 package com.vteba.product.beauty.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.beauty.model.Beauty;
 import com.vteba.product.beauty.service.spi.BeautyService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/beauty")
-public class BeautyAction extends BaseAction {
+public class BeautyAction extends BaseAction<Beauty> {
 	@Inject
 	private BeautyService beautyServiceImpl;
 	
@@ -39,5 +41,12 @@ public class BeautyAction extends BaseAction {
 		page.setPageSize(10);
 		List<Beauty> list = beautyServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Beauty, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

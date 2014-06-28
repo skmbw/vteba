@@ -1,5 +1,6 @@
 package com.vteba.product.clothing.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.clothing.model.Clothing;
 import com.vteba.product.clothing.service.spi.ClothingService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/clothing")
-public class ClothingAction extends BaseAction {
+public class ClothingAction extends BaseAction<Clothing> {
 	@Inject
 	private ClothingService clothingServiceImpl;
 	
@@ -35,5 +37,12 @@ public class ClothingAction extends BaseAction {
 		page.setPageSize(6);
 		List<Clothing> list  = clothingServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Clothing, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vteba.user.model.User;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BaseExtAction;
 
 /**
  * 忘记密码控制器。
@@ -15,7 +15,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/user")
-public class ForgetPassAction extends BaseAction {
+public class ForgetPassAction extends BaseExtAction {
 	
 	/**
 	 * 跳转到忘记密码页面。

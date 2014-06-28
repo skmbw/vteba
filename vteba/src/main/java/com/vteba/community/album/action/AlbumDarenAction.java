@@ -1,5 +1,6 @@
 package com.vteba.community.album.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.community.base.model.Daren;
 import com.vteba.community.base.service.spi.DarenService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/albumDaren")
-public class AlbumDarenAction extends BaseAction {
+public class AlbumDarenAction extends BaseAction<Daren> {
 	@Inject
 	private DarenService darenServiceImpl;
 	
@@ -39,5 +41,12 @@ public class AlbumDarenAction extends BaseAction {
 		page.setPageSize(6);
 		List<Daren> list = darenServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<Daren, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

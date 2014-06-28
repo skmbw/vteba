@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 
 import com.vteba.shop.shopcart.dao.spi.ShopCartDao;
 import com.vteba.shop.shopcart.model.Item;
-import com.vteba.tm.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
 
 /**
  * 购物车Dao实现。

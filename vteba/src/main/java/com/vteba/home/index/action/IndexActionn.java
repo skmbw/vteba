@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vteba.community.album.model.AlbumType;
 import com.vteba.community.album.service.spi.AlbumTypeService;
-import com.vteba.tm.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.tx.generic.Page;
+import com.vteba.web.action.BaseExtAction;
 
 /**
  * 首页控制器。
@@ -20,7 +20,7 @@ import com.vteba.web.action.BaseAction;
  * date 2013-8-20 下午9:09:49
  */
 @Controller
-public class IndexActionn extends BaseAction {
+public class IndexActionn extends BaseExtAction {
 	@Inject
 	private AlbumTypeService albumTypeServiceImpl;
 	
@@ -43,4 +43,5 @@ public class IndexActionn extends BaseAction {
 		map.put("albumTypeList", list);
 		return "index";
 	}
+
 }

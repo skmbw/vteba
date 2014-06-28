@@ -1,5 +1,6 @@
 package com.vteba.community.group.action;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.community.group.model.GroupTag;
 import com.vteba.community.group.service.spi.GroupTagService;
-import com.vteba.tm.generic.Page;
+import com.vteba.service.generic.IGenericService;
+import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -20,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/groupTag")
-public class GroupTagAction extends BaseAction {
+public class GroupTagAction extends BaseAction<GroupTag> {
 	@Inject
 	private GroupTagService groupTagServiceImpl;
 	
@@ -39,5 +41,12 @@ public class GroupTagAction extends BaseAction {
 		page.setPageSize(10);
 		List<GroupTag> list = groupTagServiceImpl.pagedQueryByHql(page, hql);
 		return list;
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<GroupTag, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,5 +1,7 @@
 package com.vteba.user.action;
 
+import java.io.Serializable;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.vteba.service.generic.IGenericService;
 import com.vteba.shop.shopcart.service.spi.CookieService;
 import com.vteba.user.model.User;
 import com.vteba.user.service.spi.UserService;
@@ -22,7 +25,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/user")
-public class RegisterAction extends BaseAction {
+public class RegisterAction extends BaseAction<User> {
 	private Logger logger = LoggerFactory.getLogger(RegisterAction.class);
 	
 	@Inject
@@ -78,6 +81,13 @@ public class RegisterAction extends BaseAction {
 		}
 		
 		return "index";
+	}
+
+	@Override
+	public void setGenericServiceImpl(
+			IGenericService<User, ? extends Serializable> genericServiceImpl) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

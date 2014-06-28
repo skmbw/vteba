@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 import com.vteba.community.group.dao.spi.GroupTagDao;
 import com.vteba.community.group.model.GroupTag;
 import com.vteba.community.group.service.spi.GroupTagService;

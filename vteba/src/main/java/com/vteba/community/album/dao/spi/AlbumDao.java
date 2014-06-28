@@ -1,6 +1,6 @@
 package com.vteba.community.album.dao.spi;
 
-import com.vteba.tm.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 import com.vteba.community.album.model.Album;
 
 /**

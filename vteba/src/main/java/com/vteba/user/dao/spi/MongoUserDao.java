@@ -1,6 +1,6 @@
 package com.vteba.user.dao.spi;
 
-import com.vteba.tm.generic.MongoGenericDao;
+import com.vteba.ext.mongodb.spi.MongoGenericDao;
 import com.vteba.user.model.User;
 
 /**

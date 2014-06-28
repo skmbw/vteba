@@ -13,7 +13,9 @@ import com.vteba.user.model.User;
  */
 @Named
 public class UserContextHolder {
-	
+//	public UserContextHolder() {
+//		cookieServiceImpl = ApplicationContextHolder.getBean(CookieService.class);
+//	}
 	private static CookieService cookieServiceImpl;// = SpringContextLoader.getCurrentWebApplicationContext().getBean("cookieServiceImpl", CookieService.class);
 	
 	public static User getCurrentUser() {
