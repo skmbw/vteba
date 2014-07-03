@@ -122,15 +122,15 @@ public class RestUserService {
 		System.out.println(System.nanoTime() - d2);
 		
 		/****************************************************/
-		System.out.print("fastjson toMap : ");
-		long ad0 = System.nanoTime();
-		BeanCopyUtils.get().toMap(customer);
-		System.out.println(System.nanoTime() - ad0);
-		
-		System.out.print("fastjson 去null toMaps : ");
-		long ad = System.nanoTime();
-		BeanCopyUtils.get().toMaps(customer);
-		System.out.println(System.nanoTime() - ad);
+//		System.out.print("fastjson toMap : ");
+//		long ad0 = System.nanoTime();
+//		BeanCopyUtils.get().toMap(customer);
+//		System.out.println(System.nanoTime() - ad0);
+//		
+//		System.out.print("fastjson 去null toMaps : ");
+//		long ad = System.nanoTime();
+//		BeanCopyUtils.get().toMaps(customer);
+//		System.out.println(System.nanoTime() - ad);
 		
 		System.out.print("CGLIB BeanMap beanToMap : ");
 		long ad2 = System.nanoTime();
