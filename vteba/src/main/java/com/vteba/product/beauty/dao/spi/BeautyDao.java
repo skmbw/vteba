@@ -1,6 +1,6 @@
 package com.vteba.product.beauty.dao.spi;
 
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.product.beauty.model.Beauty;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.product.beauty.model.Beauty;
  * @author yinlei
  * date 2013-10-5 16:58:57
  */
-public interface BeautyDao extends IHibernateGenericDao<Beauty, Long> {
+public interface BeautyDao extends BaseGenericDao<Beauty, Long> {
 
 }

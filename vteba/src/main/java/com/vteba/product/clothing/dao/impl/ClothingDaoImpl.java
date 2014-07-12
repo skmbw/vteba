@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.product.clothing.dao.spi.ClothingDao;
 import com.vteba.product.clothing.model.Clothing;
 
@@ -15,7 +15,7 @@ import com.vteba.product.clothing.model.Clothing;
  * date 2013-10-3 21:29:17
  */
 @Named
-public class ClothingDaoImpl extends HibernateGenericDaoImpl<Clothing, Long> implements ClothingDao {
+public class ClothingDaoImpl extends BaseGenericDaoImpl<Clothing, Long> implements ClothingDao {
 	
 	public ClothingDaoImpl() {
 		super();

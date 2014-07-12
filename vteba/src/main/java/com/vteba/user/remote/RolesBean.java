@@ -37,7 +37,7 @@ public class RolesBean {
 	@RemoteMethod
 	public String deleteRole(Long roleId) {
 		String userRoleHql = " select ur from UserRole ur where ur.roleId = ?1 ";
-		List<UserRole> userRoles = userRoleServiceImpl.getEntityListByHql(userRoleHql, roleId);
+		List<UserRole> userRoles = userRoleServiceImpl.getListByHql(userRoleHql, roleId);
 		
 		if (userRoles.size() > 0) {
 			return "inused";

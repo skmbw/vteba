@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 
 import com.vteba.product.bag.dao.spi.BagDao;
 import com.vteba.product.bag.model.Bag;
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 
 /**
  * 包包类商品Dao实现。
@@ -15,7 +15,7 @@ import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
  * date 2013-10-5 16:58:33
  */
 @Named
-public class BagDaoImpl extends HibernateGenericDaoImpl<Bag, Long> implements BagDao {
+public class BagDaoImpl extends BaseGenericDaoImpl<Bag, Long> implements BagDao {
 	
 	public BagDaoImpl() {
 		super();

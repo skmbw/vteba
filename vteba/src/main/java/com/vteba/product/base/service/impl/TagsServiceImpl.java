@@ -9,9 +9,9 @@ import javax.inject.Named;
 import com.vteba.product.base.dao.spi.TagsDao;
 import com.vteba.product.base.model.Tags;
 import com.vteba.product.base.service.spi.TagsService;
-import com.vteba.service.generic.impl.GenericServiceImpl;
+import com.vteba.service.generic.impl.BaseServiceImpl;
 import com.vteba.tx.generic.Page;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 
 /**
  * 商品标签Service实现。
@@ -19,14 +19,14 @@ import com.vteba.tx.hibernate.IHibernateGenericDao;
  * date 2013-10-4 17:53:44
  */
 @Named
-public class TagsServiceImpl extends GenericServiceImpl<Tags, Integer> implements TagsService {
+public class TagsServiceImpl extends BaseServiceImpl<Tags, Integer> implements TagsService {
 	private TagsDao tagsDaoImpl;
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<Tags, Integer> tagsDaoImpl) {
-		this.hibernateGenericDaoImpl = tagsDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<Tags, Integer> tagsDaoImpl) {
+		this.baseGenericDaoImpl = tagsDaoImpl;
 		this.tagsDaoImpl = (TagsDao) tagsDaoImpl;
 		
 	}

@@ -1,6 +1,6 @@
 package com.vteba.shop.order.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.shop.order.model.Order;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.shop.order.model.Order;
  * @author yinlei
  * date 2013-8-31 21:04:16
  */
-public interface OrderService extends IGenericService<Order, Long> {
+public interface OrderService extends BaseService<Order, Long> {
 	
 }

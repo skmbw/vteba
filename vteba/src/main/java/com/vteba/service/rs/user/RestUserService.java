@@ -42,27 +42,27 @@ public class RestUserService {
 		userServiceImpl.getListByHql(hql, User.class);
 		
 		hql = "select u,t from User u,Tags t where u.userId = t.tagsId";
-		List<User> list = userServiceImpl.getEntityListByHql(hql);
+		List<User> list = userServiceImpl.getListByHql(hql);
 		System.out.println(list);
 		
 		hql = "select u.userId,u.userName,t.tagsName from User u,Tags t where u.userId = t.tagsId";
-		List<User> list2 = userServiceImpl.getEntityListByHql(hql);
+		List<User> list2 = userServiceImpl.getListByHql(hql);
 		System.out.println(list2);
 		
 		hql = "select new com.vteba.service.rs.user.Auser(u.userId,t.tagsName,u) from User u,Tags t where u.userId = t.tagsId";
-		List<Auser> list3 = userServiceImpl.getListByHql(hql, Auser.class);
+		List<Auser> list3 = userServiceImpl.getListByHql(hql);
 		System.out.println(list3);
 		
 		hql = "select u.userId,t.tagsName,u as user from User u,Tags t where u.userId = t.tagsId";
-		List<Auser> list4 = userServiceImpl.getListByHql(hql, Auser.class);
+		List<Auser> list4 = userServiceImpl.getListByHql(hql);
 		System.out.println(list4);
 		
-		String sql = "select * from user";
+		//String sql = "select * from user";
 //		List list5 = userServiceImpl.getListBySql(sql, User.class);
 		
-		sql = "select user_id userId,user_name userName,user_account userAccount from user";
-		List<User> list6 = userServiceImpl.getListBySql(sql, User.class);
-		System.out.println(list6);
+//		sql = "select user_id userId,user_name userName,user_account userAccount from user";
+//		List<User> list6 = userServiceImpl.getListBySql(sql, User.class);
+//		System.out.println(list6);
 		
 		User user = userServiceImpl.get(4L);
 		//user = mongoUserDaoImpl.findOne(user.getUserId());

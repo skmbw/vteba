@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.shop.account.dao.spi.AccountDao;
 import com.vteba.shop.account.model.Account;
 
@@ -15,7 +15,7 @@ import com.vteba.shop.account.model.Account;
  * date 2013-8-31 21:08:12
  */
 @Named
-public class AccountDaoImpl extends HibernateGenericDaoImpl<Account, Long> implements AccountDao {
+public class AccountDaoImpl extends BaseGenericDaoImpl<Account, Long> implements AccountDao {
 	
 	public AccountDaoImpl() {
 		super();

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.home.model.Home;
 import com.vteba.product.home.service.spi.HomeService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
@@ -44,8 +44,8 @@ public class HomeAction extends BaseAction<Home> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Home, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Home, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

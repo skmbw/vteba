@@ -3,8 +3,8 @@ package com.vteba.community.album.service.impl;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.community.album.dao.spi.AlbumDao;
 import com.vteba.community.album.model.Album;
 import com.vteba.community.album.service.spi.AlbumService;
@@ -15,14 +15,14 @@ import com.vteba.community.album.service.spi.AlbumService;
  * date 2013-10-7 16:40:37
  */
 @Named
-public class AlbumServiceImpl extends GenericServiceImpl<Album, Long> implements AlbumService {
+public class AlbumServiceImpl extends BaseServiceImpl<Album, Long> implements AlbumService {
 	private AlbumDao albumDaoImpl;
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<Album, Long> albumDaoImpl) {
-		this.hibernateGenericDaoImpl = albumDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<Album, Long> albumDaoImpl) {
+		this.baseGenericDaoImpl = albumDaoImpl;
 		this.albumDaoImpl = (AlbumDao) albumDaoImpl;
 		
 	}

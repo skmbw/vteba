@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Lists;
 import com.vteba.community.group.model.Group;
 import com.vteba.community.group.service.spi.GroupService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
@@ -46,8 +46,8 @@ public class GroupAction extends BaseAction<Group> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Group, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Group, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

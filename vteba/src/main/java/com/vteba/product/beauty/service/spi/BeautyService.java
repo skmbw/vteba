@@ -1,6 +1,6 @@
 package com.vteba.product.beauty.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.product.beauty.model.Beauty;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.product.beauty.model.Beauty;
  * @author yinlei
  * date 2013-10-5 16:58:57
  */
-public interface BeautyService extends IGenericService<Beauty, Long> {
+public interface BeautyService extends BaseService<Beauty, Long> {
 	
 }

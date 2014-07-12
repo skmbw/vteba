@@ -1,6 +1,6 @@
 package com.vteba.product.bag.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.product.bag.model.Bag;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.product.bag.model.Bag;
  * @author yinlei
  * date 2013-10-5 16:58:33
  */
-public interface BagService extends IGenericService<Bag, Long> {
+public interface BagService extends BaseService<Bag, Long> {
 	
 }

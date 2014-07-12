@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.shop.shopcart.service.spi.CookieService;
 import com.vteba.user.model.User;
 import com.vteba.user.service.spi.UserService;
@@ -84,8 +84,8 @@ public class RegisterAction extends BaseAction<User> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<User, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<User, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

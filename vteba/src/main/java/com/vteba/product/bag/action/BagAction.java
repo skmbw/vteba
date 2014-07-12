@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.bag.model.Bag;
 import com.vteba.product.bag.service.spi.BagService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
@@ -44,8 +44,8 @@ public class BagAction extends BaseAction<Bag> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Bag, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Bag, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

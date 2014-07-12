@@ -5,11 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.vteba.service.generic.impl.GenericServiceImpl;
+import com.vteba.service.generic.impl.BaseServiceImpl;
 import com.vteba.shop.shopcart.dao.spi.ShopCartDao;
 import com.vteba.shop.shopcart.model.Item;
 import com.vteba.shop.shopcart.service.spi.ShopCartService;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 
 /**
  * 基于持久化的购物车服务实现。
@@ -17,15 +17,15 @@ import com.vteba.tx.hibernate.IHibernateGenericDao;
  * @date 2013-8-26 下午1:52:06
  */
 @Named
-public class ShopCartServiceImpl extends GenericServiceImpl<Item, Long> implements ShopCartService {
+public class ShopCartServiceImpl extends BaseServiceImpl<Item, Long> implements ShopCartService {
 	
 	private ShopCartDao shopCartDaoImpl;
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<Item, Long> shopCartDaoImpl) {
-		this.hibernateGenericDaoImpl = shopCartDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<Item, Long> shopCartDaoImpl) {
+		this.baseGenericDaoImpl = shopCartDaoImpl;
 		this.shopCartDaoImpl = (ShopCartDao) shopCartDaoImpl;
 	}
 	

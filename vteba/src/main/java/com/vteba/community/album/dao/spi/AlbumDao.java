@@ -1,6 +1,6 @@
 package com.vteba.community.album.dao.spi;
 
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.community.album.model.Album;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.community.album.model.Album;
  * @author yinlei
  * date 2013-10-7 16:40:37
  */
-public interface AlbumDao extends IHibernateGenericDao<Album, Long> {
+public interface AlbumDao extends BaseGenericDao<Album, Long> {
 
 }

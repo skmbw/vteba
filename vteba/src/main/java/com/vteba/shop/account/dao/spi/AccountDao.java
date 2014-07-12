@@ -1,6 +1,6 @@
 package com.vteba.shop.account.dao.spi;
 
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.shop.account.model.Account;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.shop.account.model.Account;
  * @author yinlei
  * date 2013-8-31 21:08:12
  */
-public interface AccountDao extends IHibernateGenericDao<Account, Long> {
+public interface AccountDao extends BaseGenericDao<Account, Long> {
 
 }

@@ -3,8 +3,8 @@ package com.vteba.community.base.service.impl;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.community.base.dao.spi.DarenDao;
 import com.vteba.community.base.model.Daren;
 import com.vteba.community.base.service.spi.DarenService;
@@ -15,14 +15,14 @@ import com.vteba.community.base.service.spi.DarenService;
  * date 2013-10-7 15:17:07
  */
 @Named
-public class DarenServiceImpl extends GenericServiceImpl<Daren, Long> implements DarenService {
+public class DarenServiceImpl extends BaseServiceImpl<Daren, Long> implements DarenService {
 	private DarenDao darenDaoImpl;
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<Daren, Long> darenDaoImpl) {
-		this.hibernateGenericDaoImpl = darenDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<Daren, Long> darenDaoImpl) {
+		this.baseGenericDaoImpl = darenDaoImpl;
 		this.darenDaoImpl = (DarenDao) darenDaoImpl;
 		
 	}

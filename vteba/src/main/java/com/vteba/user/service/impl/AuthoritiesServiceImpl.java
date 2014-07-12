@@ -8,14 +8,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.vteba.security.spi.AuthoritiesService;
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.user.dao.IAuthoritiesDao;
 import com.vteba.user.model.Authorities;
 import com.vteba.user.service.IAuthoritiesService;
 
 @Named
-public class AuthoritiesServiceImpl extends GenericServiceImpl<Authorities, Long> implements IAuthoritiesService, AuthoritiesService {
+public class AuthoritiesServiceImpl extends BaseServiceImpl<Authorities, Long> implements IAuthoritiesService, AuthoritiesService {
 
 	public AuthoritiesServiceImpl() {
 		super();
@@ -25,9 +25,9 @@ public class AuthoritiesServiceImpl extends GenericServiceImpl<Authorities, Long
 		
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<Authorities, Long> authoritiesDaoImpl) {
-		this.hibernateGenericDaoImpl = authoritiesDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<Authorities, Long> authoritiesDaoImpl) {
+		this.baseGenericDaoImpl = authoritiesDaoImpl;
 		this.authoritiesDaoImpl = (IAuthoritiesDao) authoritiesDaoImpl;
 		
 	}
@@ -39,7 +39,7 @@ public class AuthoritiesServiceImpl extends GenericServiceImpl<Authorities, Long
 	public List<String> getAllAuthorities() {
 		List<String> authList = new ArrayList<String>();
 		String hql = "select a.authName from Authorities a where a.enabled = 1";
-		authList = authoritiesDaoImpl.hqlQueryForList(hql, String.class);
+		authList = authoritiesDaoImpl.queryForList(hql, String.class);
 		return authList;
 	}
 	

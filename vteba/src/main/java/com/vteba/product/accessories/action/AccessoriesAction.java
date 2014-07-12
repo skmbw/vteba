@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.accessories.model.Accessories;
 import com.vteba.product.accessories.service.spi.AccessoriesService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
@@ -39,13 +39,13 @@ public class AccessoriesAction extends BaseAction<Accessories> {
 		String hql = "select g from Accessories g ";
 		Page<Accessories> page = new Page<Accessories>();
 		page.setPageSize(10);
-		List<Accessories> list = accessoriesServiceImpl.pagedQueryList(page, hql);
+		List<Accessories> list = accessoriesServiceImpl.pagedQueryByHql(page, hql);
 		return list;
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Accessories, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Accessories, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

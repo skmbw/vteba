@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.product.accessories.dao.spi.AccessoriesDao;
 import com.vteba.product.accessories.model.Accessories;
 
@@ -15,7 +15,7 @@ import com.vteba.product.accessories.model.Accessories;
  * date 2013-10-5 16:57:27
  */
 @Named
-public class AccessoriesDaoImpl extends HibernateGenericDaoImpl<Accessories, Long> implements AccessoriesDao {
+public class AccessoriesDaoImpl extends BaseGenericDaoImpl<Accessories, Long> implements AccessoriesDao {
 	
 	public AccessoriesDaoImpl() {
 		super();

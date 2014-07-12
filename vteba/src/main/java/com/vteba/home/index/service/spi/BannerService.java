@@ -1,6 +1,6 @@
 package com.vteba.home.index.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.home.index.model.Banner;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.home.index.model.Banner;
  * @author yinlei
  * date 2013-8-31 21:00:21
  */
-public interface BannerService extends IGenericService<Banner, Integer> {
+public interface BannerService extends BaseService<Banner, Integer> {
 	
 }

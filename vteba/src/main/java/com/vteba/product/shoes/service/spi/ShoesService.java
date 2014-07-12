@@ -1,6 +1,6 @@
 package com.vteba.product.shoes.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.product.shoes.model.Shoes;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.product.shoes.model.Shoes;
  * @author yinlei
  * date 2013-10-3 20:56:49
  */
-public interface ShoesService extends IGenericService<Shoes, Long> {
+public interface ShoesService extends BaseService<Shoes, Long> {
 	public Shoes test();
 }

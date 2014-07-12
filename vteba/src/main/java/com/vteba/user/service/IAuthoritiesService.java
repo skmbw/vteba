@@ -1,8 +1,8 @@
 package com.vteba.user.service;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.user.model.Authorities;
 
-public interface IAuthoritiesService extends IGenericService<Authorities, Long> {
+public interface IAuthoritiesService extends BaseService<Authorities, Long> {
 
 }

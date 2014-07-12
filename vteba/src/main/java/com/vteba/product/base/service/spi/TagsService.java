@@ -2,7 +2,7 @@ package com.vteba.product.base.service.spi;
 
 import java.util.Map;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.product.base.model.Tags;
 
 /**
@@ -10,7 +10,7 @@ import com.vteba.product.base.model.Tags;
  * @author yinlei
  * date 2013-10-4 17:53:44
  */
-public interface TagsService extends IGenericService<Tags, Integer> {
+public interface TagsService extends BaseService<Tags, Integer> {
 	
 	/**
 	 * 根据一级标签ID获取标签树，一级标签一个，二级四个，三级由Map参数指定

@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.community.base.dao.spi.DarenDao;
 import com.vteba.community.base.model.Daren;
 
@@ -15,7 +15,7 @@ import com.vteba.community.base.model.Daren;
  * date 2013-10-7 15:17:07
  */
 @Named
-public class DarenDaoImpl extends HibernateGenericDaoImpl<Daren, Long> implements DarenDao {
+public class DarenDaoImpl extends BaseGenericDaoImpl<Daren, Long> implements DarenDao {
 	
 	public DarenDaoImpl() {
 		super();

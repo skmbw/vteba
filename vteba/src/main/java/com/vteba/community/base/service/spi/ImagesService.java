@@ -1,6 +1,6 @@
 package com.vteba.community.base.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.community.base.model.Images;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.community.base.model.Images;
  * @author yinlei
  * date 2013-10-7 16:41:32
  */
-public interface ImagesService extends IGenericService<Images, Long> {
+public interface ImagesService extends BaseService<Images, Long> {
 	
 }

@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.shop.order.dao.spi.OrderDao;
 import com.vteba.shop.order.model.Order;
 
@@ -15,7 +15,7 @@ import com.vteba.shop.order.model.Order;
  * date 2013-8-31 21:04:16
  */
 @Named
-public class OrderDaoImpl extends HibernateGenericDaoImpl<Order, Long> implements OrderDao {
+public class OrderDaoImpl extends BaseGenericDaoImpl<Order, Long> implements OrderDao {
 	
 	public OrderDaoImpl() {
 		super();

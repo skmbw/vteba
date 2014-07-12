@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.web.action.BaseExtAction;
 
 /**
@@ -30,8 +30,8 @@ public class SearchAction extends BaseExtAction {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Object, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Object, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vteba.spider.tx.impl.HibernateGenericDaoImpl;
+import com.vteba.spider.tx.IHibernateGenericDao;
 
 /**
  * 通用泛型Service实现，供其他Service继承，简化service实现。
@@ -15,84 +15,84 @@ import com.vteba.spider.tx.impl.HibernateGenericDaoImpl;
 @Transactional
 public abstract class GenericServiceImpl<T, ID extends Serializable> {
 
-	protected HibernateGenericDaoImpl<T, ID> hibernateGenericDaoImpl;
+	protected IHibernateGenericDao<T, ID> BaseGenericDaoImpl;
 	
 	/**
 	 * 延迟到子类中注入具体dao实例
-	 * @param hibernateGenericDaoImpl 实现HibernateGenericDaoImpl具体的dao实例
+	 * @param BaseGenericDaoImpl 实现BaseGenericDaoImpl具体的dao实例
 	 * @author yinlei
 	 * date 2012-6-22 下午4:04:41
 	 */
-	public abstract void setHibernateGenericDaoImpl(HibernateGenericDaoImpl<T, ID> hibernateGenericDaoImpl);
+	public abstract void setBaseGenericDaoImpl(IHibernateGenericDao<T, ID> BaseGenericDaoImpl);
 	
 	public ID save(T entity) {
-		return hibernateGenericDaoImpl.save(entity);
+		return BaseGenericDaoImpl.save(entity);
 	}
 
 	public void persist(T entity) {
-		hibernateGenericDaoImpl.persist(entity);
+		BaseGenericDaoImpl.persist(entity);
 	}
 
 	public List<T> getEntityListByHql(String hql, Object... values) {
-		return hibernateGenericDaoImpl.getEntityListByHql(hql, values);
+		return BaseGenericDaoImpl.getEntityListByHql(hql, values);
 	}
 
 	public void saveOrUpdate(T entity) {
-		hibernateGenericDaoImpl.saveOrUpdate(entity);
+		BaseGenericDaoImpl.saveOrUpdate(entity);
 	}
 
 	public void update(T entity) {
-		hibernateGenericDaoImpl.update(entity);
+		BaseGenericDaoImpl.update(entity);
 	}
 
 	public T merge(T entity) {
-		return hibernateGenericDaoImpl.merge(entity);
+		return BaseGenericDaoImpl.merge(entity);
 	}
 
 	public T load(Class<T> entity, ID id) {
-		return hibernateGenericDaoImpl.load(entity, id);
+		return BaseGenericDaoImpl.load(entity, id);
 	}
 
 	public T load(ID id) {
-		return hibernateGenericDaoImpl.load(id);
+		return BaseGenericDaoImpl.load(id);
 	}
 
 	public <X> X get(Class<X> entity, ID id) {
-		return hibernateGenericDaoImpl.get(entity, id);
+		return BaseGenericDaoImpl.get(entity, id);
 	}
 
 	public T get(ID id) {
-		return hibernateGenericDaoImpl.get(id);
+		return BaseGenericDaoImpl.get(id);
 	}
 
 	public void delete(ID id) {
-		hibernateGenericDaoImpl.delete(id);
+		BaseGenericDaoImpl.delete(id);
 	}
 
 	public void delete(T entity) {
-		hibernateGenericDaoImpl.delete(entity);
+		BaseGenericDaoImpl.delete(entity);
 	}
 
 	public <X> List<X> getAll(Class<X> entityClass) {
-		return hibernateGenericDaoImpl.getAll(entityClass);
+		return BaseGenericDaoImpl.getAll(entityClass);
 	}
 	
 	public List<Object[]> sqlQueryForObject(String sql, Object... values) {
-		return hibernateGenericDaoImpl.sqlQueryForObject(sql, values);
+		return BaseGenericDaoImpl.sqlQueryForObject(sql, values);
 	}
 
 	public List<Object[]> hqlQueryForObject(String hql, boolean namedQuery,
 			Object... values) {
-		return hibernateGenericDaoImpl.hqlQueryForObject(hql, namedQuery,
+		return BaseGenericDaoImpl.hqlQueryForObject(hql, namedQuery,
 				values);
 	}
 
 	public int executeHqlUpdate(String hql, boolean namedQuery, Object... values) {
-		return hibernateGenericDaoImpl.executeHqlUpdate(hql, namedQuery, values);
+		return BaseGenericDaoImpl.executeHqlUpdate(hql, namedQuery, values);
 	}
 
 	public int executeSqlUpdate(String sql, Object... values) {
-		return hibernateGenericDaoImpl.executeSqlUpdate(sql, values);
+		return BaseGenericDaoImpl.executeSqlUpdate(sql, values);
 	}
 
 	public void saveEntityBatch(List<T> list, int batchSize) {
@@ -100,7 +100,7 @@ public abstract class GenericServiceImpl<T, ID extends Serializable> {
 			T entity = list.get(i);
 			persist(entity);
 			if (i != 0 && i % batchSize == 0) {
-				hibernateGenericDaoImpl.flush();
+				BaseGenericDaoImpl.flush();
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 package com.vteba.product.men.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.product.men.model.Men;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.product.men.model.Men;
  * @author yinlei
  * date 2013-10-5 17:00:08
  */
-public interface MenService extends IGenericService<Men, Long> {
+public interface MenService extends BaseService<Men, Long> {
 	
 }

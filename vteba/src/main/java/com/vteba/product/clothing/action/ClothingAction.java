@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.product.clothing.model.Clothing;
 import com.vteba.product.clothing.service.spi.ClothingService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
@@ -40,8 +40,8 @@ public class ClothingAction extends BaseAction<Clothing> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Clothing, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Clothing, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

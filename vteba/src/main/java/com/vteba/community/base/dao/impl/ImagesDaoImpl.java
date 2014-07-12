@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.community.base.dao.spi.ImagesDao;
 import com.vteba.community.base.model.Images;
 
@@ -15,7 +15,7 @@ import com.vteba.community.base.model.Images;
  * date 2013-10-7 16:41:32
  */
 @Named
-public class ImagesDaoImpl extends HibernateGenericDaoImpl<Images, Long> implements ImagesDao {
+public class ImagesDaoImpl extends BaseGenericDaoImpl<Images, Long> implements ImagesDao {
 	
 	public ImagesDaoImpl() {
 		super();

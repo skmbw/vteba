@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.tx.jdbc.spring.SpringJdbcTemplate;
 import com.vteba.user.dao.spi.UserDao;
 import com.vteba.user.model.User;
@@ -16,7 +16,7 @@ import com.vteba.user.model.User;
  * date 2013-8-31 0:45:14
  */
 @Named
-public class UserDaoImpl extends HibernateGenericDaoImpl<User, Long> implements UserDao {
+public class UserDaoImpl extends BaseGenericDaoImpl<User, Long> implements UserDao {
 	
 	public UserDaoImpl() {
 		super();

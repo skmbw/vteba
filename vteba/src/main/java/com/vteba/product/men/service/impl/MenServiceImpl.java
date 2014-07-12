@@ -3,8 +3,8 @@ package com.vteba.product.men.service.impl;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.product.men.dao.spi.MenDao;
 import com.vteba.product.men.model.Men;
 import com.vteba.product.men.service.spi.MenService;
@@ -15,14 +15,14 @@ import com.vteba.product.men.service.spi.MenService;
  * date 2013-10-5 17:00:08
  */
 @Named
-public class MenServiceImpl extends GenericServiceImpl<Men, Long> implements MenService {
+public class MenServiceImpl extends BaseServiceImpl<Men, Long> implements MenService {
 	private MenDao menDaoImpl;
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<Men, Long> menDaoImpl) {
-		this.hibernateGenericDaoImpl = menDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<Men, Long> menDaoImpl) {
+		this.baseGenericDaoImpl = menDaoImpl;
 		this.menDaoImpl = (MenDao) menDaoImpl;
 		
 	}

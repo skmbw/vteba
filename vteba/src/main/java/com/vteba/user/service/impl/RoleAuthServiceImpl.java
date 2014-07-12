@@ -3,14 +3,14 @@ package com.vteba.user.service.impl;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.user.dao.IRoleAuthDao;
 import com.vteba.user.model.RoleAuth;
 import com.vteba.user.service.IRoleAuthService;
 
 @Named
-public class RoleAuthServiceImpl extends GenericServiceImpl<RoleAuth, Long> implements IRoleAuthService {
+public class RoleAuthServiceImpl extends BaseServiceImpl<RoleAuth, Long> implements IRoleAuthService {
 
 	public RoleAuthServiceImpl() {
 		super();
@@ -19,9 +19,9 @@ public class RoleAuthServiceImpl extends GenericServiceImpl<RoleAuth, Long> impl
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<RoleAuth, Long> roleAuthDaoImpl) {
-		this.hibernateGenericDaoImpl = roleAuthDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<RoleAuth, Long> roleAuthDaoImpl) {
+		this.baseGenericDaoImpl = roleAuthDaoImpl;
 		this.roleAuthDaoImpl = (IRoleAuthDao) roleAuthDaoImpl;
 		
 	}

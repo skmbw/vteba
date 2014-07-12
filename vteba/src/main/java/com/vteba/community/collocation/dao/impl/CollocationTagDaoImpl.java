@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.community.collocation.dao.spi.CollocationTagDao;
 import com.vteba.community.collocation.model.CollocationTag;
 
@@ -15,7 +15,7 @@ import com.vteba.community.collocation.model.CollocationTag;
  * date 2013-10-8 16:59:39
  */
 @Named
-public class CollocationTagDaoImpl extends HibernateGenericDaoImpl<CollocationTag, Integer> implements CollocationTagDao {
+public class CollocationTagDaoImpl extends BaseGenericDaoImpl<CollocationTag, Integer> implements CollocationTagDao {
 	
 	public CollocationTagDaoImpl() {
 		super();

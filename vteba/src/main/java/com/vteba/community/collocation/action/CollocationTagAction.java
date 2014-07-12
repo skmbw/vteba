@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.community.collocation.model.CollocationTag;
 import com.vteba.community.collocation.service.spi.CollocationTagService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
@@ -44,8 +44,8 @@ public class CollocationTagAction extends BaseAction<CollocationTag> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<CollocationTag, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<CollocationTag, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

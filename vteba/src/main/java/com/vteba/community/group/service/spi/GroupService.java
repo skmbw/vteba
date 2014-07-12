@@ -1,6 +1,6 @@
 package com.vteba.community.group.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.community.group.model.Group;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.community.group.model.Group;
  * @author yinlei
  * date 2013-10-7 22:22:54
  */
-public interface GroupService extends IGenericService<Group, Long> {
+public interface GroupService extends BaseService<Group, Long> {
 	
 }

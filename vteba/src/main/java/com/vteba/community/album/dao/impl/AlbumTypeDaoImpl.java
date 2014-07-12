@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.community.album.dao.spi.AlbumTypeDao;
 import com.vteba.community.album.model.AlbumType;
 
@@ -15,7 +15,7 @@ import com.vteba.community.album.model.AlbumType;
  * date 2013-10-7 21:46:38
  */
 @Named
-public class AlbumTypeDaoImpl extends HibernateGenericDaoImpl<AlbumType, Integer> implements AlbumTypeDao {
+public class AlbumTypeDaoImpl extends BaseGenericDaoImpl<AlbumType, Integer> implements AlbumTypeDao {
 	
 	public AlbumTypeDaoImpl() {
 		super();

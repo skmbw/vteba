@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.community.group.model.GroupTag;
 import com.vteba.community.group.service.spi.GroupTagService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
@@ -44,8 +44,8 @@ public class GroupTagAction extends BaseAction<GroupTag> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<GroupTag, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<GroupTag, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

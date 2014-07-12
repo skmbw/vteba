@@ -3,8 +3,8 @@ package com.vteba.user.service.impl;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.user.dao.spi.UserDao;
 import com.vteba.user.model.User;
 import com.vteba.user.service.spi.UserService;
@@ -15,16 +15,16 @@ import com.vteba.user.service.spi.UserService;
  * date 2013-8-31 0:45:14
  */
 @Named
-public class UserServiceImpl extends GenericServiceImpl<User, Long> implements UserService {
-	private UserDao userDaoImpl;
+public class UserServiceImpl extends BaseServiceImpl<User, Long> implements UserService {
+	protected UserDao userDaoImpl;
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<User, Long> userDaoImpl) {
-		this.hibernateGenericDaoImpl = userDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<User, Long> userDaoImpl) {
+		this.baseGenericDaoImpl = userDaoImpl;
 		this.userDaoImpl = (UserDao) userDaoImpl;
-		this.springJdbcTemplate = this.userDaoImpl.getSpringJdbcTemplate();
+//		this.springJdbcTemplate = this.userDaoImpl.getSpringJdbcTemplate();
 	}
 
 }

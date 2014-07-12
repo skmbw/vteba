@@ -2,7 +2,7 @@ package com.vteba.user.action;
 
 import java.io.Serializable;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.user.model.User;
 import com.vteba.web.action.BaseAction;
 
@@ -14,8 +14,8 @@ import com.vteba.web.action.BaseAction;
 public class UserZoneAction extends BaseAction<User> {
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<User, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<User, ? extends Serializable> BaseServiceImpl) {
 		
 		
 	}

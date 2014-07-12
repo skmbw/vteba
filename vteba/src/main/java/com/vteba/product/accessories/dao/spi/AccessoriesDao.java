@@ -1,6 +1,6 @@
 package com.vteba.product.accessories.dao.spi;
 
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.product.accessories.model.Accessories;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.product.accessories.model.Accessories;
  * @author yinlei
  * date 2013-10-5 16:57:27
  */
-public interface AccessoriesDao extends IHibernateGenericDao<Accessories, Long> {
+public interface AccessoriesDao extends BaseGenericDao<Accessories, Long> {
 
 }

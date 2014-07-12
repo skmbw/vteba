@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.home.index.dao.spi.CategoryDao;
 import com.vteba.home.index.model.Category;
 
@@ -15,7 +15,7 @@ import com.vteba.home.index.model.Category;
  * date 2013-8-31 21:00:53
  */
 @Named
-public class CategoryDaoImpl extends HibernateGenericDaoImpl<Category, Integer> implements CategoryDao {
+public class CategoryDaoImpl extends BaseGenericDaoImpl<Category, Integer> implements CategoryDao {
 	
 	public CategoryDaoImpl() {
 		super();

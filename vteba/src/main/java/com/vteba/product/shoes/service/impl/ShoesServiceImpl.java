@@ -3,8 +3,8 @@ package com.vteba.product.shoes.service.impl;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.product.shoes.dao.spi.ShoesDao;
 import com.vteba.product.shoes.model.Shoes;
 import com.vteba.product.shoes.service.spi.ShoesService;
@@ -15,14 +15,14 @@ import com.vteba.product.shoes.service.spi.ShoesService;
  * date 2013-10-3 20:56:49
  */
 @Named
-public class ShoesServiceImpl extends GenericServiceImpl<Shoes, Long> implements ShoesService {
+public class ShoesServiceImpl extends BaseServiceImpl<Shoes, Long> implements ShoesService {
 	private ShoesDao shoesDaoImpl;
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<Shoes, Long> shoesDaoImpl) {
-		this.hibernateGenericDaoImpl = shoesDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<Shoes, Long> shoesDaoImpl) {
+		this.baseGenericDaoImpl = shoesDaoImpl;
 		this.shoesDaoImpl = (ShoesDao) shoesDaoImpl;
 		
 	}

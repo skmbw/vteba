@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.community.group.dao.spi.GroupDao;
 import com.vteba.community.group.model.Group;
 
@@ -15,7 +15,7 @@ import com.vteba.community.group.model.Group;
  * date 2013-10-7 22:22:54
  */
 @Named
-public class GroupDaoImpl extends HibernateGenericDaoImpl<Group, Long> implements GroupDao {
+public class GroupDaoImpl extends BaseGenericDaoImpl<Group, Long> implements GroupDao {
 	
 	public GroupDaoImpl() {
 		super();

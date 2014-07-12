@@ -1,6 +1,6 @@
 package com.vteba.product.home.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.product.home.model.Home;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.product.home.model.Home;
  * @author yinlei
  * date 2013-10-5 16:59:47
  */
-public interface HomeService extends IGenericService<Home, Long> {
+public interface HomeService extends BaseService<Home, Long> {
 	
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.common.collect.Maps;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.service.xml.XmlServiceImpl;
 import com.vteba.service.xml.jibx.Customer;
 import com.vteba.service.xml.jibx.Person;
@@ -204,9 +204,9 @@ public class LoginAction extends BaseAction<User> {
      * @return 返回的视图
      */
     protected String checkUserLogin(User user) {
-		String hql = "select u from User u where u.userAccount = ?1";
+//		String hql = "select u from User u where u.userAccount = ?1";
 		// 不成功，查询数据库，获取用户信息
-		User aUser = userServiceImpl.uniqueResultByHql(hql, false, user.getUserAccount());
+		User aUser = userServiceImpl.uniqueResult("userAccount", user.getUserAccount());
 		// 和用户填写的登录信息进行比较
 		if (aUser != null && passEqual(aUser.getPassword(), user.getPassword())) {
 			
@@ -232,8 +232,8 @@ public class LoginAction extends BaseAction<User> {
     }
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<User, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<User, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

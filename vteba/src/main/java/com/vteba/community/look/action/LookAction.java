@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vteba.community.look.model.Look;
 import com.vteba.community.look.service.spi.LookService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
@@ -44,8 +44,8 @@ public class LookAction extends BaseAction<Look> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Look, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Look, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

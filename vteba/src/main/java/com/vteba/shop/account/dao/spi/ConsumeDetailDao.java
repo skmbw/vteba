@@ -1,6 +1,6 @@
 package com.vteba.shop.account.dao.spi;
 
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.shop.account.model.ConsumeDetail;
 import com.vteba.shop.account.model.ConsumeDetailId;
 
@@ -9,6 +9,6 @@ import com.vteba.shop.account.model.ConsumeDetailId;
  * @author yinlei
  * date 2013-8-31 21:09:01
  */
-public interface ConsumeDetailDao extends IHibernateGenericDao<ConsumeDetail, ConsumeDetailId> {
+public interface ConsumeDetailDao extends BaseGenericDao<ConsumeDetail, ConsumeDetailId> {
 
 }

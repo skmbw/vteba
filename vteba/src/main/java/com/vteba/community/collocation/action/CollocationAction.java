@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Lists;
 import com.vteba.community.collocation.model.Collocation;
 import com.vteba.community.collocation.service.spi.CollocationService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.web.action.BaseAction;
 
@@ -46,8 +46,8 @@ public class CollocationAction extends BaseAction<Collocation> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Collocation, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Collocation, ? extends Serializable> baseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Maps;
 import com.vteba.product.base.model.Tags;
 import com.vteba.product.base.service.spi.TagsService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -49,8 +49,8 @@ public class TagsAction extends BaseAction<Tags> {
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Tags, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Tags, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

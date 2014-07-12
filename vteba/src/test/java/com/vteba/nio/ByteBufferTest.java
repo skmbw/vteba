@@ -91,5 +91,6 @@ public class ByteBufferTest {
 				out.close();
 			}
 		}
+		System.out.println(keysAdded);
 	}
 }

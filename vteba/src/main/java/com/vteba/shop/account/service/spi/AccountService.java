@@ -1,6 +1,6 @@
 package com.vteba.shop.account.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.shop.account.model.Account;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.shop.account.model.Account;
  * @author yinlei
  * date 2013-8-31 21:08:12
  */
-public interface AccountService extends IGenericService<Account, Long> {
+public interface AccountService extends BaseService<Account, Long> {
 	
 }

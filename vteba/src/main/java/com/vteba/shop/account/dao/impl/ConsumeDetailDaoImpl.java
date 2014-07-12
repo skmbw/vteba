@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.shop.account.dao.spi.ConsumeDetailDao;
 import com.vteba.shop.account.model.ConsumeDetail;
 import com.vteba.shop.account.model.ConsumeDetailId;
@@ -16,7 +16,7 @@ import com.vteba.shop.account.model.ConsumeDetailId;
  * date 2013-8-31 21:09:01
  */
 @Named
-public class ConsumeDetailDaoImpl extends HibernateGenericDaoImpl<ConsumeDetail, ConsumeDetailId> implements ConsumeDetailDao {
+public class ConsumeDetailDaoImpl extends BaseGenericDaoImpl<ConsumeDetail, ConsumeDetailId> implements ConsumeDetailDao {
 	
 	public ConsumeDetailDaoImpl() {
 		super();

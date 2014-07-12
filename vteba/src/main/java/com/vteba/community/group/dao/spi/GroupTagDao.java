@@ -1,6 +1,6 @@
 package com.vteba.community.group.dao.spi;
 
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.community.group.model.GroupTag;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.community.group.model.GroupTag;
  * @author yinlei
  * date 2013-10-8 15:23:29
  */
-public interface GroupTagDao extends IHibernateGenericDao<GroupTag, Integer> {
+public interface GroupTagDao extends BaseGenericDao<GroupTag, Integer> {
 
 }

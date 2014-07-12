@@ -3,8 +3,8 @@ package com.vteba.shop.order.service.impl;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.shop.order.dao.spi.OrderDao;
 import com.vteba.shop.order.model.Order;
 import com.vteba.shop.order.service.spi.OrderService;
@@ -15,14 +15,14 @@ import com.vteba.shop.order.service.spi.OrderService;
  * date 2013-8-31 21:04:16
  */
 @Named
-public class OrderServiceImpl extends GenericServiceImpl<Order, Long> implements OrderService {
+public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements OrderService {
 	private OrderDao orderDaoImpl;
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<Order, Long> orderDaoImpl) {
-		this.hibernateGenericDaoImpl = orderDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<Order, Long> orderDaoImpl) {
+		this.baseGenericDaoImpl = orderDaoImpl;
 		this.orderDaoImpl = (OrderDao) orderDaoImpl;
 		
 	}

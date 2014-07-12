@@ -1,6 +1,6 @@
 package com.vteba.user.dao.spi;
 
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.user.model.User;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.user.model.User;
  * @author yinlei
  * date 2013-8-31 0:45:14
  */
-public interface UserDao extends IHibernateGenericDao<User, Long> {
+public interface UserDao extends BaseGenericDao<User, Long> {
 
 }

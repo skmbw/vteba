@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.product.home.dao.spi.HomeDao;
 import com.vteba.product.home.model.Home;
 
@@ -15,7 +15,7 @@ import com.vteba.product.home.model.Home;
  * date 2013-10-5 16:59:47
  */
 @Named
-public class HomeDaoImpl extends HibernateGenericDaoImpl<Home, Long> implements HomeDao {
+public class HomeDaoImpl extends BaseGenericDaoImpl<Home, Long> implements HomeDao {
 	
 	public HomeDaoImpl() {
 		super();

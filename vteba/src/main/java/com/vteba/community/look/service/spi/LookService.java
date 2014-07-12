@@ -1,6 +1,6 @@
 package com.vteba.community.look.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.community.look.model.Look;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.community.look.model.Look;
  * @author yinlei
  * date 2013-10-5 22:16:00
  */
-public interface LookService extends IGenericService<Look, Long> {
+public interface LookService extends BaseService<Look, Long> {
 	
 }

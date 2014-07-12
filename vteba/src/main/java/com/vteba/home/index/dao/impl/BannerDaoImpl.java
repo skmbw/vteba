@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.home.index.dao.spi.BannerDao;
 import com.vteba.home.index.model.Banner;
 
@@ -15,7 +15,7 @@ import com.vteba.home.index.model.Banner;
  * date 2013-8-31 21:00:21
  */
 @Named
-public class BannerDaoImpl extends HibernateGenericDaoImpl<Banner, Integer> implements BannerDao {
+public class BannerDaoImpl extends BaseGenericDaoImpl<Banner, Integer> implements BannerDao {
 	
 	public BannerDaoImpl() {
 		super();

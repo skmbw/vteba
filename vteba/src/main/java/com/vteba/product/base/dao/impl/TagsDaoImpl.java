@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.product.base.dao.spi.TagsDao;
 import com.vteba.product.base.model.Tags;
 
@@ -15,7 +15,7 @@ import com.vteba.product.base.model.Tags;
  * date 2013-10-4 17:53:44
  */
 @Named
-public class TagsDaoImpl extends HibernateGenericDaoImpl<Tags, Integer> implements TagsDao {
+public class TagsDaoImpl extends BaseGenericDaoImpl<Tags, Integer> implements TagsDao {
 	
 	public TagsDaoImpl() {
 		super();

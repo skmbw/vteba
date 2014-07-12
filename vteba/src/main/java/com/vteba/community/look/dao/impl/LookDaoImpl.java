@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.community.look.dao.spi.LookDao;
 import com.vteba.community.look.model.Look;
 
@@ -15,7 +15,7 @@ import com.vteba.community.look.model.Look;
  * date 2013-10-5 22:16:00
  */
 @Named
-public class LookDaoImpl extends HibernateGenericDaoImpl<Look, Long> implements LookDao {
+public class LookDaoImpl extends BaseGenericDaoImpl<Look, Long> implements LookDao {
 	
 	public LookDaoImpl() {
 		super();

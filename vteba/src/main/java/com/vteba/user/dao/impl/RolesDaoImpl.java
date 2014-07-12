@@ -6,7 +6,7 @@ import javax.inject.Named;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.user.dao.IRolesDao;
 import com.vteba.user.model.Roles;
 
@@ -16,7 +16,7 @@ import com.vteba.user.model.Roles;
  * date 2013-8-27 下午9:27:49
  */
 @Named
-public class RolesDaoImpl extends HibernateGenericDaoImpl<Roles, Long>
+public class RolesDaoImpl extends BaseGenericDaoImpl<Roles, Long>
 		implements IRolesDao {
 
 	public RolesDaoImpl() {

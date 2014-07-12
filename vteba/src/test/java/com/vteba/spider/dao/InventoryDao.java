@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.vteba.spider.model.Inventory;
-import com.vteba.spider.tx.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
 
 @Repository
 public class InventoryDao extends HibernateGenericDaoImpl<Inventory, String> {

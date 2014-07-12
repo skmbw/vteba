@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Lists;
 import com.vteba.community.album.model.Album;
 import com.vteba.community.album.service.spi.AlbumService;
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -39,13 +39,13 @@ public class AlbumAction extends BaseAction<Album> {
 		List<Album> list = Lists.newArrayList();
 		
 		String hql = "select distinct a from Album a left join fetch a.imagesList";
-		list = albumServiceImpl.getEntityListByHql(hql);
+		list = albumServiceImpl.getListByHql(hql);
 		return list;
 	}
 
 	@Override
-	public void setGenericServiceImpl(
-			IGenericService<Album, ? extends Serializable> genericServiceImpl) {
+	public void setBaseServiceImpl(
+			BaseService<Album, ? extends Serializable> BaseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}

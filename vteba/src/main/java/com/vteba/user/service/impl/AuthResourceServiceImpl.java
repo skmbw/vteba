@@ -5,14 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.user.dao.IAuthResourceDao;
 import com.vteba.user.model.AuthResource;
 import com.vteba.user.service.IAuthResourceService;
 
 @Named
-public class AuthResourceServiceImpl extends GenericServiceImpl<AuthResource, Long> implements IAuthResourceService {
+public class AuthResourceServiceImpl extends BaseServiceImpl<AuthResource, Long> implements IAuthResourceService {
 	
 	public AuthResourceServiceImpl() {
 		super();
@@ -21,9 +21,9 @@ public class AuthResourceServiceImpl extends GenericServiceImpl<AuthResource, Lo
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<AuthResource, Long> authResourceDaoImpl) {
-		this.hibernateGenericDaoImpl = authResourceDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<AuthResource, Long> authResourceDaoImpl) {
+		this.baseGenericDaoImpl = authResourceDaoImpl;
 		this.authResourceDaoImpl = (IAuthResourceDao) authResourceDaoImpl;
 		
 	}
@@ -33,6 +33,6 @@ public class AuthResourceServiceImpl extends GenericServiceImpl<AuthResource, Lo
 	}
 	
 	public List<AuthResource> getAllList() {
-		return authResourceDaoImpl.getAll(AuthResource.class);
+		return authResourceDaoImpl.getAll();
 	}
 }

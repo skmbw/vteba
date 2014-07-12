@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.product.men.dao.spi.MenDao;
 import com.vteba.product.men.model.Men;
 
@@ -15,7 +15,7 @@ import com.vteba.product.men.model.Men;
  * date 2013-10-5 17:00:08
  */
 @Named
-public class MenDaoImpl extends HibernateGenericDaoImpl<Men, Long> implements MenDao {
+public class MenDaoImpl extends BaseGenericDaoImpl<Men, Long> implements MenDao {
 	
 	public MenDaoImpl() {
 		super();

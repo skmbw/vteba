@@ -25,8 +25,8 @@ import org.hibernate.transform.ResultTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vteba.spider.tx.IHibernateGenericDao;
 import com.vteba.spider.tx.Page;
+import com.vteba.tx.hibernate.IHibernateGenericDao;
 
 /**
  * 泛型DAO Hibernate实现，简化Entity DAO实现。

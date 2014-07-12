@@ -5,13 +5,13 @@ import javax.inject.Named;
 
 import org.hibernate.SessionFactory;
 
-import com.vteba.tx.hibernate.impl.HibernateGenericDaoImpl;
+import com.vteba.tx.hibernate.impl.BaseGenericDaoImpl;
 import com.vteba.user.dao.IAuthResourceDao;
 import com.vteba.user.model.AuthResource;
 
 @Named
 public class AuthResourceDaoImpl extends
-		HibernateGenericDaoImpl<AuthResource, Long> implements IAuthResourceDao {
+		BaseGenericDaoImpl<AuthResource, Long> implements IAuthResourceDao {
 
 	public AuthResourceDaoImpl() {
 		super();

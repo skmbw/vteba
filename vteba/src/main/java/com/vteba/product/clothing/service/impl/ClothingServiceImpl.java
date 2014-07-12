@@ -6,8 +6,8 @@ import javax.inject.Named;
 import com.vteba.product.clothing.dao.spi.ClothingDao;
 import com.vteba.product.clothing.model.Clothing;
 import com.vteba.product.clothing.service.spi.ClothingService;
-import com.vteba.service.generic.impl.GenericServiceImpl;
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.service.generic.impl.BaseServiceImpl;
+import com.vteba.tx.hibernate.BaseGenericDao;
 
 /**
  * 衣服类商品Service实现。
@@ -15,14 +15,14 @@ import com.vteba.tx.hibernate.IHibernateGenericDao;
  * date 2013-10-3 21:29:17
  */
 @Named
-public class ClothingServiceImpl extends GenericServiceImpl<Clothing, Long> implements ClothingService {
+public class ClothingServiceImpl extends BaseServiceImpl<Clothing, Long> implements ClothingService {
 	private ClothingDao clothingDaoImpl;
 	
 	@Inject
 	@Override
-	public void setHibernateGenericDaoImpl(
-			IHibernateGenericDao<Clothing, Long> clothingDaoImpl) {
-		this.hibernateGenericDaoImpl = clothingDaoImpl;
+	public void setBaseGenericDaoImpl(
+			BaseGenericDao<Clothing, Long> clothingDaoImpl) {
+		this.baseGenericDaoImpl = clothingDaoImpl;
 		this.clothingDaoImpl = (ClothingDao) clothingDaoImpl;
 		
 	}

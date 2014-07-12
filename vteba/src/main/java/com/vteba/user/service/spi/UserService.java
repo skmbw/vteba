@@ -1,6 +1,6 @@
 package com.vteba.user.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.user.model.User;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.user.model.User;
  * @author yinlei
  * date 2013-8-31 0:45:14
  */
-public interface UserService extends IGenericService<User, Long>{
+public interface UserService extends BaseService<User, Long>{
 	
 }

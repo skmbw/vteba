@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vteba.spider.dao.InventoryDao;
 import com.vteba.spider.model.Inventory;
-import com.vteba.spider.tx.impl.HibernateGenericDaoImpl;
+import com.vteba.spider.tx.IHibernateGenericDao;
 
 @Transactional
 @Service
@@ -16,10 +16,10 @@ public class InventoryService extends GenericServiceImpl<Inventory, String> {
 
 	@Autowired
 	@Override
-	public void setHibernateGenericDaoImpl(
-			HibernateGenericDaoImpl<Inventory, String> hibernateGenericDaoImpl) {
-		this.hibernateGenericDaoImpl = hibernateGenericDaoImpl;
-		this.inventoryDao = (InventoryDao) hibernateGenericDaoImpl;
+	public void setBaseGenericDaoImpl(
+			IHibernateGenericDao<Inventory, String> BaseGenericDaoImpl) {
+		this.BaseGenericDaoImpl = BaseGenericDaoImpl;
+		this.inventoryDao = (InventoryDao) BaseGenericDaoImpl;
 	}
 	
 	

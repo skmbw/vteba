@@ -1,6 +1,6 @@
 package com.vteba.community.base.service.spi;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.community.base.model.Daren;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.community.base.model.Daren;
  * @author yinlei
  * date 2013-10-7 15:17:07
  */
-public interface DarenService extends IGenericService<Daren, Long> {
+public interface DarenService extends BaseService<Daren, Long> {
 	
 }

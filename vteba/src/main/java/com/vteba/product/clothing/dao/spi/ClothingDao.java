@@ -1,6 +1,6 @@
 package com.vteba.product.clothing.dao.spi;
 
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.product.clothing.model.Clothing;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.product.clothing.model.Clothing;
  * @author yinlei
  * date 2013-10-3 21:29:17
  */
-public interface ClothingDao extends IHibernateGenericDao<Clothing, Long> {
+public interface ClothingDao extends BaseGenericDao<Clothing, Long> {
 
 }

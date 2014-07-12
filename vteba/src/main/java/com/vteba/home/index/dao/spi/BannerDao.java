@@ -1,6 +1,6 @@
 package com.vteba.home.index.dao.spi;
 
-import com.vteba.tx.hibernate.IHibernateGenericDao;
+import com.vteba.tx.hibernate.BaseGenericDao;
 import com.vteba.home.index.model.Banner;
 
 /**
@@ -8,6 +8,6 @@ import com.vteba.home.index.model.Banner;
  * @author yinlei
  * date 2013-8-31 21:00:21
  */
-public interface BannerDao extends IHibernateGenericDao<Banner, Integer> {
+public interface BannerDao extends BaseGenericDao<Banner, Integer> {
 
 }

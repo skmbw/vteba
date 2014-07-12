@@ -2,7 +2,7 @@ package com.vteba.shop.shopcart.service.spi;
 
 import java.util.List;
 
-import com.vteba.service.generic.IGenericService;
+import com.vteba.service.generic.BaseService;
 import com.vteba.shop.shopcart.model.Item;
 
 /**
@@ -10,7 +10,7 @@ import com.vteba.shop.shopcart.model.Item;
  * @author yinlei
  * @date 2013-8-26 下午1:51:22
  */
-public interface ShopCartService extends IGenericService<Item, Long>{
+public interface ShopCartService extends BaseService<Item, Long>{
 	public boolean addItem(Item item);
 	
 	public boolean addItemList(List<Item> itemList);
