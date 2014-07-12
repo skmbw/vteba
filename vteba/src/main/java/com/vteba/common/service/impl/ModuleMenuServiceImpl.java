@@ -1,10 +1,8 @@
 package com.vteba.common.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -20,6 +18,7 @@ import com.vteba.tx.hibernate.IHibernateGenericDao;
 import com.vteba.user.model.Authorities;
 import com.vteba.user.model.EmpUser;
 import com.vteba.user.service.IAuthoritiesService;
+import com.vteba.utils.ofbiz.LangUtils;
 
 /**
  * 菜单service实现
@@ -50,18 +49,21 @@ public class ModuleMenuServiceImpl extends GenericServiceImpl<ModuleMenu, String
 	}
 	
 	public List<ModuleMenu> getModuleMenuList(EmpUser user){
-		String hql = "from ModuleMenu mm where mm.enable = true order by orders asc";
-		List<ModuleMenu> menuList = moduleMenuDaoImpl.getEntityListByHql(hql);
+		//String hql = "from ModuleMenu mm where mm.enable = true order by orders asc";
+		List<ModuleMenu> menuList = moduleMenuDaoImpl.getEntityList("enable", true, LangUtils.toMap("orders", "asc"));
 
 		if (menuList != null && menuList.size() > 0) {
-			String mhql = "from Authorities aa where aa.moduleId = :moduleId and aa.userId = :userId and aa.enabled = 1 order by :orders asc";
+			//String mhql = "from Authorities aa where aa.moduleId = :moduleId and aa.userId = :userId and aa.enabled = 1 order by :orders asc";
 			for (ModuleMenu menu : menuList) {//获得各模组下的菜单(权限)
 				List<Authorities> authorities = new ArrayList<Authorities>();
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("moduleId", menu.getModuleId());
-				map.put("userId", user.getUserId());
-				map.put("orders", "orders");
-				authorities = authoritiesServiceImpl.getEntityListByHql(mhql, map);
+//				Map<String, Object> map = new HashMap<String, Object>();
+//				map.put("moduleId", menu.getModuleId());
+//				map.put("userId", user.getUserId());
+				Authorities auths = new Authorities();
+				auths.setModuleId(menu.getModuleId());
+				auths.setUserId(user.getUserId());
+				auths.setEnabled(1);
+				authorities = authoritiesServiceImpl.getEntityList(auths, LangUtils.toMap("orders", "asc"));
 				
 				List<Authorities> sets = new ArrayList<Authorities>();
 				for (Authorities auth : authorities) {

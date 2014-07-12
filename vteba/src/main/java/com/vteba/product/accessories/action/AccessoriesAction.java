@@ -39,7 +39,7 @@ public class AccessoriesAction extends BaseAction<Accessories> {
 		String hql = "select g from Accessories g ";
 		Page<Accessories> page = new Page<Accessories>();
 		page.setPageSize(10);
-		List<Accessories> list = accessoriesServiceImpl.pagedQueryByHql(page, hql);
+		List<Accessories> list = accessoriesServiceImpl.pagedQueryList(page, hql);
 		return list;
 	}
 

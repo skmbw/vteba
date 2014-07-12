@@ -13,6 +13,7 @@ import com.vteba.community.base.model.Daren;
 import com.vteba.community.base.service.spi.DarenService;
 import com.vteba.service.generic.IGenericService;
 import com.vteba.tx.generic.Page;
+import com.vteba.utils.ofbiz.LangUtils;
 import com.vteba.web.action.BaseAction;
 
 /**
@@ -36,10 +37,10 @@ public class AlbumDarenAction extends BaseAction<Daren> {
 	@ResponseBody
 	@RequestMapping("/list")
 	public List<Daren> list(Daren model) {
-		String hql = "select b from Daren b where b.enable = 1 and b.darenType = 2";
+		//String hql = "select b from Daren b where b.enable = 1 and b.darenType = 2";
 		Page<Daren> page = new Page<Daren>();
 		page.setPageSize(6);
-		List<Daren> list = darenServiceImpl.pagedQueryByHql(page, hql);
+		List<Daren> list = darenServiceImpl.pagedQueryList(page, LangUtils.toMap("enable", 1, "darenType", 2));
 		return list;
 	}
 
