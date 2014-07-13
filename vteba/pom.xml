@@ -1273,13 +1273,13 @@
 	<dependency>
 	  <groupId>io.netty</groupId>
 	  <artifactId>netty-all</artifactId>
-	  <version>4.0.9.Final</version>
+	  <version>4.0.21.Final</version>
 	</dependency>
 	
 	<dependency>
 	  <groupId>io.netty</groupId>
 	  <artifactId>netty</artifactId>
-	  <version>3.7.0.Final</version>
+	  <version>3.9.2.Final</version>
 	</dependency>
 
 <!-- 	<dependency> -->
