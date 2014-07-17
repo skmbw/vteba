@@ -37,7 +37,7 @@ public class CacheValue extends AbstractCacheObject {
 			return value;
 		} else {
 			if (serializable) {
-				return NativeSerializerUtils.fromBinaryToObject((byte[])value);
+				return NativeSerializerUtils.deserialize((byte[])value);
 			} else {
 				return value;
 			}

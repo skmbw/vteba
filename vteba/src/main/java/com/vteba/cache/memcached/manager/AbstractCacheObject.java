@@ -44,7 +44,7 @@ public class AbstractCacheObject implements Serializable {
 		Object dist = null;
 		if(isSerializable) {
 			try {
-				dist = NativeSerializerUtils.fromObjectToBinary(src);
+				dist = NativeSerializerUtils.serialize(src);
 			} catch (Exception e) {
 				isSerializable = false;
 			}
