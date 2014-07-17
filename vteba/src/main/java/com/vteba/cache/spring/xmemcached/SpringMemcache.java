@@ -6,7 +6,7 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleValueWrapper;
 
 import com.vteba.cache.memcached.spi.Memcache;
-import com.vteba.utils.cryption.CryptionUtils;
+import com.vteba.utils.cryption.CryptUtils;
 
 /**
  * Spring缓存，使用xmemcache实现，整合spring的缓存抽象
@@ -36,7 +36,7 @@ public class SpringMemcache implements Cache {
 	public ValueWrapper get(Object key) {
 		Object object;
 		try {
-			object = cache.get(CryptionUtils.toHexString(key));
+			object = cache.get(CryptUtils.toHexString(key));
 			if (object != null) {
 				return new SimpleValueWrapper(object);
 			}
@@ -49,7 +49,7 @@ public class SpringMemcache implements Cache {
 	@Override
 	public void put(Object key, Object value) {
 		try {
-			String k = CryptionUtils.toHexString(key);
+			String k = CryptUtils.toHexString(key);
 			cache.add(k, 0, value);
 		} catch (Exception e) {
 			logger.warn("Spring AbstractCache put Error. key = {}" + e.getMessage(), key, e);
@@ -59,7 +59,7 @@ public class SpringMemcache implements Cache {
 	@Override
 	public void evict(Object key) {
 		try {
-			String k = CryptionUtils.toHexString(key);
+			String k = CryptUtils.toHexString(key);
 			cache.delete(k);
 		} catch (Exception e) {
 			logger.warn("Spring AbstractCache evict Error. key = {}" + e.getMessage(), key, e);
@@ -74,7 +74,7 @@ public class SpringMemcache implements Cache {
 	//spring 4.0 新增
 	@Override
 	public <T> T get(Object key, Class<T> type) {
-		String k = CryptionUtils.toHexString(key);
+		String k = CryptUtils.toHexString(key);
 		return cache.get(k);
 	}
 
