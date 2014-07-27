@@ -35,7 +35,7 @@ public class AuthCodeAction extends BaseExtAction {
 	 */
 	@RequestMapping("/authCode")
 	public void authCode(OutputStream os) {
-		RandomNumber randomNumber = RandomNumber.Instance();
+		RandomNumber randomNumber = RandomNumber.get();
 		try {
 			IOUtils.copy(randomNumber.getImage(), os);
 		} catch (IOException e) {
