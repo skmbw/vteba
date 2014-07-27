@@ -45,7 +45,7 @@ public class AlbumAction extends BaseAction<Album> {
 
 	@Override
 	public void setBaseServiceImpl(
-			BaseService<Album, ? extends Serializable> BaseServiceImpl) {
+			BaseService<Album, ? extends Serializable> baseServiceImpl) {
 		// TODO Auto-generated method stub
 		
 	}
