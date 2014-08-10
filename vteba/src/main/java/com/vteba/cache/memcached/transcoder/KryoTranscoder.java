@@ -230,13 +230,13 @@ public class KryoTranscoder extends BaseSerializingTranscoder implements Transco
 	 * Get the bytes representing the given serialized object.
 	 */
 	protected byte[] serialize(Object object) {
-		return Kryos.get().serialize(object);
+		return Kryos.serialize(object);
 	}
 	
 	/**
 	 * Get the object represented by the given serialized bytes.
 	 */
 	protected Object deserialize(byte[] bytes) {
-		return Kryos.get().deserialize(bytes);
+		return Kryos.deserialize(bytes);
 	}
 }

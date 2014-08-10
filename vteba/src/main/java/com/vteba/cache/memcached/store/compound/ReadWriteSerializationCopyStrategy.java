@@ -46,7 +46,7 @@ public class ReadWriteSerializationCopyStrategy implements ReadWriteCopyStrategy
 //            }
 //
 //            return duplicateElementWithNewValue(value, bout.toByteArray());
-            return duplicateElementWithNewValue(value, Kryos.get().serialize(value));
+            return duplicateElementWithNewValue(value, Kryos.serialize(value));
         }
     }
 
@@ -61,7 +61,7 @@ public class ReadWriteSerializationCopyStrategy implements ReadWriteCopyStrategy
                 return duplicateElementWithNewValue(storedValue, null);
             }
 
-            Object object = Kryos.get().deserialize((byte[]) storedValue.getObjectValue());
+            Object object = Kryos.deserialize((byte[]) storedValue.getObjectValue());
             return duplicateElementWithNewValue(storedValue, object);
 //            ByteArrayInputStream bin = new ByteArrayInputStream((byte[]) storedValue.getObjectValue());
 //            ObjectInputStream ois = null;

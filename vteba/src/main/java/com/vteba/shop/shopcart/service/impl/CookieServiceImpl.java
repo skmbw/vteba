@@ -107,10 +107,10 @@ public class CookieServiceImpl implements CookieService {
 		Map<String, String> cookieMap = new HashMap<String, String>();
 		if (user != null) {
 			cookieMap.put(VTEBA_USER_ID, user.getUserId().toString());
-			cookieMap.put(VTEBA_USER_NAME, DESUtils.getEncryptString(user.getUserName()));
-			cookieMap.put(VTEBA_USER_ACCOUNT, DESUtils.getEncryptString(user.getUserAccount()));
-			cookieMap.put(VTEBA_USER_PASS, DESUtils.getEncryptString(user.getPassword()));
-			cookieMap.put(VTEBA_USER_EMAIL, DESUtils.getEncryptString(user.getEmail()));
+			cookieMap.put(VTEBA_USER_NAME, DESUtils.getEncrypt(user.getUserName()));
+			cookieMap.put(VTEBA_USER_ACCOUNT, DESUtils.getEncrypt(user.getUserAccount()));
+			cookieMap.put(VTEBA_USER_PASS, DESUtils.getEncrypt(user.getPassword()));
+			cookieMap.put(VTEBA_USER_EMAIL, DESUtils.getEncrypt(user.getEmail()));
 		}
 		ServletUtils.addCookie(cookieMap);
 	}
@@ -125,13 +125,13 @@ public class CookieServiceImpl implements CookieService {
 				if (cookie.getName().equals(VTEBA_USER_ID)) {
 					user.setUserId(Long.valueOf(cookie.getValue()));
 				} else if (cookie.getName().equals(VTEBA_USER_NAME)) {
-					user.setUserName(DESUtils.getDecryptString(cookie.getValue()));
+					user.setUserName(DESUtils.getEncrypt(cookie.getValue()));
 				} else if (cookie.getName().equals(VTEBA_USER_ACCOUNT )) {
-					user.setUserAccount(DESUtils.getDecryptString(cookie.getValue()));
+					user.setUserAccount(DESUtils.getEncrypt(cookie.getValue()));
 				} else if (cookie.getName().equals(VTEBA_USER_PASS)) {
-					user.setPassword(DESUtils.getDecryptString(cookie.getValue()));
+					user.setPassword(DESUtils.getEncrypt(cookie.getValue()));
 				} else if (cookie.getName().equals(VTEBA_USER_EMAIL)) {
-					user.setEmail(DESUtils.getDecryptString(cookie.getValue()));
+					user.setEmail(DESUtils.getEncrypt(cookie.getValue()));
 				}
 			}
 		}
