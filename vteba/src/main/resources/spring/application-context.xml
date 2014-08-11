@@ -331,5 +331,5 @@
 <!-- 		<aop:pointcut expression="execution(* com.vteba.*.dao.*.impl.*.*(..)) or execution(* com.vteba.*.*.dao.impl.*.*(..)) or execution(* com.vteba.*.dao.impl.*.*(..))" id="schemaPointcut"/> -->
 <!-- 		<aop:advisor advice-ref="schemaInterceptor" pointcut-ref="schemaPointcut" /> -->
 <!-- 	</aop:config> -->
-	
+	<bean id="fastJsonProvider" class="com.vteba.service.json.jaxrs.FastJsonProvider"/>
 </beans>
