@@ -13,7 +13,7 @@ import com.vteba.home.index.model.Banner;
 import com.vteba.home.index.service.spi.BannerService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 首页Banner控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/banner")
-public class BannerAction extends BaseAction<Banner> {
+public class BannerAction extends BasicAction<Banner> {
 	@Inject
 	private BannerService bannerServiceImpl;
 	

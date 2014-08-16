@@ -14,7 +14,7 @@ import com.vteba.community.base.service.spi.DarenService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
 import com.vteba.utils.ofbiz.LangUtils;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 专辑达人控制器
@@ -23,7 +23,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/albumDaren")
-public class AlbumDarenAction extends BaseAction<Daren> {
+public class AlbumDarenAction extends BasicAction<Daren> {
 	@Inject
 	private DarenService darenServiceImpl;
 	

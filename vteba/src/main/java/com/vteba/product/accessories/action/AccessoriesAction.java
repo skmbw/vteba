@@ -13,7 +13,7 @@ import com.vteba.product.accessories.model.Accessories;
 import com.vteba.product.accessories.service.spi.AccessoriesService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 配饰商品控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/accessories")
-public class AccessoriesAction extends BaseAction<Accessories> {
+public class AccessoriesAction extends BasicAction<Accessories> {
 	@Inject
 	private AccessoriesService accessoriesServiceImpl;
 	

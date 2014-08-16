@@ -13,7 +13,7 @@ import com.vteba.product.beauty.model.Beauty;
 import com.vteba.product.beauty.service.spi.BeautyService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 美妆商品控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/beauty")
-public class BeautyAction extends BaseAction<Beauty> {
+public class BeautyAction extends BasicAction<Beauty> {
 	@Inject
 	private BeautyService beautyServiceImpl;
 	

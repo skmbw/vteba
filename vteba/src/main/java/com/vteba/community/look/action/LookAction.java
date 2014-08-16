@@ -13,7 +13,7 @@ import com.vteba.community.look.model.Look;
 import com.vteba.community.look.service.spi.LookService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 晒货的商品控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/look")
-public class LookAction extends BaseAction<Look> {
+public class LookAction extends BasicAction<Look> {
 	@Inject
 	private LookService lookServiceImpl;
 	

@@ -16,7 +16,7 @@ import com.vteba.service.generic.BaseService;
 import com.vteba.shop.shopcart.service.spi.CookieService;
 import com.vteba.user.model.User;
 import com.vteba.user.service.spi.UserService;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 用户注册控制器。
@@ -25,7 +25,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/user")
-public class RegisterAction extends BaseAction<User> {
+public class RegisterAction extends BasicAction<User> {
 	private Logger logger = LoggerFactory.getLogger(RegisterAction.class);
 	
 	@Inject

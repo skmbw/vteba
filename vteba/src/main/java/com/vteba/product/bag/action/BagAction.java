@@ -13,7 +13,7 @@ import com.vteba.product.bag.model.Bag;
 import com.vteba.product.bag.service.spi.BagService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 包包商品控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/bag")
-public class BagAction extends BaseAction<Bag> {
+public class BagAction extends BasicAction<Bag> {
 	@Inject
 	private BagService bagServiceImpl;
 	

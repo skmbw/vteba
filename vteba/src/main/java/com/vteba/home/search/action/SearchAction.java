@@ -1,11 +1,8 @@
 package com.vteba.home.search.action;
 
-import java.io.Serializable;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vteba.service.generic.BaseService;
 import com.vteba.web.action.BaseExtAction;
 
 /**
@@ -20,7 +17,7 @@ public class SearchAction extends BaseExtAction {
 	/**
 	 * 站内搜索。
 	 * @return 搜索结果视图
-	 * @author yinlei
+	 * @author yinleiBasicAction
 	 * date 2013-8-24 下午12:01:26
 	 */
 	@RequestMapping("/search")
@@ -29,10 +26,4 @@ public class SearchAction extends BaseExtAction {
 		return "searchList";
 	}
 
-	@Override
-	public void setBaseServiceImpl(
-			BaseService<Object, ? extends Serializable> BaseServiceImpl) {
-		// TODO Auto-generated method stub
-		
-	}
 }

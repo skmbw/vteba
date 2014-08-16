@@ -13,7 +13,7 @@ import com.google.common.collect.Lists;
 import com.vteba.community.album.model.Album;
 import com.vteba.community.album.service.spi.AlbumService;
 import com.vteba.service.generic.BaseService;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 专辑控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/album")
-public class AlbumAction extends BaseAction<Album> {
+public class AlbumAction extends BasicAction<Album> {
 	@Inject
 	private AlbumService albumServiceImpl;
 	

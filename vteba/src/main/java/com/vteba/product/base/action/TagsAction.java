@@ -13,7 +13,7 @@ import com.google.common.collect.Maps;
 import com.vteba.product.base.model.Tags;
 import com.vteba.product.base.service.spi.TagsService;
 import com.vteba.service.generic.BaseService;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 商品标签控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/tags")
-public class TagsAction extends BaseAction<Tags> {
+public class TagsAction extends BasicAction<Tags> {
 	
 	@Inject
 	private TagsService tagsServiceImpl;

@@ -14,7 +14,7 @@ import com.vteba.community.group.model.Group;
 import com.vteba.community.group.service.spi.GroupService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 社区小组控制器
@@ -23,7 +23,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/group")
-public class GroupAction extends BaseAction<Group> {
+public class GroupAction extends BasicAction<Group> {
 	@Inject
 	private GroupService groupServiceImpl;
 	

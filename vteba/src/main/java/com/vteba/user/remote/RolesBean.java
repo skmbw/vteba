@@ -2,12 +2,6 @@ package com.vteba.user.remote;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
-import org.directwebremoting.annotations.RemoteMethod;
-import org.directwebremoting.annotations.RemoteProxy;
-import org.directwebremoting.spring.SpringCreator;
-
 import com.vteba.user.model.Roles;
 import com.vteba.user.model.UserRole;
 import com.vteba.user.service.IRolesService;
@@ -18,13 +12,13 @@ import com.vteba.user.service.IUserRoleService;
  * @author yinlei
  * date 2012-9-9 下午2:17:29
  */
-@RemoteProxy(creator = SpringCreator.class)
+//@RemoteProxy(creator = SpringCreator.class)
 public class RolesBean {
 	
-	@Inject
+	//@Inject
 	private IRolesService rolesServiceImpl;
 	
-	@Inject
+	//@Inject
 	private IUserRoleService userRoleServiceImpl;
 	
 	/**
@@ -34,7 +28,7 @@ public class RolesBean {
 	 * @author yinlei
 	 * date 2012-9-9 下午2:18:42
 	 */
-	@RemoteMethod
+	//@RemoteMethod
 	public String deleteRole(Long roleId) {
 		String userRoleHql = " select ur from UserRole ur where ur.roleId = ?1 ";
 		List<UserRole> userRoles = userRoleServiceImpl.getListByHql(userRoleHql, roleId);

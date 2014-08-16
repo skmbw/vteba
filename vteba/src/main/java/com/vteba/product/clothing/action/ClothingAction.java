@@ -13,7 +13,7 @@ import com.vteba.product.clothing.model.Clothing;
 import com.vteba.product.clothing.service.spi.ClothingService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 衣服类商品Action。
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/clothing")
-public class ClothingAction extends BaseAction<Clothing> {
+public class ClothingAction extends BasicAction<Clothing> {
 	@Inject
 	private ClothingService clothingServiceImpl;
 	

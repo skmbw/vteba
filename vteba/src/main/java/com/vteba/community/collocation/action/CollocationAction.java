@@ -14,7 +14,7 @@ import com.vteba.community.collocation.model.Collocation;
 import com.vteba.community.collocation.service.spi.CollocationService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 搭配推荐商品控制器
@@ -23,7 +23,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/collocation")
-public class CollocationAction extends BaseAction<Collocation> {
+public class CollocationAction extends BasicAction<Collocation> {
 	@Inject
 	private CollocationService collocationServiceImpl;
 	

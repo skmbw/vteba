@@ -13,7 +13,7 @@ import com.vteba.community.base.model.Daren;
 import com.vteba.community.base.service.spi.DarenService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 晒货达人控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/lookDaren")
-public class LookDarenAction extends BaseAction<Daren> {
+public class LookDarenAction extends BasicAction<Daren> {
 	@Inject
 	private DarenService darenServiceImpl;
 	

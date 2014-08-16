@@ -13,7 +13,7 @@ import com.vteba.product.men.model.Men;
 import com.vteba.product.men.service.spi.MenService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 男装商品控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/men")
-public class MenAction extends BaseAction<Men> {
+public class MenAction extends BasicAction<Men> {
 	@Inject
 	private MenService menServiceImpl;
 	

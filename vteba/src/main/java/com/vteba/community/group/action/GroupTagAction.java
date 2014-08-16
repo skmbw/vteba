@@ -13,7 +13,7 @@ import com.vteba.community.group.model.GroupTag;
 import com.vteba.community.group.service.spi.GroupTagService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 小组标签控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/groupTag")
-public class GroupTagAction extends BaseAction<GroupTag> {
+public class GroupTagAction extends BasicAction<GroupTag> {
 	@Inject
 	private GroupTagService groupTagServiceImpl;
 	

@@ -19,7 +19,7 @@ import com.vteba.service.xml.jibx.Person;
 import com.vteba.shop.shopcart.service.spi.CookieService;
 import com.vteba.user.model.User;
 import com.vteba.user.service.spi.UserService;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 用户登录控制器。
@@ -28,7 +28,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/user")
-public class LoginAction extends BaseAction<User> {
+public class LoginAction extends BasicAction<User> {
 	public static final String VTEBA_PASS_SALT_VALUE = "vteba_V_pass_salt_Fn_skmbw";
 	
 //	private JedisTemplate jedisTemplate;

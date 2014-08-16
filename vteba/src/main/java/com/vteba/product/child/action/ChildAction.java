@@ -13,7 +13,7 @@ import com.vteba.product.child.model.Child;
 import com.vteba.product.child.service.spi.ChildService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 亲子商品控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/child")
-public class ChildAction extends BaseAction<Child> {
+public class ChildAction extends BasicAction<Child> {
 	@Inject
 	private ChildService childServiceImpl;
 	

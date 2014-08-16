@@ -13,7 +13,7 @@ import com.vteba.product.home.model.Home;
 import com.vteba.product.home.service.spi.HomeService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 家居商品控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/home")
-public class HomeAction extends BaseAction<Home> {
+public class HomeAction extends BasicAction<Home> {
 	@Inject
 	private HomeService homeServiceImpl;
 	

@@ -13,7 +13,7 @@ import com.vteba.community.collocation.model.CollocationTag;
 import com.vteba.community.collocation.service.spi.CollocationTagService;
 import com.vteba.service.generic.BaseService;
 import com.vteba.tx.generic.Page;
-import com.vteba.web.action.BaseAction;
+import com.vteba.web.action.BasicAction;
 
 /**
  * 搭配标签控制器
@@ -22,7 +22,7 @@ import com.vteba.web.action.BaseAction;
  */
 @Controller
 @RequestMapping("/collocationTag")
-public class CollocationTagAction extends BaseAction<CollocationTag> {
+public class CollocationTagAction extends BasicAction<CollocationTag> {
 	@Inject
 	private CollocationTagService collocationTagServiceImpl;
 	
