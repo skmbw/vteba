@@ -54,9 +54,9 @@ public class LoginAction extends BasicAction<User> {
 	 */
 	@RequestMapping("/login")
 	public String login() {
-		long ad = System.currentTimeMillis();
-		User cacheUser = userServiceImpl.get(4L);
-		System.out.println(cacheUser.getUserName() + " : " + (System.currentTimeMillis() - ad));
+//		long ad = System.currentTimeMillis();
+//		User cacheUser = userServiceImpl.get(4L);
+//		System.out.println(cacheUser.getUserName() + " : " + (System.currentTimeMillis() - ad));
 		
 		//***************Redis*********************//
 //		long da2 = System.currentTimeMillis();
@@ -129,7 +129,7 @@ public class LoginAction extends BasicAction<User> {
 		long d = System.currentTimeMillis();
 		//Customer c = null;
 		String customerXml = null;
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 1; i++) {
 			customerXml = xmlServiceImpl.objectToXml(custom);
 			xmlServiceImpl.xmlToObject(customerXml, Customer.class);
 		}
@@ -151,7 +151,7 @@ public class LoginAction extends BasicAction<User> {
 		Map<String, Person> maps = Maps.newHashMap();
 		custom.setPersonMap(maps);
 		long d2 = System.currentTimeMillis();
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 1; i++) {
 			String xml = xmlServiceImpl.toXml(custom);
 			xmlServiceImpl.fromXml(xml);
 		}

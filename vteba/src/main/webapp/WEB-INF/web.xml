@@ -36,25 +36,25 @@
 <!-- 	</servlet-mapping> -->
 
 	<!-- DWR -->
-	<servlet>
-    <servlet-name>dwr</servlet-name>
-    <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
-      <init-param>
-        <param-name>debug</param-name>
-        <param-value>false</param-value>
-      </init-param>
-	</servlet>
+<!-- 	<servlet> -->
+<!--     <servlet-name>dwr</servlet-name> -->
+<!--     <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class> -->
+<!--       <init-param> -->
+<!--         <param-name>debug</param-name> -->
+<!--         <param-value>false</param-value> -->
+<!--       </init-param> -->
+<!-- 	</servlet> -->
 	
-	<servlet-mapping>
-    	<servlet-name>dwr</servlet-name>
-    	<url-pattern>/dwr/*</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!--     	<servlet-name>dwr</servlet-name> -->
+<!--     	<url-pattern>/dwr/*</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 	
 	
 	<!--spring刷新Introspector防止内存泄露-->
-	<listener>
-		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-	</listener>
+<!-- 	<listener> -->
+<!-- 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class> -->
+<!-- 	</listener> -->
 	
 	<listener>
 		<listener-class>com.vteba.web.ognl.OgnlMethodAccessorListener</listener-class>
