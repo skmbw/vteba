@@ -87,7 +87,7 @@
                         <li><a href="#">我的账户</a></li>
                         <li><a href="#">我的愿望清单</a></li>
                         <li><a href="checkout.html">去结算</a></li>
-                        <li><a href="login-page.html">去登录</a></li>
+                        <li><a href="/user/login">去登录</a></li>
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
