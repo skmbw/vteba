@@ -56,9 +56,9 @@
 <!-- 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class> -->
 <!-- 	</listener> -->
 	
-	<listener>
-		<listener-class>com.vteba.web.ognl.OgnlMethodAccessorListener</listener-class>
-	</listener>
+<!-- 	<listener> -->
+<!-- 		<listener-class>com.vteba.web.ognl.OgnlMethodAccessorListener</listener-class> -->
+<!-- 	</listener> -->
 	
 <!-- 	<listener> -->
 <!-- 		<listener-class>com.vteba.config.listener.ApplicationInitializeListener</listener-class> -->
@@ -182,10 +182,10 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-	<servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
-        <url-pattern>*.htm</url-pattern>
-    </servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!--         <servlet-name>springmvc</servlet-name> -->
+<!--         <url-pattern>*.htm</url-pattern> -->
+<!--     </servlet-mapping> -->
 
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>

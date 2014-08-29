@@ -72,7 +72,7 @@
 <!-- 	<mvc:view-controller path="/" view-name="/index"/> -->
 
     <!-- 当在web.xml中DispatcherServlet使用<url-pattern>/</url-pattern>映射时，能映射静态资源，这样配置，将资源转给servlet容器处理 -->
-<!--     <mvc:default-servlet-handler/> -->
+    <mvc:default-servlet-handler/>
 
     <!-- 静态资源映射 cache-period="0" 表示不缓存，单位秒-->
 	
