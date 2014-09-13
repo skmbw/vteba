@@ -13,9 +13,9 @@
     <import resource="classpath:springmvc-resteasy.xml"/>
     
 	<import resource="application-oxm-jibx.xml"/>
-	<import resource="application-cache-memcache.xml"/>
+<!-- 	<import resource="application-cache-memcache.xml"/> -->
 	<import resource="application-cache-infinispan.xml"/>
-	<import resource="application-cache-redis.xml"/>
+<!-- 	<import resource="application-cache-redis.xml"/> -->
 	<import resource="application-mybatis.xml"/>
 	<import resource="application-scheduler.xml"/>
 	<import resource="application-security.xml"/>
@@ -46,7 +46,7 @@
 	<!-- auto wire bean -->
 	<context:annotation-config/>
 	<!-- spring cache -->
-	<cache:annotation-driven cache-manager="springMemcacheManager"/>
+	<cache:annotation-driven cache-manager="springEmbeddedCacheManager"/>
 	<!-- auto scan bean base package , 可以有多个值，以逗号分开-->
 	<context:component-scan base-package="com.vteba">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -75,7 +75,7 @@
     </bean>
     
     <!-- bitronix.tm.resource.jdbc.PoolingDataSource -->
-    <bean id="skmbwDataSource" class="com.vteba.tm.bitronix.datasource.BtmPoolingDataSource" init-method="init" destroy-method="close">
+    <bean id="skmbwDataSource" class="com.vteba.tx.bitronix.datasource.BtmPoolingDataSource" init-method="init" destroy-method="close">
 	    <property name="className" value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />
 	    <property name="uniqueName" value="mysqlSkmbw" />
 	    <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
@@ -93,7 +93,7 @@
 	    <property name="testQuery" value="select 1"/>
 	    <property name="allowLocalTransactions" value="true"/>
 	</bean>
-	<bean id="biziliDataSource" class="com.vteba.tm.bitronix.datasource.BtmPoolingDataSource" init-method="init" destroy-method="close">
+	<bean id="biziliDataSource" class="com.vteba.tx.bitronix.datasource.BtmPoolingDataSource" init-method="init" destroy-method="close">
 	    <property name="className" value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />
 	    <property name="uniqueName" value="mysqlBizili"/>
 	    <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
@@ -110,7 +110,7 @@
 	    </property>
 	    <property name="testQuery" value="select 1"/>
 	</bean>
-	<bean id="supplychainDataSource" class="com.vteba.tm.bitronix.datasource.BtmPoolingDataSource" init-method="init" destroy-method="close">
+	<bean id="supplychainDataSource" class="com.vteba.tx.bitronix.datasource.BtmPoolingDataSource" init-method="init" destroy-method="close">
 	    <property name="className" value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />
 	    <property name="uniqueName" value="mysqlSupplychain"/>
 	    <property name="maxPoolSize" value="100"/>
@@ -284,15 +284,15 @@
 	</bean>
 	
 	<!-- SpringJdbcTemplate -->
-	<bean id="biziliJdbcTemplate" class="com.vteba.tm.jdbc.spring.SpringJdbcTemplate">
+	<bean id="biziliJdbcTemplate" class="com.vteba.tx.jdbc.spring.SpringJdbcTemplate">
 		<property name="dataSource" ref="biziliDataSource"/>
 	</bean>
 	
-	<bean id="skmbwJdbcTemplate" class="com.vteba.tm.jdbc.spring.SpringJdbcTemplate">
+	<bean id="skmbwJdbcTemplate" class="com.vteba.tx.jdbc.spring.SpringJdbcTemplate">
 		<property name="dataSource" ref="skmbwDataSource"/>
 	</bean>
 	
-	<bean id="supplychainJdbcTemplate" class="com.vteba.tm.jdbc.spring.SpringJdbcTemplate">
+	<bean id="supplychainJdbcTemplate" class="com.vteba.tx.jdbc.spring.SpringJdbcTemplate">
 		<property name="dataSource" ref="supplychainDataSource"/>
 	</bean>
     
@@ -342,5 +342,7 @@
 <!-- 		<aop:pointcut expression="execution(* com.vteba.*.*.impl.*.*(..)) or execution(* com.vteba.*.*.dao.impl.*.*(..)) or execution(* com.vteba.*.dao.impl.*.*(..))" id="schemaPointcut"/> -->
 <!-- 		<aop:advisor advice-ref="schemaInterceptor" pointcut-ref="schemaPointcut" /> -->
 <!-- 	</aop:config> -->
+	
+	<bean id="fastJsonProvider" class="com.vteba.service.json.jaxrs.FastJsonProvider" />
 	
 </beans>
