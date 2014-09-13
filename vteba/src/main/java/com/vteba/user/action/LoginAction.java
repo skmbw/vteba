@@ -1,9 +1,6 @@
 package com.vteba.user.action;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,11 +8,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.google.common.collect.Maps;
 import com.vteba.service.generic.BaseService;
-import com.vteba.service.xml.XmlServiceImpl;
-import com.vteba.service.xml.jibx.Customer;
-import com.vteba.service.xml.jibx.Person;
 import com.vteba.shop.shopcart.service.spi.CookieService;
 import com.vteba.user.model.User;
 import com.vteba.user.service.spi.UserService;
@@ -43,8 +36,8 @@ public class LoginAction extends BasicAction<User> {
 	@Inject
 	private ShaPasswordEncoder shaPasswordEncoder;
 	
-	@Inject
-	private XmlServiceImpl xmlServiceImpl;
+//	@Inject
+//	private XmlServiceImpl xmlServiceImpl;
 	
 	/**
 	 * 去登录。
@@ -80,32 +73,32 @@ public class LoginAction extends BasicAction<User> {
 //		}
 //		StreamSource source = new StreamSource(stream);
 		
-		Customer custom = new Customer();//xmlServiceImpl.xmlToObject(source, Customer.class);
-		Person person = new Person();
-		person.setCustomerNumber(22);
-		person.setFirstName("yin");
-		person.setLastName("lei");
-		
-		List<Person> personList = new ArrayList<Person>();
-		Person person2 = new Person();
-		person2.setCustomerNumber(22);
-		person2.setFirstName("yin");
-		person2.setLastName("尹雷");
-		personList.add(person2);
-		
-		custom.setPersonList(personList);
-		
-		custom.setPerson(person);
-		custom.setCity("杭州");
-		custom.setPhone("123123");
-		custom.setState("ZJ");
-		custom.setStreet("xx");
-		custom.setZip(212121);
-		
-		List<String> nameList = new ArrayList<String>();
-		nameList.add("yinlei");
-		nameList.add("尹雷");
-		custom.setNameList(nameList);
+//		Customer custom = new Customer();//xmlServiceImpl.xmlToObject(source, Customer.class);
+//		Person person = new Person();
+//		person.setCustomerNumber(22);
+//		person.setFirstName("yin");
+//		person.setLastName("lei");
+//		
+//		List<Person> personList = new ArrayList<Person>();
+//		Person person2 = new Person();
+//		person2.setCustomerNumber(22);
+//		person2.setFirstName("yin");
+//		person2.setLastName("尹雷");
+//		personList.add(person2);
+//		
+//		custom.setPersonList(personList);
+//		
+//		custom.setPerson(person);
+//		custom.setCity("杭州");
+//		custom.setPhone("123123");
+//		custom.setState("ZJ");
+//		custom.setStreet("xx");
+//		custom.setZip(212121);
+//		
+//		List<String> nameList = new ArrayList<String>();
+//		nameList.add("yinlei");
+//		nameList.add("尹雷");
+//		custom.setNameList(nameList);
 		
 		//***************Jedis*********************//
 //		long da4 = System.currentTimeMillis();
@@ -126,15 +119,17 @@ public class LoginAction extends BasicAction<User> {
 //		names[0] = "yinlei";
 //		names[1] = "";
 //		custom.setNameList(names);
-		long d = System.currentTimeMillis();
-		//Customer c = null;
-		String customerXml = null;
-		for (int i = 0; i < 1; i++) {
-			customerXml = xmlServiceImpl.objectToXml(custom);
-			xmlServiceImpl.xmlToObject(customerXml, Customer.class);
-		}
 		
-		System.out.println("JIBX " + (System.currentTimeMillis() - d));
+		
+//		long d = System.currentTimeMillis();
+//		String customerXml = null;
+//		for (int i = 0; i < 1; i++) {
+//			customerXml = xmlServiceImpl.objectToXml(custom);
+//			xmlServiceImpl.xmlToObject(customerXml, Customer.class);
+//		}
+//		
+//		System.out.println("JIBX " + (System.currentTimeMillis() - d));
+		
 		//System.out.println(customerXml);
 //		File outFile = new File("e:\\ddd.xml");
 //		FileOutputStream outputStream = null;
@@ -148,14 +143,14 @@ public class LoginAction extends BasicAction<User> {
 //		IOUtils.closeQuietly(outputStream);
 		
 		//---------------XStream----------------------//
-		Map<String, Person> maps = Maps.newHashMap();
-		custom.setPersonMap(maps);
-		long d2 = System.currentTimeMillis();
-		for (int i = 0; i < 1; i++) {
-			String xml = xmlServiceImpl.toXml(custom);
-			xmlServiceImpl.fromXml(xml);
-		}
-		System.out.println("XStream " + (System.currentTimeMillis() - d2));
+//		Map<String, Person> maps = Maps.newHashMap();
+//		custom.setPersonMap(maps);
+//		long d2 = System.currentTimeMillis();
+//		for (int i = 0; i < 1; i++) {
+//			String xml = xmlServiceImpl.toXml(custom);
+//			xmlServiceImpl.fromXml(xml);
+//		}
+//		System.out.println("XStream " + (System.currentTimeMillis() - d2));
 		
 		return "user/login";
 	}
