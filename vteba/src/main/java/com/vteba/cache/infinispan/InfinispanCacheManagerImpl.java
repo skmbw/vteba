@@ -7,7 +7,6 @@ import java.util.Set;
 import org.infinispan.Cache;
 import org.infinispan.configuration.cache.Configuration;
 import org.infinispan.configuration.global.GlobalConfiguration;
-import org.infinispan.factories.GlobalComponentRegistry;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
@@ -27,6 +26,7 @@ import com.vteba.tx.bitronix.infinispan.InfinispanXAResourceProducer;
  * @author yinlei
  * date 2013-6-23 下午7:03:56
  */
+@SuppressWarnings("deprecation")
 public class InfinispanCacheManagerImpl implements InfinispanCacheManager {
 //	private static final String INFINISPAN_CONFIG_FILE = "infinispan-configs.xml";//"application-infinispan-configs.xml";//默认配置文件
 	private static Logger logger = LoggerFactory.getLogger(InfinispanCacheManagerImpl.class);
@@ -319,14 +319,39 @@ public class InfinispanCacheManagerImpl implements InfinispanCacheManager {
 	}
 
 	@Override
-	public Configuration defineConfiguration(String cacheName, String templateCacheName, Configuration configurationOverride) {
+	public org.infinispan.config.Configuration defineConfiguration(
+			String cacheName,
+			org.infinispan.config.Configuration configurationOverride) {
+		
+		return embeddedCacheManager.defineConfiguration(cacheName, configurationOverride);
+	}
+
+	@Override
+	public org.infinispan.config.Configuration defineConfiguration(
+			String cacheName, String templateCacheName,
+			org.infinispan.config.Configuration configurationOverride) {
 		return embeddedCacheManager.defineConfiguration(cacheName, templateCacheName, configurationOverride);
 	}
 
 	@Override
-	public GlobalComponentRegistry getGlobalComponentRegistry() {
-		return embeddedCacheManager.getGlobalComponentRegistry();
+	public org.infinispan.config.GlobalConfiguration getGlobalConfiguration() {
+		return embeddedCacheManager.getGlobalConfiguration();
 	}
+
+	@Override
+	public org.infinispan.config.Configuration getDefaultConfiguration() {
+		return embeddedCacheManager.getDefaultConfiguration();
+	}
+
+//	@Override
+//	public Configuration defineConfiguration(String cacheName, String templateCacheName, Configuration configurationOverride) {
+//		return embeddedCacheManager.defineConfiguration(cacheName, templateCacheName, configurationOverride);
+//	}
+//
+//	@Override
+//	public GlobalComponentRegistry getGlobalComponentRegistry() {
+//		return embeddedCacheManager.getGlobalComponentRegistry();
+//	}
 
 	
 }
