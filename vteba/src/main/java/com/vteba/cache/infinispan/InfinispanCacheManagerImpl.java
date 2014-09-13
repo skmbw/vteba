@@ -7,6 +7,7 @@ import java.util.Set;
 import org.infinispan.Cache;
 import org.infinispan.configuration.cache.Configuration;
 import org.infinispan.configuration.global.GlobalConfiguration;
+import org.infinispan.factories.GlobalComponentRegistry;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
@@ -295,53 +296,6 @@ public class InfinispanCacheManagerImpl implements InfinispanCacheManager {
 	}
 
 	/**
-	 * @param cacheName
-	 * @param configurationOverride
-	 * @return
-	 * @deprecated
-	 * @see org.infinispan.manager.EmbeddedCacheManager#defineConfiguration(java.lang.String, org.infinispan.config.Configuration)
-	 */
-	public org.infinispan.config.Configuration defineConfiguration(
-			String cacheName,
-			org.infinispan.config.Configuration configurationOverride) {
-		return embeddedCacheManager.defineConfiguration(cacheName,
-				configurationOverride);
-	}
-
-	/**
-	 * @param cacheName
-	 * @param templateCacheName
-	 * @param configurationOverride
-	 * @return
-	 * @deprecated
-	 * @see org.infinispan.manager.EmbeddedCacheManager#defineConfiguration(java.lang.String, java.lang.String, org.infinispan.config.Configuration)
-	 */
-	public org.infinispan.config.Configuration defineConfiguration(
-			String cacheName, String templateCacheName,
-			org.infinispan.config.Configuration configurationOverride) {
-		return embeddedCacheManager.defineConfiguration(cacheName,
-				templateCacheName, configurationOverride);
-	}
-
-	/**
-	 * @return
-	 * @deprecated
-	 * @see org.infinispan.manager.EmbeddedCacheManager#getGlobalConfiguration()
-	 */
-	public org.infinispan.config.GlobalConfiguration getGlobalConfiguration() {
-		return embeddedCacheManager.getGlobalConfiguration();
-	}
-
-	/**
-	 * @return
-	 * @deprecated
-	 * @see org.infinispan.manager.EmbeddedCacheManager#getDefaultConfiguration()
-	 */
-	public org.infinispan.config.Configuration getDefaultConfiguration() {
-		return embeddedCacheManager.getDefaultConfiguration();
-	}
-
-	/**
 	 * @return the embeddedCacheManager
 	 */
 	public EmbeddedCacheManager getEmbeddedCacheManager() {
@@ -362,6 +316,17 @@ public class InfinispanCacheManagerImpl implements InfinispanCacheManager {
 			logger.error("将Infinispan注册为XAResource失败。" + e.getMessage());
 			throw new BasicException("将Infinispan注册为XAResource失败。");
 		}
+	}
+
+	@Override
+	public Configuration defineConfiguration(String arg0, String arg1,
+			Configuration arg2) {
+		return embeddedCacheManager.defineConfiguration(arg0, arg1, arg2);
+	}
+
+	@Override
+	public GlobalComponentRegistry getGlobalComponentRegistry() {
+		return embeddedCacheManager.getGlobalComponentRegistry();
 	}
 
 	
