@@ -7,11 +7,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.infinispan.AdvancedCache;
 import org.infinispan.Cache;
+import org.infinispan.commons.util.concurrent.NotifyingFuture;
 import org.infinispan.configuration.cache.Configuration;
+import org.infinispan.filter.Converter;
+import org.infinispan.filter.KeyFilter;
+import org.infinispan.filter.KeyValueFilter;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.EmbeddedCacheManager;
-import org.infinispan.notifications.KeyFilter;
-import org.infinispan.util.concurrent.NotifyingFuture;
 
 /**
  * 对Infinispan缓存实例的封装。底层委托给org.infinispan.Cache&ltK, V&gt的实例。
@@ -20,7 +22,6 @@ import org.infinispan.util.concurrent.NotifyingFuture;
  * @param <K> 缓存Key泛型类型
  * @param <V> 缓存value泛型类型
  */
-@SuppressWarnings("deprecation")
 public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 	private Cache<K, V> cache;
 	
@@ -41,10 +42,6 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 		return cache.startBatch();
 	}
 
-	public void addListener(Object listener, KeyFilter filter) {
-		cache.addListener(listener, filter);
-	}
-
 	public void addListener(Object listener) {
 		cache.addListener(listener);
 	}
@@ -57,9 +54,8 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 		cache.stop();
 	}
 
-	@Deprecated
-	public NotifyingFuture<V> putAsync(K key, V value) {
-		return cache.putAsync(key, value);
+	public void addListener(Object listener, KeyFilter<? super K> filter) {
+		cache.addListener(listener, filter);
 	}
 
 	public void endBatch(boolean successful) {
@@ -73,20 +69,15 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 	public Set<Object> getListeners() {
 		return cache.getListeners();
 	}
-	
-	public NotifyingFuture<V> putAsync(K key, V value, long lifespan,
-			TimeUnit unit) {
-		return cache.putAsync(key, value, lifespan, unit);
+
+	public <C> void addListener(Object listener,
+			KeyValueFilter<? super K, ? super V> filter,
+			Converter<? super K, ? super V, C> converter) {
+		cache.addListener(listener, filter, converter);
 	}
 
 	public V putIfAbsent(K key, V value) {
 		return cache.putIfAbsent(key, value);
-	}
-	@Deprecated
-	public NotifyingFuture<V> putAsync(K key, V value, long lifespan,
-			TimeUnit lifespanUnit, long maxIdle, TimeUnit maxIdleUnit) {
-		return cache.putAsync(key, value, lifespan, lifespanUnit, maxIdle,
-				maxIdleUnit);
 	}
 
 	public String getName() {
@@ -97,12 +88,17 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 		return cache.getVersion();
 	}
 
+	public NotifyingFuture<V> putAsync(K key, V value) {
+		return cache.putAsync(key, value);
+	}
+
 	public V put(K key, V value) {
 		return cache.put(key, value);
 	}
-	@Deprecated
-	public NotifyingFuture<Void> putAllAsync(Map<? extends K, ? extends V> data) {
-		return cache.putAllAsync(data);
+
+	public NotifyingFuture<V> putAsync(K key, V value, long lifespan,
+			TimeUnit unit) {
+		return cache.putAsync(key, value, lifespan, unit);
 	}
 
 	public V put(K key, V value, long lifespan, TimeUnit unit) {
@@ -112,20 +108,14 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 	public boolean remove(Object key, Object value) {
 		return cache.remove(key, value);
 	}
-	@Deprecated
-	public NotifyingFuture<Void> putAllAsync(
-			Map<? extends K, ? extends V> data, long lifespan, TimeUnit unit) {
-		return cache.putAllAsync(data, lifespan, unit);
-	}
 
 	public V putIfAbsent(K key, V value, long lifespan, TimeUnit unit) {
 		return cache.putIfAbsent(key, value, lifespan, unit);
 	}
-	@Deprecated
-	public NotifyingFuture<Void> putAllAsync(
-			Map<? extends K, ? extends V> data, long lifespan,
+
+	public NotifyingFuture<V> putAsync(K key, V value, long lifespan,
 			TimeUnit lifespanUnit, long maxIdle, TimeUnit maxIdleUnit) {
-		return cache.putAllAsync(data, lifespan, lifespanUnit, maxIdle,
+		return cache.putAsync(key, value, lifespan, lifespanUnit, maxIdle,
 				maxIdleUnit);
 	}
 
@@ -137,27 +127,30 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 	public boolean replace(K key, V oldValue, V newValue) {
 		return cache.replace(key, oldValue, newValue);
 	}
-	@Deprecated
-	public NotifyingFuture<Void> clearAsync() {
-		return cache.clearAsync();
+
+	public NotifyingFuture<Void> putAllAsync(Map<? extends K, ? extends V> data) {
+		return cache.putAllAsync(data);
 	}
 
 	public V replace(K key, V value, long lifespan, TimeUnit unit) {
 		return cache.replace(key, value, lifespan, unit);
 	}
-	@Deprecated
-	public NotifyingFuture<V> putIfAbsentAsync(K key, V value) {
-		return cache.putIfAbsentAsync(key, value);
+
+	public NotifyingFuture<Void> putAllAsync(
+			Map<? extends K, ? extends V> data, long lifespan, TimeUnit unit) {
+		return cache.putAllAsync(data, lifespan, unit);
 	}
 
 	public boolean replace(K key, V oldValue, V value, long lifespan,
 			TimeUnit unit) {
 		return cache.replace(key, oldValue, value, lifespan, unit);
 	}
-	@Deprecated
-	public NotifyingFuture<V> putIfAbsentAsync(K key, V value, long lifespan,
-			TimeUnit unit) {
-		return cache.putIfAbsentAsync(key, value, lifespan, unit);
+
+	public NotifyingFuture<Void> putAllAsync(
+			Map<? extends K, ? extends V> data, long lifespan,
+			TimeUnit lifespanUnit, long maxIdle, TimeUnit maxIdleUnit) {
+		return cache.putAllAsync(data, lifespan, lifespanUnit, maxIdle,
+				maxIdleUnit);
 	}
 
 	public V replace(K key, V value) {
@@ -173,12 +166,6 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 	public void putForExternalRead(K key, V value) {
 		cache.putForExternalRead(key, value);
 	}
-	@Deprecated
-	public NotifyingFuture<V> putIfAbsentAsync(K key, V value, long lifespan,
-			TimeUnit lifespanUnit, long maxIdle, TimeUnit maxIdleUnit) {
-		return cache.putIfAbsentAsync(key, value, lifespan, lifespanUnit,
-				maxIdle, maxIdleUnit);
-	}
 
 	public boolean isEmpty() {
 		return cache.isEmpty();
@@ -188,14 +175,23 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 		return cache.containsKey(key);
 	}
 
+	public NotifyingFuture<Void> clearAsync() {
+		return cache.clearAsync();
+	}
+
 	public V putIfAbsent(K key, V value, long lifespan, TimeUnit lifespanUnit,
 			long maxIdleTime, TimeUnit maxIdleTimeUnit) {
 		return cache.putIfAbsent(key, value, lifespan, lifespanUnit,
 				maxIdleTime, maxIdleTimeUnit);
 	}
-	@Deprecated
-	public NotifyingFuture<V> removeAsync(Object key) {
-		return cache.removeAsync(key);
+
+	public NotifyingFuture<V> putIfAbsentAsync(K key, V value) {
+		return cache.putIfAbsentAsync(key, value);
+	}
+
+	public NotifyingFuture<V> putIfAbsentAsync(K key, V value, long lifespan,
+			TimeUnit unit) {
+		return cache.putIfAbsentAsync(key, value, lifespan, unit);
 	}
 
 	public boolean containsValue(Object value) {
@@ -206,17 +202,15 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 			TimeUnit lifespanUnit, long maxIdleTime, TimeUnit maxIdleTimeUnit) {
 		cache.putAll(map, lifespan, lifespanUnit, maxIdleTime, maxIdleTimeUnit);
 	}
-	@Deprecated
-	public NotifyingFuture<Boolean> removeAsync(Object key, Object value) {
-		return cache.removeAsync(key, value);
-	}
 
 	public void evict(K key) {
 		cache.evict(key);
 	}
-	@Deprecated
-	public NotifyingFuture<V> replaceAsync(K key, V value) {
-		return cache.replaceAsync(key, value);
+
+	public NotifyingFuture<V> putIfAbsentAsync(K key, V value, long lifespan,
+			TimeUnit lifespanUnit, long maxIdle, TimeUnit maxIdleUnit) {
+		return cache.putIfAbsentAsync(key, value, lifespan, lifespanUnit,
+				maxIdle, maxIdleUnit);
 	}
 
 	public V replace(K key, V value, long lifespan, TimeUnit lifespanUnit,
@@ -228,11 +222,6 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 	public V get(Object key) {
 		return cache.get(key);
 	}
-	@Deprecated
-	public NotifyingFuture<V> replaceAsync(K key, V value, long lifespan,
-			TimeUnit unit) {
-		return cache.replaceAsync(key, value, lifespan, unit);
-	}
 
 	public Configuration getCacheConfiguration() {
 		return cache.getCacheConfiguration();
@@ -240,6 +229,10 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 
 	public EmbeddedCacheManager getCacheManager() {
 		return cache.getCacheManager();
+	}
+
+	public NotifyingFuture<V> removeAsync(Object key) {
+		return cache.removeAsync(key);
 	}
 
 	public AdvancedCache<K, V> getAdvancedCache() {
@@ -259,11 +252,13 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 		return cache.replace(key, oldValue, value, lifespan, lifespanUnit,
 				maxIdleTime, maxIdleTimeUnit);
 	}
-	@Deprecated
-	public NotifyingFuture<V> replaceAsync(K key, V value, long lifespan,
-			TimeUnit lifespanUnit, long maxIdle, TimeUnit maxIdleUnit) {
-		return cache.replaceAsync(key, value, lifespan, lifespanUnit, maxIdle,
-				maxIdleUnit);
+
+	public NotifyingFuture<Boolean> removeAsync(Object key, Object value) {
+		return cache.removeAsync(key, value);
+	}
+
+	public NotifyingFuture<V> replaceAsync(K key, V value) {
+		return cache.replaceAsync(key, value);
 	}
 
 	public Set<K> keySet() {
@@ -273,20 +268,35 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 	public V remove(Object key) {
 		return cache.remove(key);
 	}
-	@Deprecated
-	public NotifyingFuture<Boolean> replaceAsync(K key, V oldValue, V newValue) {
-		return cache.replaceAsync(key, oldValue, newValue);
+
+	public NotifyingFuture<V> replaceAsync(K key, V value, long lifespan,
+			TimeUnit unit) {
+		return cache.replaceAsync(key, value, lifespan, unit);
 	}
-	@Deprecated
-	public NotifyingFuture<Boolean> replaceAsync(K key, V oldValue, V newValue,
-			long lifespan, TimeUnit unit) {
-		return cache.replaceAsync(key, oldValue, newValue, lifespan, unit);
+
+	public NotifyingFuture<V> replaceAsync(K key, V value, long lifespan,
+			TimeUnit lifespanUnit, long maxIdle, TimeUnit maxIdleUnit) {
+		return cache.replaceAsync(key, value, lifespan, lifespanUnit, maxIdle,
+				maxIdleUnit);
 	}
 
 	public Collection<V> values() {
 		return cache.values();
 	}
-	@Deprecated
+
+	public NotifyingFuture<Boolean> replaceAsync(K key, V oldValue, V newValue) {
+		return cache.replaceAsync(key, oldValue, newValue);
+	}
+
+	public Set<java.util.Map.Entry<K, V>> entrySet() {
+		return cache.entrySet();
+	}
+
+	public NotifyingFuture<Boolean> replaceAsync(K key, V oldValue, V newValue,
+			long lifespan, TimeUnit unit) {
+		return cache.replaceAsync(key, oldValue, newValue, lifespan, unit);
+	}
+
 	public NotifyingFuture<Boolean> replaceAsync(K key, V oldValue, V newValue,
 			long lifespan, TimeUnit lifespanUnit, long maxIdle,
 			TimeUnit maxIdleUnit) {
@@ -294,29 +304,17 @@ public class InfinispanCacheImpl<K, V> implements InfinispanCache<K, V>{
 				lifespanUnit, maxIdle, maxIdleUnit);
 	}
 
-	public Set<java.util.Map.Entry<K, V>> entrySet() {
-		return cache.entrySet();
-	}
-	@Deprecated
-	public NotifyingFuture<V> getAsync(K key) {
-		return cache.getAsync(key);
-	}
-
 	public void putAll(Map<? extends K, ? extends V> m) {
 		cache.putAll(m);
+	}
+
+	public NotifyingFuture<V> getAsync(K key) {
+		return cache.getAsync(key);
 	}
 
 	public void clear() {
 		cache.clear();
 	}
 
-	public boolean equals(Object o) {
-		return cache.equals(o);
-	}
 
-	public int hashCode() {
-		return cache.hashCode();
-	}
-	
-	
 }

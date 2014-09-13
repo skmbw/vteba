@@ -319,9 +319,8 @@ public class InfinispanCacheManagerImpl implements InfinispanCacheManager {
 	}
 
 	@Override
-	public Configuration defineConfiguration(String arg0, String arg1,
-			Configuration arg2) {
-		return embeddedCacheManager.defineConfiguration(arg0, arg1, arg2);
+	public Configuration defineConfiguration(String cacheName, String templateCacheName, Configuration configurationOverride) {
+		return embeddedCacheManager.defineConfiguration(cacheName, templateCacheName, configurationOverride);
 	}
 
 	@Override
