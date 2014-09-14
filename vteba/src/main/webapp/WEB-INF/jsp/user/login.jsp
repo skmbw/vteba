@@ -2,6 +2,7 @@
 <%@ include file="../inc/header.jsp"%>
 <%
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getLocalPort();
+	String ctx = basePath + request.getServletPath();
 %>
 <!DOCTYPE html>
 <html><head>
@@ -11,21 +12,21 @@
 <meta name="description" content="">
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
 <meta name="copyright" content="vteba.com">
-<link rel="icon" href="<%=basePath%>/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/globe-v5-combo.css" media="all">
-<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/module-captcha.css" media="all">
-<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/page-loginreg.css" media="all">
+<link rel="icon" href="${ctx}/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/globe-v5-combo.css" media="all">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/module-captcha.css" media="all">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/page-loginreg.css" media="all">
 
-<script type="text/javascript" src="<%=basePath%>/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.cookie.js"></script>
 <script type="text/javascript">
     function changeValidateCode(obj) {
-   		obj.src="/authCode?d=" + new Date().getTime();;
+   		obj.src="${ctx}/authCode?d=" + new Date().getTime();;
     }
     $.ajax({
         type:"post",
         dataType:"json",
-        url: '/restUser/json',
+        url: '${ctx}/rs/restUser/json',
         //data: '[{"createDate":"2013-10-04 16:49:03","discount":0.8,"discountPrice":16,"itemId":1,"itemImagePath":"/images/1tfp1_kqyv64cdkfbhm6dwgfjeg5sckzsew_150x169.jpg","itemName":"早秋新款","itemPrice":20},{"createDate":"2013-10-04 16:49:07","discount":0.8,"discountPrice":16,"itemId":2,"itemImagePath":"/images/1tfp1_kqyukq2dkfbdowsugfjeg5sckzsew_150x169.jpg","itemName":"连衣裙","itemPrice":20},{"createDate":"2013-10-04 16:49:10","discount":0.8,"discountPrice":16,"itemId":3,"itemImagePath":"/images/1tfp1_kqyuusclkfbewvtwgfjeg5sckzsew_150x170.jpg","itemName":"牛仔裤","itemPrice":20},{"createDate":"2013-10-04 16:49:12","discount":0.8,"discountPrice":16,"itemId":4,"itemImagePath":"/images/1tfp1_kqyxqodekfbgos3wgfjeg5sckzsew_150x170.jpg","itemName":"衬衫","itemPrice":20},{"createDate":"2013-10-04 16:49:15","discount":0.8,"discountPrice":16,"itemId":5,"itemImagePath":"/images/1tfp1_kqyxsq2wkfbfqvsugfjeg5sckzsew_150x169.jpg","itemName":"红人款","itemPrice":20},{"createDate":"2013-10-04 16:49:17","discount":0.8,"discountPrice":16,"itemId":6,"itemImagePath":"/images/1tfp1_kqyumq3ikfbgurcugfjeg5sckzsew_150x170.jpg","itemName":"T恤","itemPrice":20}]',
         data: '{"createDate":"2013-10-04 16:49:03","discount":0.8,"discountPrice":16,"itemId":1,"itemImagePath":"/images/1tfp1_kqyv64cdkfbhm6dwgfjeg5sckzsew_150x169.jpg","itemName":"早秋新款","itemPrice":20}',
         contentType:'application/json;charset=UTF-8',
@@ -142,11 +143,11 @@
     <div class="imgcheck_code_main clearfix">
 	    <input name="authCode" id="authCode" class="text r3" maxlength="4" type="text">
 	    <div id="imgcheck_code_change" onclick="changeValidateCode($('#authImage')[0]);" style="float:none;vertical-align:middle;text-align:center;left:160px;cursor:pointer;"><span style="vertical-align:middle;text-align:center;color:#666;font-size:11px;">点击刷新</span></div> 
-	    <img src="/authCode" style="vertical-align:middle;cursor:pointer;" onclick="changeValidateCode(this);" id="authImage" title="看不清？点击刷新" alt="微特吧"/>
+	    <img src="${ctx}/authCode" style="vertical-align:middle;cursor:pointer;" onclick="changeValidateCode(this);" id="authImage" title="看不清？点击刷新" alt="微特吧"/>
 	</div>
 </div>
 <div id="authcode_error" style="visibility:hidden;float:left;margin-left:12px;margin-left:14px\9;">
-                <span style="padding-left: 21px;color:#ff89a7;background: url(/images/error1.png) no-repeat left center;">验证码错误</span>
+                <span style="padding-left: 21px;color:#ff89a7;background: url(${ctx}/images/error1.png) no-repeat left center;">验证码错误</span>
             </div>
             	</div>
             	<div class="clear"></div>

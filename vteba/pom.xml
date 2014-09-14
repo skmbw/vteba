@@ -18,7 +18,7 @@
       <hibernate-version>4.3.6.Final</hibernate-version>
       <jibx-version>1.2.4.5</jibx-version> 
       <cxf-version>2.7.4</cxf-version>
-      <activemq-version>5.8.0</activemq-version>
+      <activemq-version>5.10.0</activemq-version> 
       <infinispan-version>5.3.0.Final</infinispan-version>
       <asm-version>4.1</asm-version>
       <hornetq-version>2.2.21.Final</hornetq-version>
@@ -106,7 +106,7 @@
     <dependency>
 		<groupId>org.springframework.data</groupId>
 		<artifactId>spring-data-redis</artifactId>
-		<version>1.1.0.RELEASE</version>
+		<version>1.3.1.RELEASE</version>
 		<exclusions>
 	  	<exclusion>
 	  		<groupId>org.slf4j</groupId>
@@ -301,7 +301,7 @@
 	  <groupId>org.javassist</groupId>
       <artifactId>javassist</artifactId>
       <version>3.17.1-GA</version>
-      <scope>provided</scope>
+<!--       <scope>provided</scope> -->
 	</dependency>
 	<dependency>
 	  <groupId>ognl</groupId>
@@ -489,11 +489,11 @@
 	  <version>${activemq-version}</version>
 	</dependency>
 	
-	<dependency>
-	  <groupId>org.jboss.spec.javax.jms</groupId>
-	  <artifactId>jboss-jms-api_1.1_spec</artifactId>
-	  <version>1.0.1.Final</version>
-	</dependency>
+<!-- 	<dependency> -->
+<!-- 	  <groupId>org.jboss.spec.javax.jms</groupId> -->
+<!-- 	  <artifactId>jboss-jms-api_1.1_spec</artifactId> -->
+<!-- 	  <version>1.0.1.Final</version> -->
+<!-- 	</dependency> -->
 	
 <!-- 	<dependency> -->
 <!-- 		<groupId>org.hornetq</groupId> -->
@@ -576,11 +576,11 @@
       <artifactId>validation-api</artifactId>
       <version>1.1.0.Final</version>
 	</dependency>
-	<dependency>
-	  <groupId>org.jboss.spec.javax.transaction</groupId>
-	  <artifactId>jboss-transaction-api_1.1_spec</artifactId>
-	  <version>1.0.1.Final</version>
-	</dependency>
+<!-- 	<dependency> -->
+<!-- 	  <groupId>org.jboss.spec.javax.transaction</groupId> -->
+<!-- 	  <artifactId>jboss-transaction-api_1.1_spec</artifactId> -->
+<!-- 	  <version>1.0.1.Final</version> -->
+<!-- 	</dependency> -->
 	<dependency>
 	  <groupId>org.jboss.spec.javax.transaction</groupId>
 	  <artifactId>jboss-transaction-api_1.2_spec</artifactId>
@@ -673,17 +673,17 @@
 <!-- 	  <scope>provided</scope> -->
 <!-- 	</dependency> -->
 	 
-	<dependency>
-	  <groupId>net.sf.dozer</groupId>
-	  <artifactId>dozer</artifactId>
-	  <version>5.4.0</version>
-	  <exclusions>
-	  	<exclusion>
-	  		<groupId>org.slf4j</groupId>
-	  		<artifactId>jcl-over-slf4j</artifactId>
-	  	</exclusion>
-	  </exclusions>
-	</dependency>
+<!-- 	<dependency> -->
+<!-- 	  <groupId>net.sf.dozer</groupId> -->
+<!-- 	  <artifactId>dozer</artifactId> -->
+<!-- 	  <version>5.4.0</version> -->
+<!-- 	  <exclusions> -->
+<!-- 	  	<exclusion> -->
+<!-- 	  		<groupId>org.slf4j</groupId> -->
+<!-- 	  		<artifactId>jcl-over-slf4j</artifactId> -->
+<!-- 	  	</exclusion> -->
+<!-- 	  </exclusions> -->
+<!-- 	</dependency> -->
 	<!-- apache CXF WebService end -->
 
 	<!-- SOAP begin -->
@@ -715,11 +715,11 @@
 		<artifactId>classmate</artifactId>
 		<version>1.0.0</version>
 	</dependency>
-	<dependency>
-		<groupId>com.fasterxml.jackson.jaxrs</groupId>
-		<artifactId>jackson-jaxrs-json-provider</artifactId>
-		<version>${jackson-version}</version>
-	</dependency>
+<!-- 	<dependency> -->
+<!-- 		<groupId>com.fasterxml.jackson.jaxrs</groupId> -->
+<!-- 		<artifactId>jackson-jaxrs-json-provider</artifactId> -->
+<!-- 		<version>${jackson-version}</version> -->
+<!-- 	</dependency> -->
 	
 <!-- 	<dependency> -->
 <!-- 		<groupId>com.fasterxml.jackson.jaxrs</groupId> -->
@@ -1351,6 +1351,12 @@
 	  <groupId>org.infinispan</groupId>
 	  <artifactId>infinispan-core</artifactId>
 	  <version>${infinispan-version}</version>
+	  <exclusions>
+	  	<exclusion>
+	  		<groupId>org.jboss.spec.javax.transaction</groupId>
+	  		<artifactId>jboss-transaction-api_1.1_spec</artifactId>
+	  	</exclusion>
+	  </exclusions>
 	</dependency>
 	<dependency>
 		<groupId>org.infinispan</groupId>
@@ -1391,7 +1397,7 @@
 	  <groupId>org.hibernate</groupId>
 	  <artifactId>hibernate-infinispan</artifactId>
 	  <version>${hibernate-version}</version>
-	  <scope>provided</scope>
+<!-- 	  <scope>provided</scope> -->
 	</dependency>
 	
 <!-- 	<dependency> -->
@@ -1456,7 +1462,7 @@
         <dependency>
 		    <groupId>redis.clients</groupId>
 		    <artifactId>jedis</artifactId>
-		    <version>2.2.0</version>
+		    <version>2.5.1</version>
 		</dependency>
 <!-- 		<dependency> -->
 <!-- 			<groupId>us.codecraft</groupId> -->

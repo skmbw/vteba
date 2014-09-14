@@ -1,1 +1,1 @@
-<%request.getRequestDispatcher("/index.htm").forward(request, response);%>
+<%request.getRequestDispatcher("/index").forward(request, response);%>
